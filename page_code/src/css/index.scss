@@ -1,0 +1,44 @@
+.body_content {
+    width: 100%;
+
+    .w1440 {
+        width: 1440px;
+        margin: 0 auto;
+    }
+}
+
+div {
+    box-sizing: border-box;
+}
+
+.el-tooltip__popper {
+    background: rgba(208, 47, 56, 1) !important;
+    color: #fff !important;
+}
+
+.el-tooltip__popper .popper__arrow {
+    // border-bottom-color: rgba(208, 47, 56, 1) !important;
+}
+
+.el-tooltip__popper.is-dark {
+    background: rgba(208, 47, 56, 1) !important;
+}
+
+.el-button--danger {
+    background-color: #e02d36;
+    border-color: #e02d36;
+}
+
+.is-opened:hover {
+    .el-submenu__title {
+        background: transparent !important;
+    }
+}
+
+.el-menu--popup-bottom-start {
+    width: 1440px;
+    background-color: #fff !important;
+    li {
+        color: #000 !important;
+    }
+}
