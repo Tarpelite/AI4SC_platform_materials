@@ -106,7 +106,7 @@ export default {
         .item {
             width: 300px;
             height: 440px;
-            background: linear-gradient( #9CB9FF 0%, #DEEAFF 100%);
+            background: linear-gradient( #DEEAFF 0%, #9CB9FF 100%);
             box-shadow: 0px 2px 16px 1px rgba(0,0,0,0.08);
             border-radius: 20px;
             padding: 20px;

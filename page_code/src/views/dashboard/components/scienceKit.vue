@@ -144,13 +144,14 @@ export default {
         transform: translateX(0px);
         transition-property:transform;
         transition-duration: 2s;
+        padding-bottom: 15px;
         .mr24 {
             margin-right: 24px;
         }
         .item {
             width: 400px;
             height: 420px;
-            background: linear-gradient( #9CB9FF 0%, #DEEAFF 100%);
+            background: linear-gradient( 180deg, #CCD7FF 0%, #F5F7FF 52%, #FFFFFF 100%);
             box-shadow: 0px 2px 16px 1px rgba(0,0,0,0.08);
             border-radius: 20px;
             padding: 20px;

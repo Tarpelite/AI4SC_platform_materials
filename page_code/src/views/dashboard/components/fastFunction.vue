@@ -63,6 +63,7 @@ export default {
     .content {
         display: flex;
         margin-top: 20px;
+        padding-bottom: 15px;
         .mr24 {
             margin-right: 24px;
         }

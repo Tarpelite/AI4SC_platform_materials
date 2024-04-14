@@ -104,6 +104,7 @@ export default {
         transform: translateX(0px);
         transition-property:transform;
         transition-duration: 2s;
+        padding-bottom: 15px;
         .mr24 {
             margin-right: 24px;
         }

@@ -1,6 +1,7 @@
 <template>
   <div class="newsNotice">
     <div class="bannerBg">
+      <div style="height: 10px;"></div>
       <div class="banner">
         <el-carousel height="400px" ref="nop">
           <el-carousel-item
