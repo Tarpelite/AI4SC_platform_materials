@@ -621,10 +621,9 @@ export default {
 .newsNotice {
   height: 100%;
   margin-top: 20px;
-  background: #fafafa;
   .bannerBg {
     width: 1440px;
-    height: 400px;
+    padding-bottom: 20px;
     background: linear-gradient(
       180deg,
       #deeaff 0%,
@@ -660,6 +659,7 @@ export default {
         font-weight: bold;
         font-size: 40px;
         color: #262626;
+        margin-top: 30px;
       }
       .msg {
         font-size: 16px;

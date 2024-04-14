@@ -12,7 +12,7 @@
             <img :src="images.collect" alt="" />
             <span>收藏</span>
           </div>
-          <div class="back">
+          <div class="back" @click="$router.push({ path: '/newsNotice' })">
             <img :src="images.back" alt="" />
             <span>返回</span>
           </div>

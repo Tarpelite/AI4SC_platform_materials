@@ -24,6 +24,31 @@ const routes = [
     path: '/scientificMission',
     name: '科学任务',
     component: () => import('../views/scientificMission')
+  },
+  {
+    path: '/scientificMissionMore',
+    name: '科学任务更多',
+    component: () => import('../views/scientificMission/more.vue')
+  },
+  {
+    path: '/scientificMissionDetail',
+    name: '科学任务详情',
+    component: () => import('../views/scientificMission/scientificMissionDetail.vue')
+  },
+  {
+    path: '/smartKit',
+    name: '智能套件',
+    component: () => import('../views/smartKit')
+  },
+  {
+    path: '/operationCondition',
+    name: '运行情况',
+    component: () => import('../views/operationCondition')
+  },
+  {
+    path: '/userInfo',
+    name: '用户主页',
+    component: () => import('../views/userInfo')
   }
 ]
 

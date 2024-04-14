@@ -15,10 +15,11 @@
           <input type="text" placeholder="输入关键词搜索…">
         </div>
         <div class="menuItem">
-          <div v-for="(item,index) in routerList" :key="index" :class="item.path == activeIndex ? 'active' : ''" @click="jump(item)">
+          <div v-for="(item,index) in routerList" :key="index" :class="item.path == activeIndex ? 'active' : ''" @click="jump(item.path)">
             {{ item.name }}
           </div>
         </div>
+        <img class="userAvatar" @click="jump('/userInfo')" :src="user" alt="">
       </div>
     </div>
 
@@ -58,7 +59,7 @@ export default {
         },
         {
           name: '智算套件',
-          path: '/kit'
+          path: '/smartKit'
         },
         {
           name: '数据资源',
@@ -74,10 +75,11 @@ export default {
         },
         {
           name: '运⾏情况',
-          path: '/qperation'
+          path: '/operationCondition'
         },
       ],
       logoPng: images.logo,
+      user: images.user,
       textColor: "#000",
       productFlag: false,
       programmeFlag: false,
@@ -296,9 +298,9 @@ export default {
     },
   },
   methods: {
-    jump(item) {
-      this.activeIndex = item.path
-      this.$router.push({path: item.path})
+    jump(Path) {
+      this.activeIndex = Path
+      this.$router.push({path: Path})
     }
   },
   mounted() {
@@ -362,7 +364,7 @@ p {
   height: 80px;
   width: 1440px;
   margin: 0 auto;
-  background: rgba(222, 234, 255, .8);
+  background: rgba(222, 234, 255, .94);
   transition-duration: 1s;
   cursor: pointer;
   .search {
@@ -392,7 +394,10 @@ p {
       height: 36px;
     }
   }
-
+  .userAvatar {
+    width: 36px;
+    height: 36px;
+  }
   .menuItem {
     display: flex;
     justify-content: space-around;
