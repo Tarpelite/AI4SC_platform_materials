@@ -1,5 +1,5 @@
 <template>
-    <div class="hotNews w1440">
+    <div class="hotNews">
         <div class="title">热点新闻</div>
         <div class="content" ref="list">
             <div class="item mr24" v-for="(item,index) in list" :key="index">
@@ -26,37 +26,37 @@ export default {
             list: [
                 {
                     id: 1,
-                    msg: '华盛顿大学团队开发了RoseTTAFold All-Atom，预测蛋白质与多分子复合结构，推进生物分子设计。',
+                    msg: '预测所有生物分子，David Baker 团队蛋白质设计新工具 RoseTTAFold All-Atom 登 Science',
                     img: 'https://pic.imgdb.cn/item/65ef01049f345e8d039fc9bf.png'
                 },
                 {
                     id: 2,
-                    msg: 'Nature杂志连续刊登了Chroma和GNoME研究，利用图神经网络在AI科学领域取得重大进展。',
+                    msg: 'AI4Science的基石：几何图神经网络，最全综述来了！人大高瓴联合腾讯AI lab、清华、斯坦福等发布',
                     img: 'https://pic.imgdb.cn/item/65ef029a9f345e8d03ae62c6.png'
                 },
                 {
                     id: 3,
-                    msg: '「自动驾驶实验室」成为未来科研新趋势，如RoboChem、A-Lab以及Fast-Cat等，这些系统运用AI技术自动执行高质量的科学实验，显著提高效率和效果。',
+                    msg: '5天完成6个月实验量，加速催化研究，「自动驾驶」催化实验室Fast-Cat登Nature子刊',
                     img: 'https://pic.imgdb.cn/item/65ef03149f345e8d03b2f078.png'
                 },
                 {
                     id: 4,
-                    msg: '2023年10月28日，科学智算共性平台举办“科学计算平台技术前沿”分论坛，聚集各领域专家共同探讨科学智算最新研究和产业动态。',
+                    msg: '课题组组织CNCC分论坛 —— 科学计算平台技术前沿',
                     img: 'https://pic.imgdb.cn/item/65ef074c9f345e8d03daa411.png'
                 },
                 {
                     id: 5,
-                    msg: '北理和北航在2023年10月27日共同举办了“神经符号计算：理论、技术与应用”分论坛，探讨将神经网络计算与符号规则推理结合的新型计算方法，此法能提高学习模型的泛化性、鲁棒性和可解释性。',
+                    msg: '课题组组织CNCC分论坛——“神经符号计算：理论、技术与应用”',
                     img: 'https://pic.imgdb.cn/item/65ef07649f345e8d03db8f32.png'
                 },
                 {
                     id: 6,
-                    msg: '北航联合其他八家单位举办首届“人工智能科学计算研讨会”。会议提议成立科学智算研究联盟，促进人工智能与科学深度结合，加速科学发现与技术创新。',
+                    msg: '北京航空航天大学举办首届“人工智能科学计算学术研讨会”',
                     img: 'https://pic.imgdb.cn/item/65ef08599f345e8d03e41a72.png'
                 },
                 {
                     id: 7,
-                    msg: '首届“大湾区杯”粤港澳AI for Science科技竞赛于2023年11月18日在广东韶关举行，此次大赛共有近千名青年学子参与，最终产生80支获奖队伍。大赛旨在推动AI技术在科研领域的应用与发展。',
+                    msg: '首届“大湾区杯”粤港澳 AI for Science科技竞赛颁奖典礼隆重举行',
                     img: 'https://pic.imgdb.cn/item/65ef08df9f345e8d03e86d28.png'
                 },
             ],
@@ -87,10 +87,13 @@ export default {
 
 <style lang="scss" scoped>
 .hotNews {
-    padding: 0 80px;
     background: #fafafa;
     position: relative;
     overflow: hidden;
+    max-width: 2000px;
+    min-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
     .title {
         font-weight: bold;
         font-size: 40px;
@@ -123,7 +126,7 @@ export default {
                 padding: 20px 20px;
                 .text {
                     font-weight: bold;
-                    font-size: 18px;
+                    font-size: 16px;
                     color: #262626;
                     display: -webkit-box;
                     -webkit-line-clamp: 4;

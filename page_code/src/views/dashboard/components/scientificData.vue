@@ -1,5 +1,5 @@
 <template>
-    <div class="fastFunction w1440">
+    <div class="fastFunction">
         <div class="title">科学数据</div>
         <div class="content">
             <div class="item" v-for="(item,index) in list" :key="index" :class="index == 3 ? '' : 'mr24'">
@@ -61,8 +61,11 @@ export default {
 
 <style lang="scss" scoped>
 .fastFunction {
-    padding: 0 80px;
     background: #fafafa;
+    max-width: 2000px;
+    min-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
     .title {
         font-weight: bold;
         font-size: 40px;
@@ -81,7 +84,8 @@ export default {
             background: #fff;
             border-radius: 20px;
             box-shadow: 0px 2px 16px 1px rgba(0,0,0,0.08);
-            width: 400px;
+            max-width: 400px;
+            min-width: 250px;
             height: 240px;
             display: flex;
             flex-direction: column;
@@ -118,7 +122,8 @@ export default {
                 }
             }
             .footer {
-                width: 403px;
+                max-width: 403px;
+                min-width: 253px;
                 height: 60px;
                 background: #FAFAFA;
                 border-radius: 0px 0px 20px 20px;

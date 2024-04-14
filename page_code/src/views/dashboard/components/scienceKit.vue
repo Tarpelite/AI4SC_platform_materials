@@ -1,5 +1,5 @@
 <template>
-    <div class="typicalTask w1440">
+    <div class="typicalTask">
         <div class="title">科学套件</div>
         <div class="content" ref="list">
             <div class="item mr24" v-for="(item,index) in list" :key="index">
@@ -127,10 +127,13 @@ export default {
 
 <style lang="scss" scoped>
 .typicalTask {
-    padding: 0 80px;
     background: #fafafa;
     position: relative;
     overflow: hidden;
+    max-width: 2000px;
+    min-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
     .title {
         font-weight: bold;
         font-size: 40px;

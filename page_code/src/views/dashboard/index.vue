@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <div class="bannerBg">
-      <div style="width: 1280px;margin: 0 auto;">
+      <div style="max-width: 2000px;min-width: 900px;margin: 0 auto;padding: 0 40px;">
         <el-carousel height="560px" ref="nop">
           <el-carousel-item v-for="item in carouselData" :key="item.id" :class="'carousel' + item.id">
             <div class="carouselItem" :style="'background-image: url(' + item.path + ')'">
@@ -107,13 +107,15 @@ export default {
 .dashboard {
   height: 100%;
   .bannerBg {
-    width: 1440px;
+    max-width: 2000px;
+    min-width: 900px;
     height: 560px;
     background: linear-gradient( 180deg, #DEEAFF 0%, #DEEAFF 18%, rgba(250,250,250,1) 100%);
     margin: 0 auto;
   }
   .carouselItem {
-    width: 1280px;
+    max-width: 2000px;
+    min-width: 900px;
     height: 560px;
     margin: 0 auto;
     position: relative;
@@ -158,97 +160,6 @@ export default {
   }
 }
 
-.bannerMask {
-  // width: 1440px;
-  min-width: 1200px;
-    max-width: 1920px;
-  margin: 0 auto;
-
-  >div {
-    position: relative;
-  }
-
-  .mask {
-    display: block;
-    width: 100%;
-    height: 160px;
-    opacity: 0.8;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    z-index: 101;
-  }
-
-  .left,
-  .right,
-  .phone,
-  .wechat,
-  .emil {
-    cursor: pointer;
-    position: absolute;
-    z-index: 102;
-    bottom: 38px;
-    right: 60px;
-    display: block;
-    width: 40px;
-    height: 40px;
-  }
-
-  .right {
-    right: 66px;
-    background-image: url('../../utils/image/arrowRight.png');
-    background-position: center center;
-    background-size: contain;
-  }
-
-  .left {
-    right: 120px;
-    background-image: url('../../utils/image/arrowLeft.png');
-    background-position: center center;
-    background-size: contain;
-  }
-
-  .emil {
-    right: 178px;
-    background-image: url('../../utils/image/emil.png');
-    background-position: center center;
-    background-size: contain;
-  }
-
-  .wechat {
-    right: 236px;
-    background-image: url('../../utils/image/WeChat.png');
-    background-position: center center;
-    background-size: contain;
-  }
-
-  .phone {
-    right: 294px;
-    background-image: url('../../utils/image/phone.png');
-    background-position: center center;
-    background-size: contain;
-  }
-
-  .right:hover {
-    background-image: url('../../utils/image/arrowRight1.png');
-  }
-
-  .left:hover {
-    background-image: url('../../utils/image/arrowLeft1.png');
-  }
-
-  .emil:hover {
-    background-image: url('../../utils/image/emil1.png');
-  }
-
-  .wechat:hover {
-    background-image: url('../../utils/image/WeChat1.png');
-  }
-
-  .phone:hover {
-    background-image: url('../../utils/image/phone1.png');
-  }
-}
 
 .tooltipContent {
   img {

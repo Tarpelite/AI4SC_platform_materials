@@ -180,7 +180,8 @@ export default {
   margin-top: 20px;
   background: #fafafa;
   .bannerBg {
-    width: 1440px;
+    max-width: 2000px;
+    min-width: 900px;
     height: 400px;
     background: linear-gradient(
       180deg,
@@ -191,14 +192,16 @@ export default {
     margin: 0 auto;
   }
   .banner {
-    width: 1280px;
+    max-width: 1440px;
+    min-width: 900px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
     border-radius: 20px 20px 20px 20px;
   }
   .carouselItem {
-    width: 1280px;
+    max-width: 1440px;
+    min-width: 900px;
     height: 400px;
     padding: 40px 60px;
     display: flex;
@@ -240,13 +243,15 @@ export default {
     }
   }
   .smartKitBody {
-    width: 1280px;
+    max-width: 1440px;
+    min-width: 900px;
     margin: 0 auto;
     .smartKitItem {
       display: flex;
       margin-top: 80px;
       .smartKitLeft {
-        width: 640px;
+        max-width: 740px;
+        min-width: 540px;
         margin-right: 80px;
         padding: 20px 40px;
         .title {
@@ -282,7 +287,8 @@ export default {
         }
       }
       .smartKitRight {
-        width: 560px;
+        max-width: 560px;
+        min-width: 460px;
         height: 320px;
         background: #ffffff;
         box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);

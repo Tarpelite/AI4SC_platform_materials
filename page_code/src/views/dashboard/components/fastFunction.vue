@@ -1,5 +1,5 @@
 <template>
-    <div class="fastFunction w1440">
+    <div class="fastFunction">
         <div class="title">快速功能</div>
         <div class="content">
             <div class="item" v-for="(item,index) in list" :key="index" :class="index == 3 ? '' : 'mr24'">
@@ -52,8 +52,11 @@ export default {
 
 <style lang="scss" scoped>
 .fastFunction {
-    padding: 0 80px;
     background: #fafafa;
+    max-width: 2000px;
+    min-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
     .title {
         font-weight: bold;
         font-size: 40px;

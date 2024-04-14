@@ -1,25 +1,37 @@
 <template>
   <div id="app">
-    <div
-      class="menuCard"
-      ref="menu"
-    >
+    <div class="menuCard" ref="menu">
       <div class="el-menu-i">
-        <div class="logo">
-          <a @click="$router.push('/dashboard')"
-            ><img :src="logoPng" width="202"
-          /></a>
-        </div>
-        <div class="search">
-          <img src="@/utils/image/search.png" alt="">
-          <input type="text" placeholder="输入关键词搜索…">
-        </div>
-        <div class="menuItem">
-          <div v-for="(item,index) in routerList" :key="index" :class="item.path == activeIndex ? 'active' : ''" @click="jump(item.path)">
-            {{ item.name }}
+        <div class="left">
+          <div class="logo">
+            <a @click="$router.push('/dashboard')"
+              ><img :src="logoPng" width="202"
+            /></a>
+          </div>
+          <div class="search">
+            <img src="@/utils/image/search.png" alt="" />
+            <input type="text" placeholder="输入关键词搜索…" />
           </div>
         </div>
-        <img class="userAvatar" @click="jump('/userInfo')" :src="user" alt="">
+        <div class="right">
+          <div class="menuItem">
+            <div
+              v-for="(item, index) in routerList"
+              :key="index"
+              class="hoverItem"
+              :class="item.path == activeIndex ? 'active' : ''"
+              @click="jump(item.path)"
+            >
+              {{ item.name }}
+            </div>
+          </div>
+          <img
+            class="userAvatar"
+            @click="jump('/userInfo')"
+            :src="user"
+            alt=""
+          />
+        </div>
       </div>
     </div>
 
@@ -46,36 +58,36 @@ export default {
       path: "",
       routerList: [
         {
-          name: '智算平台',
-          path: '/dashboard'
+          name: "智算平台",
+          path: "/dashboard",
         },
         {
-          name: '新闻通知',
-          path: '/newsNotice'
+          name: "新闻通知",
+          path: "/newsNotice",
         },
         {
-          name: '科学任务',
-          path: '/scientificMission'
+          name: "科学任务",
+          path: "/scientificMission",
         },
         {
-          name: '智算套件',
-          path: '/smartKit'
+          name: "智算套件",
+          path: "/smartKit",
         },
         {
-          name: '数据资源',
-          path: '/resource'
+          name: "数据资源",
+          path: "/resource",
         },
         {
-          name: '智算评测',
-          path: '/evaluate'
+          name: "智算评测",
+          path: "/evaluate",
         },
         {
-          name: '协作社区',
-          path: '/community'
+          name: "协作社区",
+          path: "/community",
         },
         {
-          name: '运⾏情况',
-          path: '/operationCondition'
+          name: "运⾏情况",
+          path: "/operationCondition",
         },
       ],
       logoPng: images.logo,
@@ -299,9 +311,9 @@ export default {
   },
   methods: {
     jump(Path) {
-      this.activeIndex = Path
-      this.$router.push({path: Path})
-    }
+      this.activeIndex = Path;
+      this.$router.push({ path: Path });
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -322,7 +334,8 @@ export default {
 </script>
 
 <style>
-body,html {
+body,
+html {
   margin: 0;
   width: 100%;
   height: 100%;
@@ -360,19 +373,27 @@ p {
 .el-menu-i {
   display: flex;
   align-items: center;
-  padding-left: 40px;
+  padding:0 40px;
   height: 80px;
-  width: 1440px;
+  max-width: 2000px;
+  min-width: 900px;
   margin: 0 auto;
-  background: rgba(222, 234, 255, .94);
+  background: rgba(222, 234, 255, 0.94);
   transition-duration: 1s;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  .left {
+    display: flex;
+  }
+  .right {
+    display: flex;
+  }
   .search {
     background: #fff;
     border-radius: 20px;
     display: flex;
     justify-content: center;
-    margin-right: 180px;
     padding: 5px;
     img {
       width: 24px;
@@ -401,14 +422,23 @@ p {
   .menuItem {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    text-wrap: nowrap;
     div {
       margin-right: 32px;
       font-size: 14px;
     }
-    .active {
-      color: #2954FF;
-      border-bottom: 2px solid #2954FF;
+    .hoverItem:hover {
+      color: #2954ff;
+      border-bottom: 2px solid #2954ff;
       padding-bottom: 5px;
+      height: 20px;
+    }
+    .active {
+      color: #2954ff;
+      border-bottom: 2px solid #2954ff;
+      padding-bottom: 5px;
+      height: 20px;
     }
   }
 

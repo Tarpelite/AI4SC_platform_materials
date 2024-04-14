@@ -623,8 +623,10 @@ export default {
   height: 100%;
   margin-top: 20px;
   .bannerBg {
-    width: 1440px;
-    padding-bottom: 20px;
+    max-width: 2000px;
+    min-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 20px 40px;
     background: linear-gradient(
       180deg,
       #deeaff 0%,
@@ -634,17 +636,20 @@ export default {
     margin: 0 auto;
   }
   .banner {
-    width: 1280px;
+    max-width: 1440px;
+    min-width: 900px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
     border-radius: 20px 20px 20px 20px;
   }
   .carouselItem {
-    width: 1280px;
+    max-width: 1440px;
+    min-width: 900px;
     height: 400px;
     padding: 40px 60px;
     display: flex;
+    justify-content: space-between;
     .right {
       width: 400px;
       img {
@@ -681,16 +686,19 @@ export default {
     }
   }
   .body {
-    width: 1440px;
+    max-width: 2000px;
+    min-width: 900px;
     margin: 0 auto;
+    padding: 0 40px;
     background: #fafafa;
-    padding-top: 40px;
     .box {
-      width: 1280px;
+      max-width: 1440px;
+    min-width: 900px;
       margin: 0 auto;
       display: flex;
       .bodyLeft {
-        width: 750px;
+        max-width: 850px;
+        min-width: 650px;
         .tab {
           display: flex;
           .tabItem {
@@ -757,7 +765,8 @@ export default {
         }
       }
       .bodyRight {
-        width: 420px;
+        max-width: 520px;
+        min-width: 400px;
         margin-left: 130px;
         .header {
           display: flex;
