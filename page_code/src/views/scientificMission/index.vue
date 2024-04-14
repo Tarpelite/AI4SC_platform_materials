@@ -601,10 +601,7 @@ export default {
   margin-top: 20px;
   background: #fafafa;
   .bannerBg {
-    max-width: 2000px;
-    min-width: 900px;
-    margin: 0 auto;
-    height: 400px;
+    padding: 0 40px 20px 40px;
     background: linear-gradient(
       180deg,
       #deeaff 0%,
@@ -614,8 +611,7 @@ export default {
     margin: 0 auto;
   }
   .banner {
-    max-width: 1440px;
-    min-width: 900px;
+    width: 1280px;
     margin: 0 auto;
     // padding: 0 40px;
     background: rgba(255, 255, 255, 0.4);
@@ -623,8 +619,7 @@ export default {
     border-radius: 20px 20px 20px 20px;
   }
   .carouselItem {
-    max-width: 1440px;
-    min-width: 900px;
+    width: 1280px;
     height: 400px;
     padding: 40px 60px;
     display: flex;
@@ -666,8 +661,7 @@ export default {
     }
   }
   .screen {
-    max-width: 1440px;
-    min-width: 900px;
+    width: 1280px;
     height: 190px;
     background: #ffffff;
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
@@ -745,8 +739,7 @@ export default {
     }
   }
   .body {
-    max-width: 1440px;
-    min-width: 900px;
+    width: 1280px;
     margin: 0 auto;
     background: #fafafa;
     margin-top: 40px;

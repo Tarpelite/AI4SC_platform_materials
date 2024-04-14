@@ -23,7 +23,8 @@
         </el-carousel>
       </div>
     </div>
-    <div class="body">
+    <div style="background: #fafafa;">
+      <div class="body">
       <div class="box">
         <div class="bodyLeft">
           <div class="tab">
@@ -87,6 +88,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -623,9 +625,6 @@ export default {
   height: 100%;
   margin-top: 20px;
   .bannerBg {
-    max-width: 2000px;
-    min-width: 900px;
-    margin: 0 auto;
     padding: 0 40px 20px 40px;
     background: linear-gradient(
       180deg,
@@ -636,16 +635,14 @@ export default {
     margin: 0 auto;
   }
   .banner {
-    max-width: 1440px;
-    min-width: 900px;
+    width: 1280px;
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
     border-radius: 20px 20px 20px 20px;
   }
   .carouselItem {
-    max-width: 1440px;
-    min-width: 900px;
+    width: 1280px;
     height: 400px;
     padding: 40px 60px;
     display: flex;
@@ -686,14 +683,12 @@ export default {
     }
   }
   .body {
-    max-width: 2000px;
-    min-width: 900px;
+    width: 1280px;
     margin: 0 auto;
     padding: 0 40px;
-    background: #fafafa;
     .box {
       max-width: 1440px;
-    min-width: 900px;
+      min-width: 900px;
       margin: 0 auto;
       display: flex;
       .bodyLeft {

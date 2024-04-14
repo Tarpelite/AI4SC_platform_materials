@@ -1,43 +1,128 @@
 <template>
-  <div class="smartKit">
-    <div class="bannerBg">
-      <div class="banner">
-        <el-carousel height="400px" ref="nop">
-          <el-carousel-item
-            v-for="item in carouselData"
-            :key="item.id"
-            :class="'carousel' + item.id"
-          >
-            <div class="carouselItem">
+  <div class="userInfo">
+    <div class="content">
+      <div class="information">
+        <div class="infoBox">
+          <div class="avatar">
+            <img :src="images.user" alt="" />
+          </div>
+          <div class="info">
+            <div class="name">Hi,Admin</div>
+            <div class="time">今天是你加入科学智算共性平台的第365天~</div>
+            <img :src="images.edit" alt="" />
+            <div class="basicInformation">
               <div class="left">
-                <div class="title">{{ item.title }}</div>
-                <div class="msg">{{ item.title }}</div>
-                <div class="detail" @click="jump(item)">了解详情</div>
+                <div class="item">
+                  <span class="title">邮箱</span>
+                  <span class="spanContent">18759445778@163.com</span>
+                </div>
+                <div class="item">
+                  <span class="title">手机号</span>
+                  <span class="spanContent">18759445778</span>
+                </div>
               </div>
               <div class="right">
-                <img :src="item.img" alt="" />
+                <div class="item">
+                  <span class="title">微信</span>
+                  <span class="spanContent">DeepHPMs</span>
+                </div>
+                <div class="item">
+                  <span class="title">加入时间</span>
+                  <span class="spanContent">2023-04-08</span>
+                </div>
               </div>
             </div>
-          </el-carousel-item>
-        </el-carousel>
+          </div>
+        </div>
+        <div class="collect">
+          <div class="quest">
+            <div class="title">收藏科学任务数量</div>
+            <div class="num">8</div>
+          </div>
+          <div class="kit">
+            <div class="title">收藏科学套件数量</div>
+            <div class="num">5</div>
+          </div>
+        </div>
+      </div>
+      <div class="history">
+        <div class="title">浏览历史</div>
+        <div class="historyBody">
+          <div
+            class="historyItem"
+            v-for="(item, index) in historyList"
+            :key="index"
+          >
+            <div class="ItemLeft">
+              <img :src="item.img" alt="" />
+            </div>
+            <div class="ItemRight">
+              <div class="title">{{ item.title }}</div>
+              <div class="type">
+                {{ item.type }}
+                <div class="time">{{ item.time }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div style="height: 40px"></div>
-    <div class="smartKitBody">
-      <div
-        class="smartKitItem"
-        v-for="(item, index) in smartKitList"
-        :key="index"
-      >
-        <div class="smartKitLeft">
-          <div class="title">
-            <div class="titleLeft">{{ item.title }}</div>
-            <div class="tag">{{ item.souce }}</div>
-          </div>
-          <div class="msg">{{ item.msg }}</div>
+    <div class="collectBox">
+      <div class="tab">
+        <div
+          class="quest"
+          :class="active == 0 ? 'active' : ''"
+          @click="active = 0"
+        >
+          科学任务收藏
         </div>
-        <div class="smartKitRight">
-          <img :src="item.img" alt="" />
+        <div
+          class="kit"
+          :class="active == 1 ? 'active' : ''"
+          @click="active = 1"
+        >
+          科学套件收藏
+        </div>
+      </div>
+      <div class="collectContent">
+        <div v-if="active == 0" style="display: flex; flex-wrap: wrap">
+          <div
+            class="questItem"
+            v-for="(item, index) in collectList"
+            :key="index"
+            @click="jumpDetail()"
+          >
+            <div class="img">
+              <img :src="item.img" alt="" />
+            </div>
+            <div class="boxBody">
+              <div class="title">{{ item.title }}</div>
+              <div class="msg">{{ item.msg }}</div>
+              <div class="tag">
+                <div class="type">{{ item.type }}</div>
+                <div class="algorithm">{{ item.algorithm }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-if="active == 1" style="display: flex; flex-wrap: wrap">
+          <div
+            class="kitItem mr24"
+            v-for="(item, index) in kitList"
+            :key="index"
+          >
+            <img :src="item.img" alt="" />
+            <div class="text">
+              <div class="titleChild">{{ item.title }}</div>
+              <div class="msg">{{ item.msg }}</div>
+            </div>
+            <img
+              class="smallImg"
+              :src="item.smallImg"
+              :style="item.type == 'baidu' ? 'width:65px;height:40px;' : ''"
+              alt=""
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -50,257 +135,446 @@ export default {
   data() {
     return {
       images: images,
-      carouselData: [
+      historyList: [
+        {
+          img: "https://pic.imgdb.cn/item/65ef08039f345e8d03e0fa72.png",
+          title: "上海人工智能实验室科学家白磊进行关于气象大模型的报告和讨论",
+          type: "社区活动",
+          time: "4/8 0:57",
+        },
+        {
+          img: "https://pic.imgdb.cn/item/65ef04059f345e8d03bb7fda.png",
+          title: "AI炼金术革新化学：MIT学者使用生成式AI，六秒生成新化学反应",
+          type: "学术动态",
+          time: "4/8 0:57",
+        },
+        {
+          img: "https://pic.imgdb.cn/item/65ef042d9f345e8d03bcd868.png",
+          title: "人工智能促进科学、能源和安全的报告",
+          type: "产业动向",
+          time: "4/8 0:57",
+        },
+        {
+          img: "https://pic.imgdb.cn/item/65ef044e9f345e8d03bdf414.png",
+          title: "使用深度神经网络整合药物与疾病关联数据进行药物再利用",
+          type: "学术动态",
+          time: "4/8 0:57",
+        },
+        {
+          img: "https://pic.imgdb.cn/item/65ef046f9f345e8d03bf228f.png",
+          title:
+            "中国科学院团队利用 AI 大模型训练技术解决同步辐射海量数据处理难题",
+          type: "学术动态",
+          time: "4/8 0:57",
+        },
+      ],
+      active: 0,
+      collectList: [
+        {
+          title: "DeepHPMs求解Burgers-BUAA方程",
+          msg: "DeepHPMs应用于Burgers方程，展现流体动力学中复杂波动的数值解。",
+          img: "https://pic.imgdb.cn/item/6612a08d68eb9357136ae905.png",
+          type: "数学",
+          algorithm: "百度AI Studio",
+        },
+        {
+          title: "DeepOnet求解常微分方程",
+          msg: "利用DeepOnet解决常微分方程问题，为科学计算提供新的深度学习方法。",
+          img: "https://pic.imgdb.cn/item/6612a16868eb9357136b82c0.png",
+          type: "数学",
+          algorithm: "百度AI Studio",
+        },
+        {
+          title: "深度学习求解Euler_Beam问题",
+          msg: "利用深度学习技术对Euler Beam理论进行模拟，提高工程力学问题的求解效率。",
+          img: "https://pic.imgdb.cn/item/6612a2a768eb9357136ce477.png",
+          type: "数学",
+          algorithm: "百度AI Studio",
+        },
+        {
+          title: "AMGNet",
+          msg: "AMGNet探索了深度学习在科学计算领域的应用，尤其是在加速多重网格方法解决偏微分方程方面的潜力。",
+          img: "https://pic.imgdb.cn/item/6612a84e68eb935713737fcf.png",
+          type: "流体力学",
+          algorithm: "百度AI Studio",
+        },
+        {
+          title: "Aneurysm",
+          msg: "通过深度学习方法处理血管瘤问题，尤其是在脑血管疾病诊断和治疗计划制定中的应用。",
+          img: "https://pic.imgdb.cn/item/6612a8eb68eb935713743a4f.png",
+          type: "流体力学",
+          algorithm: "百度AI Studio",
+        },
+        {
+          title: "2D-Biharmonic",
+          type: "结构力学",
+          algorithm: "百度AI Studio",
+          img: "https://pic.imgdb.cn/item/6612b29268eb9357137e0e3a.png",
+          msg: "应用物理信息神经网络求解二维双调和方程，探索在复杂边界条件下的数值解法。",
+        },
+        {
+          title: "hPINNs(PINN with hard constraints)",
+          type: "材料科学",
+          algorithm: "百度AI Studio",
+          img: "https://pic.imgdb.cn/item/65e089959f345e8d039380f6.png",
+          msg: "将硬约束条件整合进物理信息神经网络中，提高求解偏微分方程的准确度和鲁棒性。",
+        },
+        {
+          title: "FourCastNet",
+          type: "气象学",
+          algorithm: "百度AI Studio",
+          coverImage: "https://pic.imgdb.cn/item/6612b4c468eb9357138150b6.png",
+          msg: "基于深度学习的天气预报模型，通过自适应傅里叶神经算子高效预测气象变量，如风速和降水。",
+        },
+      ],
+      kitList: [
         {
           id: 1,
           title: "MindEarth地球科学领域套件",
           msg: "地球科学领域套件MindEarth致力于高效使能AI+气象海洋的融合研究。",
           img: "https://pic.imgdb.cn/item/65f25b6b9f345e8d03a16ef2.gif",
+          smallImg: images.huawei,
+          type: "huawei",
         },
         {
           id: 2,
           title: "Mindflow计算流体求解套件",
           msg: "支持物理驱动、数据驱动和数据机理融合驱动的AI流体仿真",
           img: "https://pic.imgdb.cn/item/65f25bac9f345e8d03a27224.gif",
+          smallImg: images.huawei,
+          type: "huawei",
         },
         {
           id: 3,
           title: "MindElec计算电磁仿真领域套件",
-          msg: "持数据建构及转换、仿真计算、结果可视化以及端到端的AI电磁仿真。",
+          msg: "持数据建构及转换、仿真计算、结果可视化以及端到端的AI电磁仿真",
           img: "https://pic.imgdb.cn/item/65f25bed9f345e8d03a34c02.png",
+          smallImg: images.huawei,
+          type: "huawei",
         },
         {
           id: 4,
           title: "MindChemistry计算化学领域套件",
           msg: "支持多体系，多尺度任务的AI+化学仿真",
           img: "https://pic.imgdb.cn/item/65f25c359f345e8d03a440e7.jpg",
-        },
-      ],
-      smartKitList: [
-        {
-          title: "MindEarth地球科学领域套件",
-          msg: "天气现象与人类的生产生活、社会经济、军事活动等方方面面都密切相关，准确的天气预报能够在灾害天气事件中减轻影响、避免经济损失，还能创造持续不断地财政收入，例如能源、农业、交通和娱乐行业。目前，天气预报主要采用数值天气预报模式，通过处理由气象卫星、观测台站、雷达等收集到的观测资料，求解描写天气演变的大气动力学方程组，进而提供天气气候的预测信息。数值预报模式的预测过程涉及大量计算，耗费较长时间与较大的计算资源。相较于数值预报模式，数据驱动的深度学习模型能够有效地将计算成本降低数个量级。MindEarth是基于昇思MindSpore开发的地球科学领域套件，支持短临、中期、长期等多时空尺度以及降水、台风等灾害性天气的AI气象预测，旨在于为广大的工业界科研工程人员、高校老师及学生提供高效易用的AI气象预测软件。",
-          img: "https://pic.imgdb.cn/item/65f25b6b9f345e8d03a16ef2.gif",
-          souce: "华为",
+          smallImg: images.huawei,
+          type: "huawei",
         },
         {
-          title: "Mindflow计算流体求解套件",
-          msg: "流体仿真是指通过数值计算对给定边界条件下的流体控制方程进行求解，从而实现流动的分析、预测和控制，其在航空航天、船舶制造以及能源电力等行业领域的工程设计中应用广泛。传统流体仿真的数值方法如有限体积、有限差分等，主要依赖商业软件实现，需要进行物理建模、网格划分、数值离散、迭代求解等步骤，仿真过程较为复杂，计算周期长。AI具备强大的学习拟合和天然的并行推理能力，可以有效地提升流体仿真效率。MindFlow是基于昇思MindSpore开发的流体仿真领域套件，支持航空航天、船舶制造以及能源电力等行业领域的AI流场模拟，旨在于为广大的工业界科研工程人员、高校老师及学生提供高效易用的AI计算流体仿真软件。",
-          img: "https://pic.imgdb.cn/item/65f25bac9f345e8d03a27224.gif",
-          souce: "华为",
-        },
-        {
-          title: "MindElec计算电磁仿真领域套件",
-          msg: "电磁仿真是指通过计算的方式模拟电磁波在物体或空间中的传播特性，其在手机容差、天线优化和芯片设计等场景中应用广泛。传统数值方法如有限差分、有限元等需网格剖分、迭代计算，仿真流程复杂、计算时间长，无法满足产品的设计需求。AI方法具有万能逼近和高效推理能力，可有效提升仿真效率。MindSpore Elec是基于MindSpore开发的AI电磁仿真工具包，由数据构建及转换、仿真计算、以及结果可视化组成。可以支持端到端的AI电磁仿真。目前已在华为终端手机容差场景中取得阶段性成果，相比商业仿真软件，AI电磁仿真的S参数误差在2%左右，端到端仿真速度提升10+倍。",
-          img: "https://pic.imgdb.cn/item/65f25bed9f345e8d03a34c02.png",
-          souce: "华为",
-        },
-        {
-          title: "MindChemistry计算化学领域套件",
-          msg: "传统化学研究长期以来面临着众多挑战，实验设计、合成、表征和分析的过程往往耗时、昂贵，并且高度依赖专家经验。AI与化学的协同可以克服传统方法的局限性、开拓全新的研究范式，结合AI模型与化学知识，可以高效处理大量数据、挖掘隐藏的关联信息，构建仿真模型，从而加快化学反应的设计和优化，实现材料的性质预测，并辅助设计新材料。MindChemistry是基于MindSpore构建的化学领域套件，支持多体系（有机/无机/复合材料化学）、多尺度任务（微观分子生成/预测、宏观反应优化）的AI+化学仿真，致力于高效使能AI与化学的融合研究，践行和牵引AI与化学联合多研究范式跃迁，为化学领域专家的研究提供全新视角与高效的工具。",
-          img: "https://pic.imgdb.cn/item/65f25c359f345e8d03a440e7.jpg",
-          souce: "华为",
-        },
-        {
+          id: 5,
           title: "MindSPONGE计算生物领域套件",
-          msg: "MindSpore SPONGE(Simulation Package tOwards Next GEneration molecular modelling)是基于昇思MindSpore的计算生物领域套件，支持分子动力学、蛋白质折叠等常用功能，旨在于为广大的科研人员、老师及学生提供高效易用的AI计算生物软件。支持高性能、模块化，端到端可微，类AI架构编写的分子模拟功能以及MSA生成，蛋白质折叠训练推理和蛋白质结构打分，NMR数据解析等常用功能。",
+          msg: "支持高性能、模块化，端到端可微，类AI架构编写的分子模拟功能以及MSA生成，蛋白质折叠训练推理和蛋白质结构打分，NMR数据解析等常用功能。",
           img: "https://pic.imgdb.cn/item/65f25c439f345e8d03a47148.gif",
-          souce: "华为",
-        },
-        {
-          title: "SciAI高频模型套件",
-          msg: "MindSpore SciAI是基于昇思MindSpore打造的AI4SCI高频基础模型套件，内置了60+高频模型，覆盖物理感知（如PINNs、DeepRitz以及PFNN）和神经算子（如FNO、DeepONet、PDENet）等主流模型，覆盖度全球第一； 提供了高阶API（一键环境配置，自动模型加载、极简训练微调等），开发者和用户开箱即用。 MindSpore SciAI应用领域覆盖到了流体、电磁、声、热、固体、生物等众多学科，为广大开发者和用户提供了高效、易用的AI4Science通用计算平台。",
-          img: "https://pic.imgdb.cn/item/65f25c699f345e8d03a4f0b5.jpg",
-          souce: "华为",
-        },
-        {
-          title: "PaddleHelix生物计算套件",
-          msg: "基于百度飞桨深度学习框架，打造“数据+原理”双驱动的生物计算大模型技术，支持小分子药物、多肽/蛋白药物、mRNA疫苗等场景，助力创新药的早期发现。生物计算大模型技术将大模型技术与生物领域原理知识进行融合，通过海量的数据，借鉴物理化学生物领域的第一性原理，使模型可以很好地适应新数据，大大增强了模型的泛化性和外推能力，即使面对全新的场景与任务也能取得优异的表现。",
-          img: "https://pic.imgdb.cn/item/65f25c789f345e8d03a5241b.png",
-          souce: "百度",
-        },
-        {
-          title: "PaddleScience科学计算套件",
-          msg: "PaddleScience 是一个基于深度学习框架 PaddlePaddle 开发的科学计算套件，利用深度神经网络的学习能力和 PaddlePaddle 框架的自动(高阶)微分机制，解决物理、化学、气象等领域的问题。支持物理机理驱动、数据驱动、数理融合三种求解方式，并提供了基础 API 和详尽文档供用户使用与二次开发。",
-          img: "https://pic.imgdb.cn/item/65f25c939f345e8d03a58c1f.jpg",
-          souce: "百度",
-        },
-        {
-          title: "PaddleQuantum量子计算套件",
-          msg: "Paddle Quantum（量桨）是基于百度飞桨研发的全球首个云量一体的量子机器学习平台。量桨支持量子神经网络的搭建与训练等功能，使得百度飞桨也因此成为国内首个支持量子机器学习的深度学习框架。量桨具备轻松上手、功能丰富等特点，提供了完善的API文档和用例教程，使用户可以快速入门和上手。量桨建立起了人工智能与量子计算的桥梁，不但可以快速实现量子神经网络的搭建与训练，还提供易用的量子机器学习开发套件与量子优化、量子化学等前沿量子应用工具集，并提供多项自研量子机器学习应用。通过百度飞桨深度学习平台赋能量子计算，量桨为领域内的科研人员以及开发者便捷地开发量子人工智能的应用提供了强有力的支撑，同时也为广大量子计算爱好者提供了一条可行的学习途径。",
-          img: "https://pic.imgdb.cn/item/65f25ca29f345e8d03a5c61d.jpg",
-          souce: "百度",
+          smallImg: images.huawei,
+          type: "huawei",
         },
       ],
     };
   },
-  computed: {
-    screenList() {
-      let arr = [];
-      this.tagList
-        .filter((item) => item.flag)
-        .map((item) => {
-          arr.push(item.id);
-        });
-      let listArr = [];
-      this.list.map((item) => {
-        if (arr.includes(item.id)) {
-          listArr.push(item);
-        }
-      });
-      return listArr;
-    },
-  },
+  computed: {},
   components: {},
   methods: {},
 };
 </script>
 
 <style lang="scss" scoped>
-::v-deep .el-carousel__indicators--horizontal {
-  position: absolute;
-  bottom: 5px;
-  text-align: right;
-  .el-carousel__indicator--horizontal button {
-    width: 20px;
-    height: 4px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-  }
-
-  .el-carousel__indicator--horizontal.is-active button {
-    width: 60px;
-    height: 4px;
-    background: #fff;
-    border-radius: 10px;
-  }
-}
-.smartKit {
+.userInfo {
   height: 100%;
-  margin-top: 20px;
   background: #fafafa;
-  .bannerBg {
+  max-width: 2000px;
+  min-width: 900px;
+  margin: 0 auto;
+  .content {
     width: 1440px;
-    height: 400px;
-    background: linear-gradient(
-      180deg,
-      #deeaff 0%,
-      #deeaff 18%,
-      rgba(250, 250, 250, 1) 100%
-    );
+    padding: 40px 80px;
     margin: 0 auto;
-  }
-  .banner {
-    width: 1280px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.4);
-    box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
-    border-radius: 20px 20px 20px 20px;
-  }
-  .carouselItem {
-    width: 1280px;
-    height: 400px;
-    padding: 40px 60px;
     display: flex;
-    background: linear-gradient(135deg, #587dff 0%, #9d2eff 100%);
-    .right {
-      width: 400px;
-      img {
-        width: 400px;
+    .information {
+      width: 860px;
+      margin-right: 20px;
+      .infoBox {
         height: 280px;
-        border-radius: 12px 12px 12px 12px;
-      }
-    }
-    .left {
-      width: 680px;
-      margin-right: 80px;
-      position: relative;
-      .title {
-        font-weight: bold;
-        font-size: 40px;
-        color: #ffffff;
-        margin-top: 30px;
-      }
-      .msg {
-        font-size: 16px;
-        color: #ffffff;
-        margin-top: 10px;
-      }
-      .detail {
-        width: 80px;
         background: #ffffff;
-        border-radius: 14px 14px 14px 14px;
-        font-size: 12px;
-        color: #2954ff;
-        padding: 5px 0;
-        text-align: center;
-        position: absolute;
-        bottom: 0;
-      }
-    }
-  }
-  .smartKitBody {
-    width: 1280px;
-    margin: 0 auto;
-    .smartKitItem {
-      display: flex;
-      margin-top: 80px;
-      .smartKitLeft {
-        width: 640px;
-        margin-right: 80px;
-        padding: 20px 40px;
-        .title {
-          display: flex;
-          .titleLeft {
-            font-weight: 500;
-            font-size: 32px;
+        box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+        border-radius: 16px 16px 16px 16px;
+        padding: 40px;
+        display: flex;
+        .avatar {
+          img {
+            width: 120px;
+            height: 120px;
+          }
+        }
+        .info {
+          margin: 20px 0 0 40px;
+          .name {
+            font-weight: bold;
+            font-size: 24px;
             color: #262626;
           }
-          .tag {
+          .time {
             font-size: 14px;
-            color: #ffffff;
-            background: #587dff;
-            border-radius: 16px;
-            padding: 0px 15px;
-            height: 28px;
-            line-height: 28px;
-            margin-left: 20px;
+            color: #262626;
+            margin-top: 8px;
+          }
+          img {
+            width: 16px;
+            height: 16px;
+            margin-top: 8px;
+            cursor: pointer;
+          }
+          .basicInformation {
+            display: flex;
+            margin-top: 10px;
+            .left {
+              margin-right: 50px;
+            }
+            .item {
+              font-size: 14px;
+              color: #262626;
+              margin-top: 15px;
+              .title {
+                width: 100px;
+                display: inline-block;
+              }
+            }
+          }
+        }
+      }
+      .collect {
+        margin-top: 20px;
+        height: 120px;
+        background: #ffffff;
+        box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+        border-radius: 16px 16px 16px 16px;
+        padding: 24px 40px;
+        display: flex;
+        .title {
+          font-weight: 500;
+          font-size: 16px;
+          color: #262626;
+          text-align: center;
+        }
+        .num {
+          font-weight: 500;
+          font-size: 40px;
+          color: #6e91fa;
+          text-align: center;
+        }
+        .quest {
+          width: 370px;
+        }
+        .kit {
+          width: 370px;
+        }
+      }
+    }
+    .history {
+      width: 400px;
+      height: 420px;
+      background: #ffffff;
+      box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+      border-radius: 16px 16px 16px 16px;
+      padding: 24px;
+      .historyBody {
+        .historyItem {
+          display: flex;
+          margin-top: 6px;
+          padding: 6px;
+          cursor: pointer;
+          background: #fafafa;
+          .ItemLeft {
+            position: relative;
+            img {
+              width: 48px;
+              height: 48px;
+              border-radius: 8px 8px 8px 8px;
+            }
+          }
+          .ItemRight {
+            margin-left: 15px;
+            display: flex;
+            flex-direction: column;
+            .title {
+              font-weight: 500;
+              font-size: 14px;
+              color: #262626;
+              display: -webkit-box;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: normal;
+            }
+            .type {
+              font-size: 14px;
+              color: #587dff;
+              display: flex;
+              justify-content: space-between;
+              margin-top: 5px;
+              .time {
+                color: #262626;
+              }
+            }
+          }
+        }
+        .historyItem:hover {
+          background: #ffffff;
+          box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+          border-radius: 16px 16px 16px 16px;
+          .title {
+            color: #2954ff;
+          }
+        }
+      }
+    }
+  }
+  .collectBox {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 0px 80px;
+    .tab {
+      width: 400px;
+      height: 40px;
+      background: #d9d9d9;
+      box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+      border-radius: 12px 12px 12px 12px;
+      display: flex;
+      text-align: center;
+      line-height: 35px;
+      div {
+        margin: 2px;
+        width: 198px;
+        height: 36px;
+        cursor: pointer;
+      }
+      div:hover {
+        color: #2954ff;
+        background: #ffffff;
+        border-radius: 10px 10px 10px 10px;
+      }
+      .active {
+        color: #2954ff;
+        background: #ffffff;
+        border-radius: 10px 10px 10px 10px;
+      }
+    }
+    .collectContent {
+      margin-top: 40px;
+      border-radius: 16px;
+      .questItem {
+        width: 290px;
+        height: 320px;
+        margin: 0 30px 30px 0;
+        cursor: pointer;
+        .img {
+          width: 290px;
+          height: 160px;
+          background: linear-gradient(180deg, #9cb9ff 0%, #deeaff 100%);
+          border-radius: 16px 16px 0px 0px;
+          img {
+            width: 250px;
+            height: 139px;
+            border-radius: 8px 8px 0px 0px;
+            margin: 20px 20px 0 20px;
+          }
+        }
+        .boxBody {
+          width: 290px;
+          height: 160px;
+          padding: 15px 20px;
+          background: #fff;
+          border-radius: 0px 0px 16px 16px;
+          box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+          .title {
+            font-weight: bold;
+            font-size: 16px;
+            color: #262626;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+          }
+          .msg {
+            font-size: 12px;
+            color: #262626;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+            margin-top: 8px;
+          }
+          .tag {
+            display: flex;
+            font-size: 12px;
+            margin-top: 24px;
+            .type {
+              background: #587dff;
+              border-radius: 14px 14px 14px 14px;
+              color: #ffffff;
+              padding: 2px 8px;
+              margin-right: 5px;
+            }
+            .algorithm {
+              background: #ffffff;
+              border: 1px solid #587dff;
+              border-radius: 14px 14px 14px 14px;
+              color: #587dff;
+              padding: 2px 8px;
+            }
+          }
+        }
+      }
+      .kitItem {
+        width: 400px;
+        height: 420px;
+        background: linear-gradient(
+          180deg,
+          #ccd7ff 0%,
+          #f5f7ff 52%,
+          #ffffff 100%
+        );
+        box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+        border-radius: 20px;
+        padding: 20px;
+        position: relative;
+        margin: 0 25px 30px 0;
+        .text {
+          margin-top: 24px;
+          .titleChild {
+            font-weight: bold;
+            font-size: 24px;
+            color: #262626;
+          }
+          .msg {
+            font-size: 14px;
+            color: #262626;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
             margin-top: 10px;
           }
         }
-        .msg {
-          font-size: 14px;
-          color: #262626;
-          margin-top: 5px;
-          line-height: 25px;
-          display: -webkit-box;
-          -webkit-line-clamp: 10;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: normal;
+        .smallImg {
+          width: 80px;
+          height: 28px;
+          position: absolute;
+          right: 20px;
+          bottom: 20px;
         }
-      }
-      .smartKitRight {
-        width: 560px;
-        height: 320px;
-        background: #ffffff;
-        box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
-        border-radius: 20px 20px 20px 20px;
-        padding: 20px;
         img {
-          width: 100%;
-          height: 280px;
-          border-radius: 16px 16px 16px 16px;
+          width: 360px;
+          height: 200px;
+          border-radius: 10px;
+          margin-top: 20px;
         }
-      }
-    }
-    .smartKitItem:hover {
-      background: #ffffff;
-      box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
-      border-radius: 20px 20px 20px 20px;
-      .smartKitRight {
-        box-shadow: none;
       }
     }
   }

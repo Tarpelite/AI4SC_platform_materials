@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <div class="bannerBg">
-      <div style="max-width: 2000px;min-width: 900px;margin: 0 auto;padding: 0 40px;">
+      <div style="width: 1440px;margin: 0 auto;padding: 0 80px;">
         <el-carousel height="560px" ref="nop">
           <el-carousel-item v-for="item in carouselData" :key="item.id" :class="'carousel' + item.id">
             <div class="carouselItem" :style="'background-image: url(' + item.path + ')'">
@@ -15,11 +15,13 @@
         </el-carousel>
       </div>
     </div>
-    <fastFunction />
-    <hotNews />
-    <typicalTask />
-    <scienceKit />
-    <scientificData />
+    <div style="background: #fafafa;">
+      <fastFunction />
+      <hotNews />
+      <typicalTask />
+      <scienceKit />
+      <scientificData />
+    </div>
   </div>
 </template>
 
@@ -107,15 +109,12 @@ export default {
 .dashboard {
   height: 100%;
   .bannerBg {
-    max-width: 2000px;
-    min-width: 900px;
     height: 560px;
     background: linear-gradient( 180deg, #DEEAFF 0%, #DEEAFF 18%, rgba(250,250,250,1) 100%);
     margin: 0 auto;
   }
   .carouselItem {
-    max-width: 2000px;
-    min-width: 900px;
+    width: 1440px;
     height: 560px;
     margin: 0 auto;
     position: relative;

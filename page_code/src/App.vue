@@ -364,6 +364,7 @@ p {
   position: fixed;
   top: 0;
   z-index: 100;
+  background: rgba(222, 234, 255, 0.94);
 }
 
 .body_content {
@@ -375,10 +376,8 @@ p {
   align-items: center;
   padding:0 40px;
   height: 80px;
-  max-width: 2000px;
-  min-width: 900px;
+  width: 1440px;
   margin: 0 auto;
-  background: rgba(222, 234, 255, 0.94);
   transition-duration: 1s;
   cursor: pointer;
   display: flex;

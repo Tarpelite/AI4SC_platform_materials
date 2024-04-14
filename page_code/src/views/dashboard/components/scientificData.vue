@@ -61,11 +61,9 @@ export default {
 
 <style lang="scss" scoped>
 .fastFunction {
-    background: #fafafa;
-    max-width: 2000px;
-    min-width: 900px;
+    width: 1440px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 0 80px;
     .title {
         font-weight: bold;
         font-size: 40px;

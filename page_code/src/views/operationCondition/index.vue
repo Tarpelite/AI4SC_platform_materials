@@ -137,8 +137,6 @@ export default {
   height: 100%;
   margin-top: 20px;
   .operationalBg {
-    max-width: 2000px;
-    min-width: 900px;
     margin: 0 auto;
     background: linear-gradient(
       180deg,
