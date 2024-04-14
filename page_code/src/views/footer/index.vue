@@ -1,7 +1,7 @@
 <template>
   <div class="body_content">
     <footer class="">
-      <div class="footerList w1440">
+      <!-- <div class="footerList w1440">
         <div class="contentList">
           <div v-for="item in detailList" :key="item.id" class="contentItem">
             <p class="itemTitle">{{ item.title }}</p>
@@ -42,7 +42,7 @@
             京ICP备18036750号-1 Copright©2017-2023 RuiHang . All Rights Reserved
           </p>
         </div>
-      </div>
+      </div> -->
     </footer>
   </div>
 </template>
