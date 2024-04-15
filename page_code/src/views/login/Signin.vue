@@ -1,76 +1,47 @@
 <template>
-  <div>
-    <div class="login" v-if="flag == 'login'">
-      <div class="title" v-if="wxFlag">
-        <div class="titleLeft"> <img :src="images.back1" alt="" @click="wxFlag = false"> 微信登录</div>
-        <div class="titleRight">
-          没有账号？<span class="signin" @click="flag = 'Signin'">注册</span>
-        </div>
+  <div class="login">
+    <div class="title">
+      <div class="titleLeft">注册</div>
+      <div class="titleRight">已注册？请<span class="signin" @click="$emit('Toggle')">登录</span></div>
+    </div>
+    <div class="form">
+      <div class="username">
+        <img :src="images.username" alt="" />
+        <input type="text" placeholder="输入你的手机号或邮箱" />
       </div>
-      <div class="title" v-if="!wxFlag">
-        <div class="titleLeft">登录</div>
-        <div class="titleRight">
-          没有账号？<span class="signin" @click="flag = 'Signin'">注册</span>
-        </div>
+      <div class="verification">
+        <img :src="images.verification" alt="" />
+        <input type="text" placeholder="输入6位验证码" />
+        <div class="send">发送验证码</div>
       </div>
-      <div class="form" v-if="!wxFlag">
-        <div class="username">
-          <img :src="images.username" alt="" />
-          <input type="text" placeholder="输入你的手机号或邮箱" />
-        </div>
-        <div class="password" v-if="!verificationFlag">
-          <img :src="images.password" alt="" />
-          <input type="password" placeholder="输入密码" />
-        </div>
-        <div class="verification" v-if="verificationFlag">
-          <img :src="images.verification" alt="" />
-          <input type="text" placeholder="输入6位验证码" />
-          <div class="send">发送验证码</div>
-        </div>
-      </div>
-      <div class="message" v-if="!wxFlag">
-        <span @click="verification">{{
-          verification ? "使用密码登录" : "使用验证码登录"
-        }}</span>
-        <span v-if="!verificationFlag">忘记密码？</span>
-      </div>
-      <div class="loginBtn" v-if="!wxFlag">登录</div>
-      <div class="privacy" v-if="!wxFlag">
-        <input type="radio" />
-        我已阅读并同意<span>服务协议</span>和<span>隐私政策</span>
-      </div>
-      <div
-        class="WXBtn"
-        style="margin-top: 24px"
-        @click="wxFlag = true"
-        v-if="!wxFlag"
-      >
-        微信登录
+      <div class="password">
+        <img :src="images.password" alt="" />
+        <input type="password" placeholder="输入密码" />
       </div>
     </div>
-    <Signin v-if="flag == 'Signin'" @Toggle="Toggle" />
+    <div class="message">
+      密码至少8个字符，至少含字母和数字，不能包含空格
+    </div>
+    <div class="loginBtn">注册</div>
+    <div class="privacy">
+        <input type="radio">
+        我已阅读并同意<span>服务协议</span>和<span>隐私政策</span>
+    </div>
+    <div class="WXBtn" style="margin-top: 24px;">微信登录</div>
   </div>
 </template>
 
 <script>
 import images from "@/utils/js/exportImage";
-import Signin from "./Signin.vue";
 export default {
   data() {
     return {
       images: images,
       verificationFlag: false,
-      flag: "login",
-      wxFlag: false,
     };
   },
-  components: {
-    Signin,
-  },
   methods: {
-    Toggle() {
-      this.flag = "login";
-    },
+    itemClick(val) {},
     verification() {
       this.verificationFlag = !this.verificationFlag;
     },
@@ -87,11 +58,6 @@ export default {
       font-weight: bold;
       font-size: 40px;
       color: #262626;
-      img {
-        width: 24px;
-        height: 24px;
-        cursor: pointer;
-      }
     }
     .titleRight {
       padding-top: 22px;
@@ -177,25 +143,22 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
-    margin-top: 12px;
-    span {
-      cursor: pointer;
-    }
+    margin-top: 2px;
   }
   .loginBtn {
     margin-top: 40px;
     width: 400px;
     height: 48px;
-    background: #587dff;
+    background: #587DFF;
     border-radius: 16px 16px 16px 16px;
     text-align: center;
     font-size: 18px;
-    color: #ffffff;
+    color: #FFFFFF;
     line-height: 48px;
     cursor: pointer;
   }
   .loginBtn:hover {
-    background: rgba(88, 125, 255, 0.8);
+    background: rgba(88, 125, 255, .8);
   }
   .WXBtn {
     width: 400px;
@@ -215,8 +178,8 @@ export default {
   .privacy {
     margin-top: 12px;
     span {
-      color: #587dff;
-      cursor: pointer;
+        color: #587DFF;
+        cursor: pointer;
     }
   }
 }

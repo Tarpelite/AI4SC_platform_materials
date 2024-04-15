@@ -20,14 +20,14 @@
               :key="index"
               class="hoverItem"
               :class="item.path == activeIndex ? 'active' : ''"
-              @click="jump(item.path)"
+              @click="jump(item.path,item.type)"
             >
               {{ item.name }}
             </div>
           </div>
           <img
             class="userAvatar"
-            @click="jump('/userInfo')"
+            @click="jump('/userInfo','')"
             :src="user"
             alt=""
           />
@@ -75,15 +75,18 @@ export default {
         },
         {
           name: "数据资源",
-          path: "/resource",
+          path: "http://aisccc.cn/database",
+          type: 'without'
         },
         {
           name: "智算评测",
-          path: "/evaluate",
+          path: "http://aisccc.cn/evaluating_",
+          type: 'without'
         },
         {
           name: "协作社区",
-          path: "/community",
+          path: "http://aisccc.cn/",
+          type: 'without'
         },
         {
           name: "运⾏情况",
@@ -310,9 +313,13 @@ export default {
     },
   },
   methods: {
-    jump(Path) {
-      this.activeIndex = Path;
-      this.$router.push({ path: Path });
+    jump(Path,type) {
+      if(type == 'without') {
+        window.open(Path)
+      }else {
+        this.activeIndex = Path;
+        this.$router.push({ path: Path });
+      }
     },
   },
   mounted() {

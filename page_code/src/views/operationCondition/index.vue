@@ -155,7 +155,8 @@ export default {
     .operationalMap {
       width: 1280px;
       height: 720px;
-      background: rgba(15, 52, 153, 0.3);
+      background: #202D6B;
+      
       border-radius: 20px 20px 20px 20px;
       margin-top: 20px;
     }

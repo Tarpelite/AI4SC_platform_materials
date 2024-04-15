@@ -17,6 +17,7 @@
               class="bodyItem"
               v-for="(item, index) in friendlyLinkList"
               :key="index"
+              @click="jump(item.link)"
             >
               {{ item.name }}
             </div>
@@ -64,47 +65,47 @@ export default {
       friendlyLinkList: [
         {
           name: "科技部",
-          link: "",
+          link: "https://www.most.gov.cn/index.html",
         },
         {
           name: "中山大学",
-          link: "",
+          link: "https://www.sysu.edu.cn/",
         },
         {
           name: "百度飞桨",
-          link: "",
+          link: "https://www.paddlepaddle.org.cn/",
         },
         {
           name: "工信部",
-          link: "",
+          link: "https://wap.miit.gov.cn/",
         },
         {
           name: "北京大学",
-          link: "",
+          link: "https://www.pku.edu.cn/",
         },
         {
           name: "华为昇思",
-          link: "",
+          link: "https://xihe.mindspore.cn/",
         },
         {
           name: "北京航空航天大学",
-          link: "",
+          link: "https://www.buaa.edu.cn/",
         },
         {
           name: "华中科技大学",
-          link: "",
+          link: "https://www.hust.edu.cn/",
         },
         {
           name: "中科可控",
-          link: "",
+          link: "https://www.cancon.com.cn/",
         },
         {
           name: "浙江大学",
-          link: "",
+          link: "https://www.zju.edu.cn/",
         },
         {
           name: "之江实验室",
-          link: "",
+          link: "https://www.zhejianglab.com/home",
         },
       ],
       communityList: [
@@ -138,7 +139,9 @@ export default {
     };
   },
   methods: {
-    itemClick(val) {},
+    jump(link) {
+      window.open(link)
+    },
   },
 };
 </script>
