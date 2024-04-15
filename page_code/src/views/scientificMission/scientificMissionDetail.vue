@@ -4,9 +4,9 @@
       <div class="header">
         <div class="title"><span class="renwu" @click="$router.back()">科学任务</span> / DeepHPMs求解Burgers-BUAA方程</div>
         <div class="btns">
-          <img class="btnsImg" :src="images.link" alt="" />
-          <img class="btnsImg" :src="images.homeLink" alt="" />
-          <img class="btnsImg" :src="images.codeRepository" alt="" />
+          <img class="btnsImg" :src="images.link" alt="" @click="jump('https://aistudio.baidu.com/projectdetail/6508962')" />
+          <img class="btnsImg" :src="images.homeLink" alt="" @click="jump('https://gitee.com/paddlepaddle/PaddleScience/tree/develop/examples/deephpms')" />
+          <img class="btnsImg" :src="images.codeRepository" alt="" @click="jump('https://paddlescience-docs.readthedocs.io/zh/latest/zh/examples/deephpms/')" />
           <div class="back" @click="$router.back()">
             <img :src="images.back" class="backImg" alt="" />
             <span>返回</span>
@@ -66,11 +66,11 @@
           </div>
           <div class="relevantPapers">
             <div class="title">相关论文</div>
-            <div class="relevantPapersText">
+            <div class="relevantPapersText" @click="jump('https://doi.org/10.1016/j.jcp.2017.11.039')">
               Hidden physics models: Machine learning of nonlinear partial
               alterental equations…
             </div>
-            <div class="relevantPapersText">
+            <div class="relevantPapersText"  @click="jump('https://doi.org/10.1016/j.jcp.2017.11.039')">
               Meshless physics-informed deep learning method for
               three-dimensional solid…
             </div>
@@ -148,7 +148,11 @@ export default {
     };
   },
   components: {},
-  methods: {},
+  methods: {
+    jump(link) {
+      window.open(link);
+    }
+  },
 };
 </script>
 
@@ -291,6 +295,7 @@ export default {
           border-radius: 16px 16px 16px 16px;
           padding: 20px;
           .relevantPapersText {
+            cursor: pointer;
             width: 320px;
             height: 60px;
             background: #f2f7ff;
