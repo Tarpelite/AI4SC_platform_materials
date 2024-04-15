@@ -1635,7 +1635,7 @@ export default {
             .btnsImg {
               width: 28px;
               height: 28px;
-              margin-right: 22px;
+              margin-right: 10px;
               background: rgba(222, 234, 255, 0.6);
               border-radius: 8px 8px 8px 8px;
               cursor: pointer;
