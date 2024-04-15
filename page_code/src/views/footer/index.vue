@@ -1,5 +1,5 @@
 <template>
-  <div class="body_content">
+  <div class="">
     <footer class="">
       <div class="footerbox">
         <div class="logo">
@@ -140,7 +140,7 @@ export default {
   },
   methods: {
     jump(link) {
-      window.open(link)
+      window.open(link);
     },
   },
 };
@@ -244,11 +244,11 @@ footer {
     margin-top: 100px;
     text-align: center;
     font-weight: 400;
-font-size: 16px;
-color: #FFFFFF;
-.email {
-  margin-left: 60px;
-}
+    font-size: 16px;
+    color: #ffffff;
+    .email {
+      margin-left: 60px;
+    }
   }
 }
 </style>

@@ -123,6 +123,21 @@ export default {
           left: "27%",
           zoom: 1.6, //地图的缩放
           label: {
+            show: true,
+            color: "#fff",
+            formatter: function (params) {
+              if(params.name == '北京市') {
+                return '北京航空航天大学'
+              }else if(params.name == '浙江省') {
+                return '浙江大学'
+              }else if(params.name == '广东省') {
+                return '中山大学 华为云'
+              }else if(params.name == '河北省') {
+                return '百度云'
+              }else {
+                return ''
+              }
+            },
             emphasis: {
               show: true,
               color: "#fff",
@@ -140,15 +155,13 @@ export default {
           },
         },
         visualMap: {
+          show: false,
           min: 0,
           max: this.max,
           right: "8",
           bottom: "8",
-          calculable: true,
           itemWidth: "8",
           itemHeight: "118",
-          orient: "horizontal",
-          align: "right",
           seriesIndex: [0],
           textStyle: {
             color: "#B3DBFF",
@@ -161,7 +174,6 @@ export default {
             type: "map",
             geoIndex: 0,
             map: "china",
-            roam: true,
             zoom: 1.2,
             label: {
               normal: {

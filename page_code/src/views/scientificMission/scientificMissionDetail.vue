@@ -2,7 +2,7 @@
   <div class="scientificMissionDetail">
     <div class="content">
       <div class="header">
-        <div class="title">模型列表 / DeepHPMs求解Burgers-BUAA方程</div>
+        <div class="title"><span class="renwu" @click="$router.back()">科学任务</span> / DeepHPMs求解Burgers-BUAA方程</div>
         <div class="btns">
           <img class="btnsImg" :src="images.link" alt="" />
           <img class="btnsImg" :src="images.homeLink" alt="" />
@@ -167,6 +167,9 @@ export default {
       padding-bottom: 8px;
       .title {
         color: #587dff;
+        .renwu {
+          cursor: pointer;
+        }
       }
       .btns {
         display: flex;

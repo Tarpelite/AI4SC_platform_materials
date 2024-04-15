@@ -11,7 +11,7 @@
             <div class="carouselItem">
               <div class="left">
                 <div class="title">{{ item.title }}</div>
-                <div class="msg">{{ item.title }}</div>
+                <div class="msg">{{ item.msg }}</div>
                 <div class="detail" @click="jumpDetail(item)">了解详情</div>
               </div>
               <div class="right">

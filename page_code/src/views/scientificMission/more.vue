@@ -1,9 +1,9 @@
 <template>
   <div class="scientificMissionMore">
     <div class="scientificMissionMoreHeader">
-      <div style="width: 1200px;margin:0 auto;">
+      <div style="width: 1200px; margin: 0 auto">
         <div class="title">{{ screenHeaderList.name }}</div>
-      <div class="msg">{{ screenHeaderList.msg }}</div>
+        <div class="msg">{{ screenHeaderList.msg }}</div>
       </div>
     </div>
     <div class="body">
@@ -87,7 +87,7 @@ export default {
       ],
       list: [
         {
-          name: "模型列表",
+          name: "科学任务列表",
           type: 0,
           childList: [
             {
@@ -149,7 +149,7 @@ export default {
           ],
         },
         {
-          name: "模型列表",
+          name: "科学任务列表",
           type: 1,
 
           childList: [
@@ -544,7 +544,7 @@ export default {
           ],
         },
         {
-          name: "模型列表",
+          name: "科学任务列表",
           type: 2,
           childList: [
             {
@@ -592,7 +592,7 @@ export default {
           ],
         },
         {
-          name: "模型列表",
+          name: "科学任务列表",
           type: 3,
           childList: [
             {
@@ -619,7 +619,7 @@ export default {
           ],
         },
         {
-          name: "模型列表",
+          name: "科学任务列表",
           type: 4,
           childList: [
             {
@@ -632,7 +632,7 @@ export default {
           ],
         },
         {
-          name: "模型列表",
+          name: "科学任务列表",
           type: 5,
           childList: [
             {
@@ -674,7 +674,7 @@ export default {
           ],
         },
         {
-          name: "模型列表",
+          name: "科学任务列表",
           type: 6,
           childList: [
             {
@@ -708,7 +708,7 @@ export default {
           ],
         },
         {
-          name: "模型列表",
+          name: "科学任务列表",
           type: 7,
           childList: [
             {
@@ -755,29 +755,29 @@ export default {
             },
           ],
         },
-      ]
+      ],
     };
   },
   computed: {
     screenHeaderList() {
-      if(this.$route.query.id) {
-        return this.headerList[this.$route.query.id]
-      }else {
-        return {}
+      if (this.$route.query.id) {
+        return this.headerList[this.$route.query.id];
+      } else {
+        return {};
       }
     },
     screenlist() {
-      if(this.$route.query.id) {
-        return this.list[this.$route.query.id]
-      }else {
-        return {}
+      if (this.$route.query.id) {
+        return this.list[this.$route.query.id];
+      } else {
+        return {};
       }
-    }
+    },
   },
   components: {},
   methods: {
     jumpDetail() {
-      this.$router.push({ path: '/scientificMissionDetail' });
+      this.$router.push({ path: "/scientificMissionDetail" });
     },
   },
 };
@@ -789,7 +789,7 @@ export default {
   margin-top: 20px;
   background: #fafafa;
   .scientificMissionMoreHeader {
-    width: 1440px;
+    width: 100%;
     margin: 0 auto;
     height: 250px;
     background: linear-gradient(
@@ -797,21 +797,20 @@ export default {
       #deeaff 0%,
       #deeaff 18%,
       rgba(222, 234, 255, 0) 100%
-      
     );
     .title {
-        font-weight: bold;
-font-size: 40px;
-color: #2954FF;
-text-align: center;
-padding-top: 60px;
-      }
-      .msg {
-        font-weight: 400;
-font-size: 18px;
-color: #262626;
-margin-top: 12px;
-      }
+      font-weight: bold;
+      font-size: 40px;
+      color: #2954ff;
+      text-align: center;
+      padding-top: 60px;
+    }
+    .msg {
+      font-weight: 400;
+      font-size: 18px;
+      color: #262626;
+      margin-top: 12px;
+    }
   }
   .body {
     width: 1440px;
@@ -826,10 +825,9 @@ margin-top: 12px;
         justify-content: space-between;
         .title {
           font-weight: bold;
-          font-size: 28px;
-          color: #2954ff;
+          font-size: 16px;
+          color: #262626;
           padding-bottom: 10px;
-          
         }
         .more {
           display: flex;

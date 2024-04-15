@@ -52,6 +52,7 @@
             class="historyItem"
             v-for="(item, index) in historyList"
             :key="index"
+            @click="$router.push({ path: '/newsNoticeDetail' })"
           >
             <div class="ItemLeft">
               <img :src="item.img" alt="" />
@@ -90,7 +91,7 @@
             class="questItem"
             v-for="(item, index) in collectList"
             :key="index"
-            @click="jumpDetail()"
+            @click="jumpDetail(0)"
           >
             <div class="img">
               <img :src="item.img" alt="" />
@@ -110,6 +111,7 @@
             class="kitItem mr24"
             v-for="(item, index) in kitList"
             :key="index"
+            @click="jumpDetail(1)"
           >
             <img :src="item.img" alt="" />
             <div class="text">
@@ -273,7 +275,15 @@ export default {
   },
   computed: {},
   components: {},
-  methods: {},
+  methods: {
+    jumpDetail(type) {
+      if(type) {
+
+      }else {
+        this.$router.push({ path: '/scientificMissionDetail' });
+      }
+    }
+  },
 };
 </script>
 

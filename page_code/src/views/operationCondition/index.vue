@@ -28,8 +28,10 @@
               </template>  
             </el-table-column>
             <el-table-column
-              prop="time"
               label="检测时间">
+              <template slot-scope="scope">
+                {{ timeConvert(scope) }}
+              </template>  
             </el-table-column>
             <el-table-column
               prop="region"
@@ -133,7 +135,30 @@ export default {
   components: {
     mapEcharts
   },
-  methods: {},
+  methods: {
+    timeConvert() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      const hour = now.getHours();
+      const minute = now.getMinutes();
+      const second = now.getSeconds();
+      var minute1 = ''
+      var second1 = ''
+      if(minute < 10) {
+        minute1 = "0" + minute
+      }else {
+        minute1 = minute
+      }
+      if(second < 10) {
+        second1 = "0" + second
+      }else {
+        second1 = second
+      }
+      return year + '-' + month + '-' + day + ' ' + hour + ':' + minute1 + ':' + second1
+    }
+  },
 };
 </script>
 
