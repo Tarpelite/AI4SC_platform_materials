@@ -310,9 +310,14 @@ export default {
   },
   watch: {
     $route: function (to, from) {
+      this.activeIndex = this.$route.path
       this.userInfo = sessionStorage.getItem("info");
       if (!this.userInfo) {
         this.$router.push({ path: "/login" });
+      } else {
+        if (this.$route.path == "/login") {
+          this.$router.push({ path: "/dashboard" });
+        }
       }
     },
   },
@@ -335,6 +340,10 @@ export default {
     this.userInfo = sessionStorage.getItem("info");
     if (!this.userInfo) {
       this.$router.push({ path: "/login" });
+    } else {
+      if (this.$route.path == "/login") {
+        this.$router.push({ path: "/dashboard" });
+      }
     }
     window.addEventListener("scroll", this.handleScroll);
   },
