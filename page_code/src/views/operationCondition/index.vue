@@ -1,7 +1,9 @@
 <template>
   <div class="operationCondition">
     <div class="operationalBg">
-      <div class="operationalMap"></div>
+      <div class="operationalMap">
+        <mapEcharts />
+      </div>
       <div class="operationalTable">
         <div class="title">情况表格</div>
         <div style="margin-top: 10px;">
@@ -42,6 +44,7 @@
 
 <script>
 import images from "@/utils/js/exportImage";
+import mapEcharts from "./map.vue"
 export default {
   data() {
     return {
@@ -127,7 +130,9 @@ export default {
       ]
     };
   },
-  components: {},
+  components: {
+    mapEcharts
+  },
   methods: {},
 };
 </script>

@@ -1,274 +1,251 @@
 <template>
   <div class="body_content">
     <footer class="">
-      <!-- <div class="footerList w1440">
-        <div class="contentList">
-          <div v-for="item in detailList" :key="item.id" class="contentItem">
-            <p class="itemTitle">{{ item.title }}</p>
-            <div>
-              <p
-                v-for="val in item.children"
-                :key="val.id"
-                @click="itemClick(val)"
-                :class="[
-                  'childrenTitle',
-                ]"
-              >
-              <span>
-                {{ val.title }}
-              </span>
-              </p>
+      <div class="footerbox">
+        <div class="logo">
+          <div class="logoTitle">
+            <img :src="images.AI4SC" alt="" />
+          </div>
+          <div class="img">
+            <img :src="images.footerLogo" alt="" />
+          </div>
+        </div>
+        <div class="friendlyLink">
+          <div class="friendlyLinkTitle">友情链接</div>
+          <div class="friendlyLinkBody">
+            <div
+              class="bodyItem"
+              v-for="(item, index) in friendlyLinkList"
+              :key="index"
+            >
+              {{ item.name }}
             </div>
           </div>
         </div>
-        <div class="describe">
-          <div class="describe_msg">
-            <p>咨询电话</p>
-            <p>010-62150576</p>
+        <div class="community">
+          <div class="communityTitle">社区</div>
+          <div class="communityBody">
+            <div
+              class="bodyItem"
+              v-for="(item, index) in communityList"
+              :key="index"
+            >
+              {{ item.name }}
+            </div>
           </div>
-          <div class="describe_msg">
-            <p>咨询邮箱</p>
-            <p>xiaorh@rhzz.com.cn</p>
-          </div>
-          <div class="qrcode">
-            <img src="../../utils/image/qrcode.jpg" alt="" />
+        </div>
+        <div class="information">
+          <div class="informationTitle">网站信息</div>
+          <div class="informationBody">
+            <div
+              class="bodyItem"
+              v-for="(item, index) in informationList"
+              :key="index"
+            >
+              {{ item.name }}
+            </div>
           </div>
         </div>
       </div>
-      <div class="filings">
-        <div>
-          <img src="../../utils/image/footerLogo.png" alt="" />
-          <p>
-            京ICP备18036750号-1 Copright©2017-2023 RuiHang . All Rights Reserved
-          </p>
-        </div>
-      </div> -->
+      <div class="copyright">
+        版权所有：科学智算共性平台 京ICP备18020905号-2
+        <span class="email">联系邮箱：cnai4s2023@gmail.com</span>
+      </div>
     </footer>
   </div>
 </template>
 
 <script>
+import images from "@/utils/js/exportImage";
 export default {
   data() {
     return {
-      detailList: [
+      images: images,
+      friendlyLinkList: [
         {
-          id: 1,
-          title: "产品体系",
-          children: [
-            {
-              id: 0,
-              title: "睿防 - 数据安全产品",
-              path: "/products_info",
-              type: "Rifens",
-            },
-            {
-              id: 9,
-              title: "睿巡 - 边界安全产品",
-              path: "/products_info",
-              type: "Rinspector",
-            },
-            {
-              id: 11,
-              title: "睿察 - 工控安全产品",
-              path: "/products_info",
-              type: "Ritect",
-            },
-            {
-              id: 12,
-              title: "睿知 - 管理平台产品",
-              path: "/products_info",
-              type: "Rilize",
-            },
-            {
-              id: 13,
-              title: "睿训 - 培训演练产品",
-              path: "/products_info",
-              type: "Rehearsal",
-            },
-          ],
+          name: "科技部",
+          link: "",
         },
         {
-          id: 2,
-          title: "解决方案",
-          children: [
-            {
-              id: 21,
-              title: "电力行业解决方案",
-              path: "/solution/electric",
-            },
-            {
-              id: 22,
-              title: "电信行业解决方案",
-              path: "/solution/telecom",
-            },
-            {
-              id: 23,
-              title: "关键制造行业解决方案",
-              path: "/solution/pivotal",
-            },
-            {
-              id: 24,
-              title: "智慧校园信息安全解决方案",
-              path: "/solution/campus",
-            },
-          ],
+          name: "中山大学",
+          link: "",
         },
         {
-          id: 3,
-          title: "关于我们",
-          children: [
-            {
-              id: 31,
-              title: "公司简介",
-              path: "/we",
-            },
-            {
-              id: 32,
-              title: "联系我们",
-              path: "/lxwm",
-            },
-            {
-              id: 33,
-              title: "招贤纳士",
-              path: "/zwzp",
-            },
-          ],
+          name: "百度飞桨",
+          link: "",
+        },
+        {
+          name: "工信部",
+          link: "",
+        },
+        {
+          name: "北京大学",
+          link: "",
+        },
+        {
+          name: "华为昇思",
+          link: "",
+        },
+        {
+          name: "北京航空航天大学",
+          link: "",
+        },
+        {
+          name: "华中科技大学",
+          link: "",
+        },
+        {
+          name: "中科可控",
+          link: "",
+        },
+        {
+          name: "浙江大学",
+          link: "",
+        },
+        {
+          name: "之江实验室",
+          link: "",
+        },
+      ],
+      communityList: [
+        {
+          name: "理事会",
+          link: "",
+        },
+        {
+          name: "技术委员会",
+          link: "",
+        },
+        {
+          name: "加入共性平台",
+          link: "",
+        },
+      ],
+      informationList: [
+        {
+          name: "社区动态",
+          link: "",
+        },
+        {
+          name: "成员动态",
+          link: "",
+        },
+        {
+          name: "行业资讯",
+          link: "",
         },
       ],
     };
   },
   methods: {
-    itemClick(val) {
-      if (val.type) {
-        if (val.id == this.$route.query.productsId) return;
-        this.$router.push({
-          path: val.path,
-          query: {
-            type: val.type,
-            productsId: val.id,
-          },
-        });
-      } else {
-        this.$router.push(val.path).catch((err) => err);
-      }
-    },
+    itemClick(val) {},
   },
 };
 </script>
 
 <style lang="scss" scoped>
 footer {
-  height: 500px;
-
-  .footerList {
-    padding: 80px 140px 80px 160px;
+  height: 400px;
+  background: #3959cc;
+  .footerbox {
+    width: 1280px;
+    margin: 0 auto;
     display: flex;
-
-    .contentList {
-      display: flex;
-
-      .contentItem {
-        margin-right: 60px;
-
-        p {
-          width: 200px;
+    padding-top: 87px;
+    .logo {
+      width: 120px;
+      margin-right: 120px;
+      .logoTitle {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        padding-bottom: 5px;
+        img {
+          width: 72px;
+          height: 20px;
         }
-
-        .itemTitle {
-          font-size: 16px;
-          font-family: Helvetica Neue-Medium, Helvetica Neue;
-          font-weight: 500;
-          color: #21373d;
-          margin-bottom: 24px;
-        }
-
-        .childrenTitle {
-          font-size: 14px;
-          font-family: Helvetica Neue-Medium, Helvetica Neue;
-          font-weight: 500;
-          color: #74787a;
-          margin-bottom: 21px;
-         
-        }
-
-        // .childrenTitle:hover {
-        //   color: #e02d36;
-        // }
-        .activeColor {
-          color: #e02d36;
-        }
-        span {
-            cursor: pointer;
-        }
-        span:hover {
-          color: #e02d36;
+      }
+      .img {
+        margin-top: 15px;
+        img {
+          width: 72px;
+          height: 72px;
         }
       }
     }
-
-    .describe {
-      width: 320px;
-      height: 240px;
-      background: #f5f5f5;
-      border-radius: 2px 2px 2px 2px;
-      padding: 17px 0 0 40px;
-
-      .describe_msg {
-        margin-bottom: 16px;
-        p:first-child {
+    .friendlyLink {
+      width: 440px;
+      margin-right: 120px;
+      .friendlyLinkTitle {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        padding-bottom: 5px;
+        font-weight: bold;
+        font-size: 18px;
+        color: #ffffff;
+      }
+      .friendlyLinkBody {
+        margin-top: 7px;
+        display: flex;
+        flex-wrap: wrap;
+        .bodyItem {
+          width: 33.33%;
+          font-weight: 400;
           font-size: 14px;
-          font-family: Helvetica Neue-Medium, Helvetica Neue;
-          font-weight: 500;
-          color: #74787a;
-        }
-
-        p:last-child {
-          font-size: 16px;
-          font-family: Helvetica Neue-Medium, Helvetica Neue;
-          font-weight: 500;
-          color: #21373d;
+          color: #ffffff;
+          margin-top: 8px;
+          cursor: pointer;
         }
       }
-
-      .qrcode {
-        margin-top: 12px;
-
-        img {
-          display: block;
-          width: 100px;
-          height: 100px;
+    }
+    .community {
+      width: 120px;
+      margin-right: 120px;
+      .communityTitle {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        padding-bottom: 5px;
+        font-weight: bold;
+        font-size: 18px;
+        color: #ffffff;
+      }
+      .communityBody {
+        margin-top: 7px;
+        .bodyItem {
+          font-weight: 400;
+          font-size: 14px;
+          color: #ffffff;
+          margin-top: 8px;
+          cursor: pointer;
+        }
+      }
+    }
+    .information {
+      width: 120px;
+      .informationTitle {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        padding-bottom: 5px;
+        font-weight: bold;
+        font-size: 18px;
+        color: #ffffff;
+      }
+      .informationBody {
+        margin-top: 7px;
+        .bodyItem {
+          font-weight: 400;
+          font-size: 14px;
+          color: #ffffff;
+          margin-top: 8px;
+          cursor: pointer;
         }
       }
     }
   }
-
-  .filings {
-    width: 100%;
-    height: 100px;
-    background: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    > div {
-      display: flex;
-      align-items: center;
-
-      img {
-        display: block;
-        width: 98px;
-        height: 24px;
-        margin-right: 30px;
-      }
-
-      p {
-        font-size: 12px;
-        font-family: Helvetica Neue-Regular, Helvetica Neue;
-        font-weight: 400;
-        color: #74787a;
-      }
-    }
+  .copyright {
+    margin-top: 100px;
+    text-align: center;
+    font-weight: 400;
+font-size: 16px;
+color: #FFFFFF;
+.email {
+  margin-left: 60px;
+}
   }
 }
 </style>
