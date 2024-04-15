@@ -152,7 +152,11 @@ export default {
     },
   },
   components: {},
-  methods: {},
+  methods: {
+    jump() {
+      
+    }
+  },
 };
 </script>
 
@@ -235,6 +239,7 @@ export default {
         text-align: center;
         position: absolute;
         bottom: 0;
+        cursor: pointer;
       }
     }
   }

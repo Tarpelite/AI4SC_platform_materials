@@ -147,6 +147,11 @@ export default {
                 }
             }
         }
+        .item:hover {
+            .itemTitle {
+                color: #2954FF;
+            }
+        }
     }
 }
 </style>

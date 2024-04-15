@@ -16,11 +16,11 @@
       <div class="form" v-if="!wxFlag">
         <div class="username">
           <img :src="images.username" alt="" />
-          <input type="text" placeholder="输入你的手机号或邮箱" />
+          <input type="text" v-model="username" placeholder="输入你的手机号或邮箱" />
         </div>
         <div class="password" v-if="!verificationFlag">
           <img :src="images.password" alt="" />
-          <input type="password" placeholder="输入密码" />
+          <input type="password" v-model="password" placeholder="输入密码" />
         </div>
         <div class="verification" v-if="verificationFlag">
           <img :src="images.verification" alt="" />
@@ -34,9 +34,9 @@
         }}</span>
         <span v-if="!verificationFlag">忘记密码？</span>
       </div>
-      <div class="loginBtn" v-if="!wxFlag">登录</div>
+      <div class="loginBtn" v-if="!wxFlag" @click="Login">登录</div>
       <div class="privacy" v-if="!wxFlag">
-        <input type="radio" />
+        <input type="checkbox" v-model="read" />
         我已阅读并同意<span>服务协议</span>和<span>隐私政策</span>
       </div>
       <div
@@ -62,6 +62,9 @@ export default {
       verificationFlag: false,
       flag: "login",
       wxFlag: false,
+      username: '',
+      password: '',
+      read: false
     };
   },
   components: {
@@ -74,6 +77,14 @@ export default {
     verification() {
       this.verificationFlag = !this.verificationFlag;
     },
+    Login() {
+      if(this.read) {
+        if(this.username && this.password) {
+          sessionStorage.setItem("info","OK")
+          this.$router.push({path: '/dashboard'})
+        }
+      }
+    }
   },
 };
 </script>

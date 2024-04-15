@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="menuCard" ref="menu">
+    <div class="menuCard" ref="menu" v-if="userInfo">
       <div class="el-menu-i">
         <div class="left">
           <div class="logo">
@@ -20,14 +20,14 @@
               :key="index"
               class="hoverItem"
               :class="item.path == activeIndex ? 'active' : ''"
-              @click="jump(item.path,item.type)"
+              @click="jump(item.path, item.type)"
             >
               {{ item.name }}
             </div>
           </div>
           <img
             class="userAvatar"
-            @click="jump('/userInfo','')"
+            @click="jump('/userInfo', '')"
             :src="user"
             alt=""
           />
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="body_content" ref="body_content">
+    <div :class="userInfo ? 'body_content' : ''" ref="body_content">
       <transition name="fade">
         <keep-alive>
           <router-view></router-view>
@@ -43,7 +43,7 @@
       </transition>
     </div>
     <!-- <div style="background-color: #f5f5f5;"> -->
-    <footerVue></footerVue>
+    <footerVue v-if="userInfo"></footerVue>
     <!-- </div> -->
   </div>
 </template>
@@ -76,17 +76,17 @@ export default {
         {
           name: "数据资源",
           path: "http://aisccc.cn/database",
-          type: 'without'
+          type: "without",
         },
         {
           name: "智算评测",
           path: "http://aisccc.cn/evaluating_",
-          type: 'without'
+          type: "without",
         },
         {
           name: "协作社区",
           path: "http://aisccc.cn/",
-          type: 'without'
+          type: "without",
         },
         {
           name: "运⾏情况",
@@ -302,10 +302,19 @@ export default {
           path: "/solution/campus",
         },
       ],
+      userInfo: null,
     };
   },
   components: {
     footerVue,
+  },
+  watch: {
+    $route: function (to, from) {
+      this.userInfo = sessionStorage.getItem("info");
+      if (!this.userInfo) {
+        this.$router.push({ path: "/login" });
+      }
+    },
   },
   computed: {
     activeProduct() {
@@ -313,21 +322,21 @@ export default {
     },
   },
   methods: {
-    jump(Path,type) {
-      if(type == 'without') {
-        window.open(Path)
-      }else {
+    jump(Path, type) {
+      if (type == "without") {
+        window.open(Path);
+      } else {
         this.activeIndex = Path;
         this.$router.push({ path: Path });
       }
     },
   },
   mounted() {
+    this.userInfo = sessionStorage.getItem("info");
+    if (!this.userInfo) {
+      this.$router.push({ path: "/login" });
+    }
     window.addEventListener("scroll", this.handleScroll);
-    //放大或缩小
-    var devicewidth = document.documentElement.clientWidth; //获取当前分辨率下的可是区域宽度
-    var scale = devicewidth / 1366; // 分母——设计稿的尺寸
-    // document.body.style.zoom = scale; //放大缩小相应倍数
   },
 
   beforeDestroy() {
@@ -381,7 +390,7 @@ p {
 .el-menu-i {
   display: flex;
   align-items: center;
-  padding:0 40px;
+  padding: 0 40px;
   height: 80px;
   width: 1440px;
   margin: 0 auto;

@@ -12,7 +12,7 @@
               <div class="left">
                 <div class="title">{{ item.title }}</div>
                 <div class="msg">{{ item.title }}</div>
-                <div class="detail" @click="jump(item)">了解详情</div>
+                <div class="detail" @click="jumpDetail(item)">了解详情</div>
               </div>
               <div class="right">
                 <img :src="item.img" alt="" />
@@ -657,6 +657,7 @@ export default {
         text-align: center;
         position: absolute;
         bottom: 0;
+        cursor: pointer;
       }
     }
   }

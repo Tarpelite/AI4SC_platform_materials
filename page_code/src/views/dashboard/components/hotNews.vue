@@ -135,6 +135,11 @@ export default {
                 }
             }
         }
+        .item:hover {
+            .text {
+                color: #2954FF;
+            }
+        }
     }
     .right {
         position: absolute;

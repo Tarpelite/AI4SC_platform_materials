@@ -140,6 +140,15 @@ export default {
             }
             
         }
+        .item:hover {
+            background: linear-gradient( 180deg, #587DFF 0%, #9D2EFF 100%);
+            .titleChild {
+                color: #fff;
+            }
+            .msg {
+                color: #fff;
+            }
+        }
     }
     .right {
         position: absolute;

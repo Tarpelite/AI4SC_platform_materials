@@ -7,7 +7,7 @@
           <img class="btnsImg" :src="images.link" alt="" />
           <img class="btnsImg" :src="images.homeLink" alt="" />
           <img class="btnsImg" :src="images.codeRepository" alt="" />
-          <div class="back" @click="$router.push({ path: '/scientificMission' })">
+          <div class="back" @click="$router.back()">
             <img :src="images.back" class="backImg" alt="" />
             <span>返回</span>
           </div>

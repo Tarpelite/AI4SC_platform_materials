@@ -24,6 +24,7 @@
               class="contentItem"
               v-for="(item, index) in screenlist.childList"
               :key="index"
+              @click="jumpDetail"
             >
               <div class="img">
                 <img :src="item.img" alt="" />
@@ -774,7 +775,11 @@ export default {
     }
   },
   components: {},
-  methods: {},
+  methods: {
+    jumpDetail() {
+      this.$router.push({ path: '/scientificMissionDetail' });
+    },
+  },
 };
 </script>
 
@@ -849,6 +854,7 @@ margin-top: 12px;
         width: 290px;
         height: 320px;
         margin: 0 30px 30px 0;
+        cursor: pointer;
         .img {
           width: 290px;
           height: 160px;
