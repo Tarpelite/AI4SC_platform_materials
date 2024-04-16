@@ -2,7 +2,7 @@
     <div class="typicalTask">
         <div class="title">科学套件</div>
         <div class="content" ref="list">
-            <div class="item mr24" v-for="(item,index) in list" :key="index">
+            <div class="item mr24" v-for="(item,index) in list" :key="index" @click="jump(item)">
                 <img :src="item.img" alt="">
                 <div class="text">
                     <div class="titleChild">{{ item.title }}</div>
@@ -32,7 +32,8 @@ export default {
                     msg: '地球科学领域套件MindEarth致力于高效使能AI+气象海洋的融合研究。',
                     img: 'https://pic.imgdb.cn/item/65f25b6b9f345e8d03a16ef2.gif',
                     smallImg: images.huawei,
-                    type: 'huawei'
+                    type: 'huawei',
+                    link: 'https://gitee.com/mindspore/mindscience/tree/master/MindEarth'
                 },
                 {
                     id: 2,
@@ -40,7 +41,8 @@ export default {
                     msg: '支持物理驱动、数据驱动和数据机理融合驱动的AI流体仿真',
                     img: 'https://pic.imgdb.cn/item/65f25bac9f345e8d03a27224.gif',
                     smallImg: images.huawei,
-                    type: 'huawei'
+                    type: 'huawei',
+                    link: 'https://gitee.com/mindspore/mindscience/tree/master/MindFlow'
                 },
                 {
                     id: 3,
@@ -48,7 +50,8 @@ export default {
                     msg: '持数据建构及转换、仿真计算、结果可视化以及端到端的AI电磁仿真',
                     img: 'https://pic.imgdb.cn/item/65f25bed9f345e8d03a34c02.png',
                     smallImg: images.huawei,
-                    type: 'huawei'
+                    type: 'huawei',
+                    link: 'https://gitee.com/mindspore/mindscience/tree/master/MindElec'
                 },
                 {
                     id: 4,
@@ -56,7 +59,8 @@ export default {
                     msg: '支持多体系，多尺度任务的AI+化学仿真',
                     img: 'https://pic.imgdb.cn/item/65f25c359f345e8d03a440e7.jpg',
                     smallImg: images.huawei,
-                    type: 'huawei'
+                    type: 'huawei',
+                    link: 'https://gitee.com/mindspore/mindscience/tree/master/MindChemistry'
                 },
                 {
                     id: 5,
@@ -64,7 +68,8 @@ export default {
                     msg: '支持高性能、模块化，端到端可微，类AI架构编写的分子模拟功能以及MSA生成，蛋白质折叠训练推理和蛋白质结构打分，NMR数据解析等常用功能。',
                     img: 'https://pic.imgdb.cn/item/65f25c439f345e8d03a47148.gif',
                     smallImg: images.huawei,
-                    type: 'huawei'
+                    type: 'huawei',
+                    link: 'https://gitee.com/mindspore/mindscience/tree/master/MindSPONGE'
                 },
                 {
                     id: 6,
@@ -72,7 +77,8 @@ export default {
                     msg: '覆盖物理感知（如PINNs、DeepRitz以及PFNN）和神经算子（如FNO、DeepONet）等主流模型，',
                     img: 'https://pic.imgdb.cn/item/65f25c699f345e8d03a4f0b5.jpg',
                     smallImg: images.feijiang,
-                    type: 'baidu'
+                    type: 'baidu',
+                    link: 'https://gitee.com/mindspore/mindscience/tree/master/SciAI'
                 },
                 {
                     id: 7,
@@ -80,7 +86,8 @@ export default {
                     msg: '支持小分子药物、多肽/蛋白药物、mRNA疫苗等场景，助力创新药的早期发现',
                     img: 'https://pic.imgdb.cn/item/65f25c789f345e8d03a5241b.png',
                     smallImg: images.feijiang,
-                    type: 'baidu'
+                    type: 'baidu',
+                    link: 'https://paddlehelix.baidu.com/'
                 },
                 {
                     id: 8,
@@ -88,7 +95,8 @@ export default {
                     msg: 'AI方法加速设计并发现新材料，助力高能物理及天文领域的新问题探索，以及加速智慧工业实时设备数据与模型的“数字孪生”等',
                     img: 'https://pic.imgdb.cn/item/65f25c939f345e8d03a58c1f.jpg',
                     smallImg: images.feijiang,
-                    type: 'baidu'
+                    type: 'baidu',
+                    link: 'https://github.com/PaddlePaddle/PaddleScience'
                 },
                 {
                     id: 9,
@@ -96,7 +104,8 @@ export default {
                     msg: '支持量子神经网络的搭建与训练等功能，',
                     img: 'https://pic.imgdb.cn/item/65f25ca29f345e8d03a5c61d.jpg',
                     smallImg: images.feijiang,
-                    type: 'baidu'
+                    type: 'baidu',
+                    link: 'https://github.com/PaddlePaddle/Quantum/blob/master/README_CN.md'
                 },
                 
             ],
@@ -120,6 +129,9 @@ export default {
             } else {
                 this.$refs.list.style.transform = 'translateX(' + this.percentage * -9 + 'px)'
             }
+        },
+        jump(item) {
+            window.open(item.link)
         }
     }
 };
@@ -157,6 +169,7 @@ export default {
             border-radius: 20px;
             padding: 20px;
             position: relative;
+            cursor: pointer;
             .text {
                 margin-top: 24px;
                 .titleChild {

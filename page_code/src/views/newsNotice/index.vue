@@ -655,6 +655,7 @@ export default {
       min-width: 900px;
       margin: 0 auto;
       display: flex;
+      padding-bottom: 20px;
       .bodyLeft {
         max-width: 850px;
         min-width: 650px;

@@ -2,7 +2,7 @@
     <div class="typicalTask">
         <div class="title">典型任务</div>
         <div class="content" ref="list">
-            <div class="item mr24" v-for="(item,index) in list" :key="index">
+            <div class="item mr24" v-for="(item,index) in list" :key="index" @click="jumpDetail(item)">
                 <div class="text">
                     <div class="titleChild">{{ item.title }}</div>
                     <div class="msg"> {{ item.msg }}</div>
@@ -76,6 +76,9 @@ export default {
             } else {
                 this.$refs.list.style.transform = 'translateX(' + this.percentage * -9 + 'px)'
             }
+        },
+        jumpDetail() {
+            this.$router.push({ path: "/scientificMissionDetail" });
         }
     }
 };
@@ -114,6 +117,7 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            cursor: pointer;
             .text {
                 .titleChild {
                     font-weight: bold;

@@ -114,7 +114,7 @@ export default {
     margin: 0 auto;
   }
   .carouselItem {
-    width: 1440px;
+    width: 100%;
     height: 560px;
     margin: 0 auto;
     position: relative;
@@ -137,6 +137,8 @@ export default {
         font-family: Helvetica Neue-Bold, Helvetica Neue;
         font-weight: bold;
         color: #FFFFFF;
+        overflow: hidden;
+        word-wrap: break-word;
       }
       .title2 {
         font-size: 20px;

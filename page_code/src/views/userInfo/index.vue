@@ -91,7 +91,7 @@
             class="questItem"
             v-for="(item, index) in collectList"
             :key="index"
-            @click="jumpDetail(0)"
+            @click="jumpDetail(0,item)"
           >
             <div class="img">
               <img :src="item.img" alt="" />
@@ -111,7 +111,7 @@
             class="kitItem mr24"
             v-for="(item, index) in kitList"
             :key="index"
-            @click="jumpDetail(1)"
+            @click="jumpDetail(1,item)"
           >
             <img :src="item.img" alt="" />
             <div class="text">
@@ -225,7 +225,7 @@ export default {
           title: "FourCastNet",
           type: "气象学",
           algorithm: "百度AI Studio",
-          coverImage: "https://pic.imgdb.cn/item/6612b4c468eb9357138150b6.png",
+          img: "https://pic.imgdb.cn/item/6612b4c468eb9357138150b6.png",
           msg: "基于深度学习的天气预报模型，通过自适应傅里叶神经算子高效预测气象变量，如风速和降水。",
         },
       ],
@@ -237,6 +237,7 @@ export default {
           img: "https://pic.imgdb.cn/item/65f25b6b9f345e8d03a16ef2.gif",
           smallImg: images.huawei,
           type: "huawei",
+          link: "https://gitee.com/mindspore/mindscience/tree/master/MindEarth",
         },
         {
           id: 2,
@@ -245,6 +246,7 @@ export default {
           img: "https://pic.imgdb.cn/item/65f25bac9f345e8d03a27224.gif",
           smallImg: images.huawei,
           type: "huawei",
+          link: "https://gitee.com/mindspore/mindscience/tree/master/MindFlow",
         },
         {
           id: 3,
@@ -253,6 +255,7 @@ export default {
           img: "https://pic.imgdb.cn/item/65f25bed9f345e8d03a34c02.png",
           smallImg: images.huawei,
           type: "huawei",
+          link: "https://gitee.com/mindspore/mindscience/tree/master/MindElec",
         },
         {
           id: 4,
@@ -261,6 +264,7 @@ export default {
           img: "https://pic.imgdb.cn/item/65f25c359f345e8d03a440e7.jpg",
           smallImg: images.huawei,
           type: "huawei",
+          link: "https://gitee.com/mindspore/mindscience/tree/master/MindChemistry",
         },
         {
           id: 5,
@@ -269,6 +273,7 @@ export default {
           img: "https://pic.imgdb.cn/item/65f25c439f345e8d03a47148.gif",
           smallImg: images.huawei,
           type: "huawei",
+          link: "https://gitee.com/mindspore/mindscience/tree/master/MindSPONGE",
         },
       ],
     };
@@ -276,13 +281,13 @@ export default {
   computed: {},
   components: {},
   methods: {
-    jumpDetail(type) {
-      if(type) {
-
-      }else {
-        this.$router.push({ path: '/scientificMissionDetail' });
+    jumpDetail(type,item) {
+      if (type) {
+        window.open(item.link)
+      } else {
+        this.$router.push({ path: "/scientificMissionDetail" });
       }
-    }
+    },
   },
 };
 </script>
@@ -553,6 +558,7 @@ export default {
         padding: 20px;
         position: relative;
         margin: 0 25px 30px 0;
+        cursor: pointer;
         .text {
           margin-top: 24px;
           .titleChild {
