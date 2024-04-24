@@ -5,5 +5,9 @@ module.exports = defineConfig({
     client: {
       overlay: false,
     },
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    proxy: process.env.VUE_APP_BASE_API
   }
 })

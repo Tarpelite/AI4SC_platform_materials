@@ -21,7 +21,7 @@ const routes = [
     component: () => import('../views/newsNotice')
   },
   {
-    path: '/newsNoticeDetail',
+    path: '/newsNoticeDetail/:id',
     name: '新闻通知详情',
     component: () => import('../views/newsNotice/newsNoticeDetail.vue')
   },
@@ -31,7 +31,7 @@ const routes = [
     component: () => import('../views/scientificMission')
   },
   {
-    path: '/scientificMissionMore',
+    path: '/scientificMissionMore/:name',
     name: '科学任务更多',
     component: () => import('../views/scientificMission/more.vue')
   },
