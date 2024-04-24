@@ -92,9 +92,9 @@ export default {
     return $axios({
       method: 'post',
       url,
-      data,
+      data: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Content-Type': 'application/json',
         token: localStorage.getItem('token')
       }
     });

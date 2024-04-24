@@ -39,14 +39,14 @@
         <input type="checkbox" v-model="read" />
         我已阅读并同意<span>服务协议</span>和<span>隐私政策</span>
       </div>
-      <div
+<!--      <div
         class="WXBtn"
         style="margin-top: 24px"
         @click="wxFlag = true"
         v-if="!wxFlag"
       >
         微信登录
-      </div>
+      </div>-->
     </div>
     <Signin v-if="flag == 'Signin'" @Toggle="Toggle" />
   </div>

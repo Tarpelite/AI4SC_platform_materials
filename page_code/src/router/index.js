@@ -36,7 +36,7 @@ const routes = [
     component: () => import('../views/scientificMission/more.vue')
   },
   {
-    path: '/scientificMissionDetail',
+    path: '/scientificMissionDetail/:id',
     name: '科学任务详情',
     component: () => import('../views/scientificMission/scientificMissionDetail.vue')
   },

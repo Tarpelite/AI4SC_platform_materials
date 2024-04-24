@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       images: images,
-      
+
     };
   },
   components: {
@@ -33,24 +33,28 @@ export default {
 
 <style lang="scss" scoped>
 .box {
-    width: 1440px;
+    width: 100%;
     display: flex;
-    margin: 0 auto;
-    height: 920px;
+    height: calc(100vh);
     .left {
         width: 640px;
         background: linear-gradient( 170deg, #33ADFF 0%, #45A8FD 40%, #9D2EFF 100%);
         .bg {
-            height: 100%;
+            height: calc(100vh);
             background-image: url("@/utils/image/loginBg.png");
             background-size:100% 100%;
+            position: relative;
             img {
                 width: 240px;
                 height: 310px;
                 margin-left: 200px;
-                margin-top: 240px;
+                margin-top: 210px;
             }
             .bgtext {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 51px;
                 font-size: 16px;
                 color: #FFFFFF;
                 text-align: center;

@@ -11,7 +11,7 @@
               <div class="left">
                 <div class="title">{{ item.title }}</div>
                 <div class="msg">{{ item.msg }}</div>
-                <div class="detail" @click="jumpDetail(item)">了解详情</div>
+                <div class="detail" @click="jumpDetail(item.id)">了解详情</div>
               </div>
               <div class="right">
                 <img :src="item.img" alt=""/>
@@ -56,7 +56,7 @@
     </div>
     <div class="body">
       <div style="max-width: 1440px; min-width: 900px; margin: 0 auto">
-        <div class="bodyItem" v-for="(item, index) in screenList" :key="index">
+        <div v-if="item.childList && item.childList.length" class="bodyItem" v-for="(item, index) in screenList" :key="index">
           <div class="header">
             <div class="title">{{ item.name }}</div>
             <div class="more" @click="jump(`/scientificMissionMore/${item.name}`, { name: name })">
@@ -70,9 +70,9 @@
                 v-for="(item1, index1) in item.childList"
                 v-if="item.flag"
                 :key="index1"
-                @click="jumpDetail()">
+                @click="jumpDetail(item1.id)">
               <div class="img">
-                <img :src="item1.image" alt=""/>
+                <img v-lazy="item1.image" alt=""/>
               </div>
               <div class="boxBody">
                 <div class="title">{{ item1.title }}</div>
@@ -234,8 +234,8 @@ export default {
     jump(jumpPath, data) {
       this.$router.push({path: jumpPath, query: data});
     },
-    jumpDetail() {
-      this.$router.push({path: "/scientificMissionDetail"});
+    jumpDetail(id) {
+      this.$router.push({path: `/scientificMissionDetail/${id}`});
     },
     winOpen(link) {
       window.open(link)

@@ -8,7 +8,6 @@ export function getUserInfo(data) {
   const url = '/authsys/loginapi/get_user_info';
   return API.get(url, data);
 }
-
 /**
  * 登出接口
  * @returns
@@ -18,17 +17,18 @@ export function logout(data) {
   return API.post(url, data);
 }
 
-/**
- * 登出接口
- * @returns
- */
-export function ossLogin(data) {
-  const url = '/authsys/api/sso_login';
+export function sendCode(data) {
+  const url = '/send_code/';
   return API.post(url, data);
 }
 
 export function getNewsList(data) {
   const url = '/news/';
+  return API.get(url, data);
+}
+
+export function getNewsHotList(data) {
+  const url = '/featured_news/';
   return API.get(url, data);
 }
 
@@ -45,7 +45,13 @@ export function getScienceList() {
   const url = '/science_tasks/'
   return API.get(url);
 }
+
 export function getScienceListByCategory(data) {
   const url = '/science_tasks_filtered/'
   return API.get(url, data);
+}
+
+export function getScienceDetail(id) {
+  const url = `/science_task_detail/${id}/`
+  return API.get(url);
 }

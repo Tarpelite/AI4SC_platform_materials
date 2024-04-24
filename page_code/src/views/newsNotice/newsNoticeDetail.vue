@@ -72,13 +72,13 @@ export default {
       detailInfo: {}
     };
   },
-  created() {
+  activated() {
     this.id = this.$route.params.id
     this._getDetail()
     this._getRelatedNews()
   },
   components: {
-    'vue-markdown': VueMarkdown
+    'VueMarkdown': VueMarkdown
   },
   methods: {
     async _getDetail() {
@@ -103,7 +103,9 @@ export default {
 .newsNoticeDetail {
   width: 1440px;
   margin: 0 auto;
-
+  .back-notify {
+    cursor: pointer;
+  }
   .content {
     padding: 40px 320px;
 

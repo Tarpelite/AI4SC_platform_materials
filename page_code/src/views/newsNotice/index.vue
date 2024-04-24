@@ -16,7 +16,7 @@
                 <div class="detail" @click="jumpDetail(item)">了解详情</div>
               </div>
               <div class="right">
-                <img :src="item.img" alt=""/>
+                <img v-lazy="item.img" alt=""/>
               </div>
             </div>
           </el-carousel-item>
@@ -57,7 +57,7 @@
                   </div>
                 </div>
                 <div class="ItemRight">
-                  <img :src="item.image" alt=""/>
+                  <img v-lazy="item.image" alt=""/>
                 </div>
               </div>
             </div>
@@ -78,12 +78,12 @@
                   @click="jumpDetail(item)"
               >
                 <div class="ItemLeft">
-                  <img :src="item.img" alt=""/>
+                  <img v-lazy="item.image" alt=""/>
                   <div class="ranking">{{ index + 1 }}</div>
                 </div>
                 <div class="ItemRight">
                   <div class="title">{{ item.title }}</div>
-                  <div class="type">{{ item.type }}</div>
+                  <div class="type">{{ item.domain }}</div>
                 </div>
               </div>
             </div>
@@ -96,7 +96,7 @@
 
 <script>
 import images from "@/utils/js/exportImage";
-import {getNewsList} from "@/api/api";
+import {getNewsHotList, getNewsList} from "@/api/api";
 import {formatDate} from "@/utils/date";
 
 export default {
@@ -126,42 +126,16 @@ export default {
       tabList: [],
       active: 0,
       contentList: [],
-      hotNewsList: [
-        {
-          img: "https://pic.imgdb.cn/item/65ef08039f345e8d03e0fa72.png",
-          title: "上海人工智能实验室科学家白磊进行关于气象大模型的报告和讨论",
-          type: "社区活动",
-        },
-        {
-          img: "https://pic.imgdb.cn/item/65ef04059f345e8d03bb7fda.png",
-          title: "AI炼金术革新化学：MIT学者使用生成式AI，六秒生成新化学反应",
-          type: "学术动态",
-        },
-        {
-          img: "https://pic.imgdb.cn/item/65ef042d9f345e8d03bcd868.png",
-          title: "人工智能促进科学、能源和安全的报告",
-          type: "产业动向",
-        },
-        {
-          img: "https://pic.imgdb.cn/item/65ef044e9f345e8d03bdf414.png",
-          title: "使用深度神经网络整合药物与疾病关联数据进行药物再利用",
-          type: "学术动态",
-        },
-        {
-          img: "https://pic.imgdb.cn/item/65ef046f9f345e8d03bf228f.png",
-          title:
-              "中国科学院团队利用 AI 大模型训练技术解决同步辐射海量数据处理难题",
-          type: "学术动态",
-        }
-      ]
+      hotNewsList: [],
+      cloneContentList: []
     };
   },
   created() {
-    this.getNewsList()
-
+    this._getNewsList()
+    this._getHotList()
   },
   methods: {
-    async getNewsList() {
+    async _getNewsList() {
       const newsList = await getNewsList()
       let arr = ["推荐"];
       newsList.map((item) => {
@@ -172,7 +146,10 @@ export default {
       })
       this.tabList = Array.from(new Set(arr));
       this.contentList = newsList;
-      this.cloneContentList = newsList;
+      this.cloneContentList = newsList.filter(item=> item.is_recommended);;
+    },
+    async _getHotList() {
+      this.hotNewsList = await getNewsHotList()
     },
     jump(jumpPath) {
       this.$router.push({path: jumpPath});
@@ -184,7 +161,7 @@ export default {
       console.log('tag', tag)
       this.active = index;
       if(tag == "推荐") {
-        this.cloneContentList = this.contentList;
+        this.cloneContentList = this.contentList.filter(item=> item.is_recommended);
       } else {
         this.cloneContentList = [];
         this.cloneContentList = this.contentList.filter(

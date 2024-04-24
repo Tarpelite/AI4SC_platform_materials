@@ -2,7 +2,7 @@
   <div class="scientificMissionDetail">
     <div class="content">
       <div class="header">
-        <div class="title"><span class="renwu" @click="$router.back()">科学任务</span> / DeepHPMs求解Burgers-BUAA方程</div>
+        <div class="title"><span class="renwu" @click="$router.back()">科学任务</span> / {{ detailInfo.title }}</div>
         <div class="btns">
           <img class="btnsImg" :src="images.link" alt="" @click="jump('https://aistudio.baidu.com/projectdetail/6508962')" />
           <img class="btnsImg" :src="images.homeLink" alt="" @click="jump('https://gitee.com/paddlepaddle/PaddleScience/tree/develop/examples/deephpms')" />
@@ -15,45 +15,13 @@
       </div>
       <div class="body">
         <div class="bodyLeft">
-          <div class="title">DeepHPMs求解Burgers-BUAA方程</div>
+          <div class="title">{{ detailInfo.title }}</div>
           <div class="tag">
-            <div class="type">数学</div>
-            <div class="algorithm">百度AI Studio</div>
+            <div class="type">{{ detailInfo.domain }}</div>
+            <div class="algorithm">{{  detailInfo.contributor }}</div>
           </div>
-          <div class="text">
-            &nbsp;&nbsp;&nbsp;&nbsp;求解偏微分方程（PDE）是一类基础的物理问题，在过去几十年里，以有限差分（FDM）、有限体积（FVM）、有限元（FEM）为代表的多种偏微分方程组数值解法趋于成熟。随着人工智能技术的高速发展，利用深度学习求解偏微分方程成为新的研究趋势。PINNS（Physics-informed
-            neural
-            networks）是一种加入物理约束的深度学习网络，因此与纯数据驱动的神经网络学习相比，PINNS
-            可以用更少的数据样本学习到更具泛化能力的模型，其应用范围包括但不限于流体力学、热传导、电磁场、量子力学等领域。传统的
-            PINNS 会将PDE 作为loss 的一项参与到网络训练中去，这就要求 PDE
-            公式为已知的先验条件，当PDE 公式未知时，这种方法就不能实现。
-          </div>
-          <div class="text">
-            &nbsp;&nbsp;&nbsp;&nbsp;DeepHPMs着眼于
-            PDE公式未知的情况，通过深度学习网络，从实验产生的高维数据中发现物理规律，即非线性
-            PDE 方程，并用一个深度学习网络来表征这个 PDE 方程，再将这个 PDE
-            网络替代传统 PINNS方法中的PDE公式，对新的数据进行预测。本问题对
-            Burgers, Korteweg- de Vries （KdV）， Kuramoto-Sivashinsky,
-            nonlinearSchro dinger 和 Navier- Stokes equations 多种
-            PDE方程进行了研究，本案例主要针对 Burgers 方程进行实现。
-          </div>
-          <div class="experience">
-            <div class="experienceTitle">立即体验</div>
-            <div class="experienceBody">
-              求解偏微分方程（PDE）是一类基础的物理问题，在过去几十年里，以有限差分（FDM）、有限体积（FVM）、有限元（FEM）为代表的多种偏微分方程组数值解法趋于成熟。随着人工智能技术的高速发展，利用深度学习求解偏微分方程成为新的研究趋势。PINNS（Physics-informed
-              neural
-              networks）是一种加入物理约束的深度学习网络，因此与纯数据驱动的神经网络学习相比，PINNS
-              可以用更少的数据样本学习到更具泛化能力的模型，其应用范围包括但不限于流体力学、热传导、电磁场、量子力学等领域。传统的
-              PINNS 会将PDE 作为loss 的一项参与到网络训练中去，这就要求 PDE
-              公式为已知的先验条件，当PDE 公式未知时，这种方法就不能实现。
-              DeepHPMs着眼于
-              PDE公式未知的情况，通过深度学习网络，从实验产生的高维数据中发现物理规律，即非线性
-              PDE 方程，并用一个深度学习网络来表征这个 PDE 方程，再将这个 PDE
-              网络替代传统 PINNS方法中的PDE公式，对新的数据进行预测。本问题对
-              Burgers, Korteweg- de Vries （KdV）， Kuramoto-Sivashinsky,
-              nonlinearSchro dinger 和 Navier- Stokes equations 多种
-              PDE方程进行了研究，本案例主要针对 Burgers 方程进行实现。
-            </div>
+          <div class="md-body" v-if="detailInfo.detailed_description">
+            <vue-markdown>{{ detailInfo.detailed_description }}</vue-markdown>
           </div>
         </div>
         <div class="bodyRight">
@@ -94,6 +62,7 @@
 
 <script>
 import images from "@/utils/js/exportImage";
+import {getScienceDetail} from "@/api/api";
 export default {
   data() {
     return {
@@ -145,10 +114,20 @@ export default {
           img: "https://pic.imgdb.cn/item/6612a48b68eb9357136f89c1.png",
         },
       ],
+      detailInfo: {}
     };
+  },
+  activated() {
+    this._getDetail()
   },
   components: {},
   methods: {
+    async _getDetail() {
+      this.detailInfo = {}
+      this.id = this.$route.params.id
+      const detailInfo = await getScienceDetail(this.id)
+      this.detailInfo = detailInfo
+    },
     jump(link) {
       window.open(link);
     }
