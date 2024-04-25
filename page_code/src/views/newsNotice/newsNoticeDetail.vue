@@ -3,9 +3,10 @@
     <div class="newsNoticeDetail">
       <div class="content">
         <div class="header">
-          <div class="title"><span class="back-notify" @click="$router.back()">新闻通知</span> / {{ detailInfo.category }}</div>
+          <div class="title"><span class="back-notify" @click="$router.back()">新闻通知</span> / {{ detailInfo.category }}
+          </div>
           <div class="btns">
-            <div class="share">
+            <div class="share" @click="shareUrl">
               <img :src="images.share" alt=""/>
               <span>分享</span>
             </div>
@@ -25,28 +26,27 @@
       </div>
       <div class="paging">
         <div class="previous">
-          <div class="btn">
+          <div class="btn" @click="loadNews(contextObj.previous_news.id)">
             <img :src="images.left1" alt=""/>
             上一篇
           </div>
           <div class="text">
-            AI4Science的基石：几何图神经网络，最全综述来了！人大高瓴联合腾讯AI
-            lab、清华、斯坦…
+            {{ contextObj.previous_news.title }}
           </div>
         </div>
         <div class="next">
-          <div class="btn" style="justify-content: flex-end">
+          <div class="btn" style="justify-content: flex-end" @click="loadNews(contextObj.next_news.id)">
             下一篇
             <img :src="images.right1" alt=""/>
           </div>
           <div class="text">
-            用基于结构的突变偏好进行蛋白质设计，加州大学、MIT、哈佛医学院团队开发了一种无监督…
+            {{ contextObj.next_news.title }}
           </div>
         </div>
       </div>
       <div class="more">更多相关新闻</div>
       <div class="moreList">
-        <div class="moreItem" v-for="(item, index) in moreList" :key="index" @click="LinkDetail">
+        <div class="moreItem" v-for="(item, index) in moreList" :key="index" @click="loadNews(item.id)">
           <img :src="item.image" alt=""/>
           <div class="body">
             <div class="title">{{ item.title }}</div>
@@ -61,7 +61,7 @@
 
 <script>
 import images from "@/utils/js/exportImage";
-import {getNewsDetail, getRelatedNews} from "@/api/api";
+import {getNewsDetail, getRelatedNews, getRelatedNewsContent} from "@/api/api";
 import VueMarkdown from 'vue-markdown'
 
 export default {
@@ -69,26 +69,49 @@ export default {
     return {
       images: images,
       moreList: [],
-      detailInfo: {}
+      detailInfo: {},
+      contextObj: {
+        previous_news: {},
+        next_news: {}
+      }
     };
   },
   activated() {
     this.id = this.$route.params.id
-    this._getDetail()
-    this._getRelatedNews()
+    this.loadNews()
   },
   components: {
     'VueMarkdown': VueMarkdown
   },
   methods: {
+    shareUrl() {
+      const url = window.location.href.toString();
+      let finIndex = url.split('').lastIndexOf('/');
+      let finalUrl = url.substr(0, finIndex + 1) + this.id;
+      navigator.clipboard.writeText(finalUrl);
+      this.$notify.success('已复制到粘贴板');
+    },
+    loadNews(id) {
+      this.id = id ? id : this.$route.params.id
+      this._getDetail()
+      this._getRelatedNews()
+      this._getRelatedNewsContent()
+      if(id) {
+        this.$nextTick(() => {
+          window.scrollTo(0, 0); // 滚动到页面的左上角
+        })
+      }
+    },
     async _getDetail() {
-      let detailData = await getNewsDetail(this.id)
-      this.detailInfo = detailData
-      console.log('detailData', detailData)
+      this.detailInfo = {}
+      this.detailInfo = await getNewsDetail(this.id)
     },
     async _getRelatedNews() {
-      let moreList = await getRelatedNews(this.id)
-      this.moreList = moreList
+      this.moreList = []
+      this.moreList = await getRelatedNews(this.id)
+    },
+    async _getRelatedNewsContent() {
+      this.contextObj = await getRelatedNewsContent(this.id)
     }
   },
 };
@@ -103,9 +126,11 @@ export default {
 .newsNoticeDetail {
   width: 1440px;
   margin: 0 auto;
+
   .back-notify {
     cursor: pointer;
   }
+
   .content {
     padding: 40px 320px;
 
@@ -233,6 +258,11 @@ export default {
       color: #262626;
       font-weight: 500;
       margin-top: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
 
     .btn {

@@ -36,6 +36,7 @@ $axios.interceptors.request.use(
     return config;
   },
   (error) => {
+    console.log('errrrrr', error)
     return Promise.reject(error);
   }
 );
@@ -57,9 +58,10 @@ $axios.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
+      console.log('-----', error.response);
       switch (error.response.status) {
         case 400:
-          Message.error('请求错误');
+          Message.error(error.response.data && error.response.data.message ? error.response.data.message  : '请求错误');
           break;
         case 401:
           Message.error('身份验证失败，请重新登录');

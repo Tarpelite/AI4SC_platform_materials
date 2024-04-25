@@ -19,13 +19,15 @@
         <input type="password" placeholder="输入密码" v-model="regInfo.password"/>
       </div>
     </div>
-    <div class="message">
-      密码至少8个字符，至少含字母和数字，不能包含空格
-    </div>
-    <div class="loginBtn">注册</div>
+    <div class="message">密码至少8个字符，至少含字母和数字，不能包含空格</div>
+
+    <div class="loginBtn" @click="regSubmit">注册</div>
     <div class="privacy">
-      <input type="radio">
+      <input type="radio" v-model="isAcc" :value="true">
       我已阅读并同意<span>服务协议</span>和<span>隐私政策</span>
+    </div>
+    <div v-if="errorMsg" class="error-msg">
+      {{ errorMsg }}
     </div>
     <!--    <div class="WXBtn" style="margin-top: 24px;">微信登录</div>-->
   </div>
@@ -33,7 +35,7 @@
 
 <script>
 import images from "@/utils/js/exportImage";
-import {sendCode} from "@/api/api";
+import {register, sendCode} from "@/api/api";
 
 export default {
   data() {
@@ -46,6 +48,8 @@ export default {
       phoneNumber: '',
       isSending: false,
       images,
+      errorMsg: '',
+      isAcc: false,
       sendBtnText: '发送验证码',
       countdown: 60 // 计时器总共的时间（秒）
     };
@@ -54,15 +58,51 @@ export default {
     async sendCode() {
       if(this.isSending) return;
       if(!this.regInfo.email) {
-        this.$notify.info('请输入注册邮箱');
+        this.$notify.error('请输入邮箱')
+        return;
+      }
+      if(!(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(this.regInfo.email))) {
+        this.$notify.error('邮箱格式错误')
         return;
       }
       // 这里应该是发送请求到后端获取验证码的逻辑
       const sendInfo = await sendCode({email: this.regInfo.email})
-
       // 模拟发送验证码的操作
       this.isSending = true;
       this.startCountdown();
+    },
+    async regSubmit() {
+      if(this.formReg()) {
+        const result = await register({
+          username: this.regInfo.email,
+          password: this.regInfo.password,
+          verification_code: this.regInfo.verification
+        })
+
+      }
+    },
+    formReg() {
+      if(!this.regInfo.email) {
+        this.$notify.error('请输入邮箱')
+        return false
+      }
+      if(!this.regInfo.verification) {
+        this.$notify.error('请输入验证码')
+        return false
+      }
+      if(!this.regInfo.password) {
+        this.$notify.error('请输入密码')
+        return false
+      }
+      if(!(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.regInfo.password))) {
+        this.$notify.error('密码至少8个字符，至少含字母和数字，不能包含空格')
+        return false
+      }
+      if(!this.isAcc) {
+        this.$notify.error('请勾选服务协议')
+        return false
+      }
+      return  true
     },
     startCountdown() {
       let counter = this.countdown;
@@ -193,6 +233,15 @@ export default {
     justify-content: space-between;
     padding: 0 10px;
     margin-top: 2px;
+  }
+  .error-msg {
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    color: #EB2F32;
+    padding: 0 10px;
+    margin-top: 22px;
   }
 
   .loginBtn {

@@ -16,7 +16,7 @@
       <div class="form" v-if="!wxFlag">
         <div class="username">
           <img :src="images.username" alt="" />
-          <input type="text" v-model="username" placeholder="输入你的手机号或邮箱" />
+          <input type="text" v-model="username" placeholder="输入你的邮箱" />
         </div>
         <div class="password" v-if="!verificationFlag">
           <img :src="images.password" alt="" />
@@ -28,12 +28,12 @@
           <div class="send">发送验证码</div>
         </div>
       </div>
-      <div class="message" v-if="!wxFlag">
-        <span @click="verification">{{
-          verification ? "使用密码登录" : "使用验证码登录"
-        }}</span>
-        <span v-if="!verificationFlag">忘记密码？</span>
-      </div>
+<!--      <div class="message" v-if="!wxFlag">-->
+      <!--        <span @click="verification">{{-->
+      <!--          verification ? "使用密码登录" : "使用验证码登录"-->
+      <!--        }}</span>-->
+      <!--        <span v-if="!verificationFlag">忘记密码？</span>-->
+      <!--      </div>-->
       <div class="loginBtn" v-if="!wxFlag" @click="Login">登录</div>
       <div class="privacy" v-if="!wxFlag">
         <input type="checkbox" v-model="read" />
@@ -55,6 +55,7 @@
 <script>
 import images from "@/utils/js/exportImage";
 import Signin from "./Signin.vue";
+
 export default {
   data() {
     return {

@@ -78,7 +78,7 @@
                 <div class="title">{{ item1.title }}</div>
                 <div class="msg">{{ item1.short_description }}</div>
                 <div class="tag">
-                  <div class="type">{{ item1.domain }}</div>
+                  <div class="type">{{ item1.domain.name }}</div>
                   <div class="algorithm">{{ item1.contributor }}</div>
                 </div>
                 <div class="btns">
@@ -190,7 +190,7 @@ export default {
       const contributeSet = new Set()
       scList.forEach((item) => {
         item.contrubutorFlag = true;
-        scienceCaSet.add(item.domain);
+        scienceCaSet.add(item.domain.name);
         contributeSet.add(item.contributor);
       });
 
@@ -212,7 +212,7 @@ export default {
       this.tagList1 = tagList1
       this.tagList = JSON.parse(JSON.stringify(scienceList))
       scienceList.forEach(item => {
-        item.childList = scList.filter(j => j.domain === item.name)
+        item.childList = scList.filter(j => j.domain.name === item.name)
       })
       this.scienceList = scienceList
     },

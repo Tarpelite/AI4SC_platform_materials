@@ -22,6 +22,7 @@ export function sendCode(data) {
   return API.post(url, data);
 }
 
+
 export function getNewsList(data) {
   const url = '/news/';
   return API.get(url, data);
@@ -29,6 +30,11 @@ export function getNewsList(data) {
 
 export function getNewsHotList(data) {
   const url = '/featured_news/';
+  return API.get(url, data);
+}
+// 还一还
+export function changeHotNewsList(data) {
+  const url = '/random_news/';
   return API.get(url, data);
 }
 
@@ -41,9 +47,31 @@ export function getRelatedNews(id) {
   const url = '/related_news/' + id;
   return API.get(url);
 }
+// 获取相关新闻上下文
+export function getRelatedNewsContent(id) {
+  const url = `/api/related_news_by_id/${id}/`;
+  return API.get(url);
+}
+
 export function getScienceList() {
   const url = '/science_tasks/'
   return API.get(url);
+}
+export function collectNews(newsId) {
+  const userId = sessionStorage.getItem('uid')
+  const url = `/api/toggle_favorite_news/${userId}/${newsId}`;
+  return API.post(url, data);
+}
+
+export function collectScience(scienceId) {
+  const userId = sessionStorage.getItem('uid')
+  const url = `/api//toggle_favorite_science_task/${userId}/${scienceId}`;
+  return API.post(url, data);
+}
+
+export function getScienceDomainIntro(data) {
+  const url = '/domains/'
+  return API.get(url,data);
 }
 
 export function getScienceListByCategory(data) {
@@ -53,5 +81,9 @@ export function getScienceListByCategory(data) {
 
 export function getScienceDetail(id) {
   const url = `/science_task_detail/${id}/`
+  return API.get(url);
+}
+export function getRelatedScienceList() {
+  const url = `/random_science_tasks/`
   return API.get(url);
 }

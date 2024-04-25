@@ -52,7 +52,7 @@
                   </div>
                   <div class="bottom">
                     <div class="type">{{ item.category }}</div>
-                    <div class="souce">{{ item.category }}</div>
+                    <div class="souce">{{ item.source }}</div>
                     <div class="time">{{ item.publishDate }}</div>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
           <div class="bodyRight">
             <div class="header">
               <div class="hotNews">热门动态</div>
-              <div class="refresh">
+              <div class="refresh" @click="changeHotNewsList">
                 <img :src="images.refresh" alt=""/>
                 换一换
               </div>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="ItemRight">
                   <div class="title">{{ item.title }}</div>
-                  <div class="type">{{ item.domain }}</div>
+                  <div class="type">{{ item.domain ? item.domain.name : '' }}</div>
                 </div>
               </div>
             </div>
@@ -96,7 +96,7 @@
 
 <script>
 import images from "@/utils/js/exportImage";
-import {getNewsHotList, getNewsList} from "@/api/api";
+import {changeHotNewsList, getNewsHotList, getNewsList} from "@/api/api";
 import {formatDate} from "@/utils/date";
 
 export default {
@@ -150,6 +150,9 @@ export default {
     },
     async _getHotList() {
       this.hotNewsList = await getNewsHotList()
+    },
+    async changeHotNewsList() {
+      this.hotNewsList =  await changeHotNewsList()
     },
     jump(jumpPath) {
       this.$router.push({path: jumpPath});
@@ -375,7 +378,7 @@ export default {
             align-items: center;
             justify-content: center;
             padding-right: 10px;
-
+            cursor: pointer;
             img {
               width: 16px;
               height: 16px;

@@ -229,53 +229,7 @@ export default {
           msg: "基于深度学习的天气预报模型，通过自适应傅里叶神经算子高效预测气象变量，如风速和降水。",
         },
       ],
-      kitList: [
-        {
-          id: 1,
-          title: "MindEarth地球科学领域套件",
-          msg: "地球科学领域套件MindEarth致力于高效使能AI+气象海洋的融合研究。",
-          img: "https://pic.imgdb.cn/item/65f25b6b9f345e8d03a16ef2.gif",
-          smallImg: images.huawei,
-          type: "huawei",
-          link: "https://gitee.com/mindspore/mindscience/tree/master/MindEarth",
-        },
-        {
-          id: 2,
-          title: "Mindflow计算流体求解套件",
-          msg: "支持物理驱动、数据驱动和数据机理融合驱动的AI流体仿真",
-          img: "https://pic.imgdb.cn/item/65f25bac9f345e8d03a27224.gif",
-          smallImg: images.huawei,
-          type: "huawei",
-          link: "https://gitee.com/mindspore/mindscience/tree/master/MindFlow",
-        },
-        {
-          id: 3,
-          title: "MindElec计算电磁仿真领域套件",
-          msg: "持数据建构及转换、仿真计算、结果可视化以及端到端的AI电磁仿真",
-          img: "https://pic.imgdb.cn/item/65f25bed9f345e8d03a34c02.png",
-          smallImg: images.huawei,
-          type: "huawei",
-          link: "https://gitee.com/mindspore/mindscience/tree/master/MindElec",
-        },
-        {
-          id: 4,
-          title: "MindChemistry计算化学领域套件",
-          msg: "支持多体系，多尺度任务的AI+化学仿真",
-          img: "https://pic.imgdb.cn/item/65f25c359f345e8d03a440e7.jpg",
-          smallImg: images.huawei,
-          type: "huawei",
-          link: "https://gitee.com/mindspore/mindscience/tree/master/MindChemistry",
-        },
-        {
-          id: 5,
-          title: "MindSPONGE计算生物领域套件",
-          msg: "支持高性能、模块化，端到端可微，类AI架构编写的分子模拟功能以及MSA生成，蛋白质折叠训练推理和蛋白质结构打分，NMR数据解析等常用功能。",
-          img: "https://pic.imgdb.cn/item/65f25c439f345e8d03a47148.gif",
-          smallImg: images.huawei,
-          type: "huawei",
-          link: "https://gitee.com/mindspore/mindscience/tree/master/MindSPONGE",
-        },
-      ],
+      kitList: [],
     };
   },
   computed: {},
@@ -409,6 +363,7 @@ export default {
           .ItemRight {
             margin-left: 15px;
             display: flex;
+            flex: 1;
             flex-direction: column;
             .title {
               font-weight: 500;
