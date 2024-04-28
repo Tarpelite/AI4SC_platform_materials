@@ -7,6 +7,10 @@
     <div class="form">
       <div class="username">
         <img :src="images.username" alt=""/>
+        <input type="text" placeholder="输入你的账号" v-model="regInfo.username"/>
+      </div>
+      <div class="username mg-t24">
+        <img :src="images.username" alt=""/>
         <input type="text" placeholder="输入你的邮箱" v-model="regInfo.email"/>
       </div>
       <div class="verification">
@@ -74,16 +78,26 @@ export default {
     async regSubmit() {
       if(this.formReg()) {
         const result = await register({
-          username: this.regInfo.email,
+          username: this.regInfo.username,
+          email: this.regInfo.email,
           password: this.regInfo.password,
           verification_code: this.regInfo.verification
         })
-
+        if(result.token) {
+          sessionStorage.setItem("token", 'Token ' + result.token)
+          sessionStorage.setItem("user_id", result.user_id)
+          this.$router.push({path: '/dashboard'})
+          this.$notify.success('注册成功')
+        }
       }
     },
     formReg() {
       if(!this.regInfo.email) {
         this.$notify.error('请输入邮箱')
+        return false
+      }
+      if(!this.regInfo.username) {
+        this.$notify.error('请输入用户名')
         return false
       }
       if(!this.regInfo.verification) {
@@ -121,6 +135,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.mg-t24 {
+  margin-top: 24px;
+}
 .login {
   .title {
     display: flex;

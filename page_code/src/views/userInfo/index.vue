@@ -4,31 +4,31 @@
       <div class="information">
         <div class="infoBox">
           <div class="avatar">
-            <img :src="images.user" alt="" />
+            <img :src="images.user" alt=""/>
           </div>
           <div class="info">
             <div class="name">Hi,Admin</div>
-            <div class="time">今天是你加入科学智算共性平台的第365天~</div>
-            <img :src="images.edit" alt="" />
+            <div class="time">今天是你加入科学智算共性平台的第 {{ userInfo.countDate }} 天~</div>
+            <!--            <img :src="images.edit" alt=""/>-->
             <div class="basicInformation">
               <div class="left">
                 <div class="item">
                   <span class="title">邮箱</span>
-                  <span class="spanContent">18759445778@163.com</span>
+                  <span class="spanContent">{{ userInfo.email }}</span>
                 </div>
                 <div class="item">
-                  <span class="title">手机号</span>
-                  <span class="spanContent">18759445778</span>
+                  <!--                  <span class="title">手机号</span>-->
+                  <!--                  <span class="spanContent">18759445778</span>-->
                 </div>
               </div>
               <div class="right">
                 <div class="item">
-                  <span class="title">微信</span>
-                  <span class="spanContent">DeepHPMs</span>
+                  <span class="title">加入时间</span>
+                  <span class="spanContent">{{ userInfo.joinDateStr }}</span>
                 </div>
                 <div class="item">
-                  <span class="title">加入时间</span>
-                  <span class="spanContent">2023-04-08</span>
+                  <!--                  <span class="title">加入时间</span>-->
+                  <!--                  <span class="spanContent">2023-04-08</span>-->
                 </div>
               </div>
             </div>
@@ -36,12 +36,12 @@
         </div>
         <div class="collect">
           <div class="quest">
-            <div class="title">收藏科学任务数量</div>
-            <div class="num">8</div>
+            <div class="title">收藏新闻数量</div>
+            <div class="num" v-if="userInfo.favorite_news">{{ userInfo.favorite_news.length }}</div>
           </div>
           <div class="kit">
-            <div class="title">收藏科学套件数量</div>
-            <div class="num">5</div>
+            <div class="title">收藏科任务数量</div>
+            <div class="num" v-if="userInfo.favorite_tasks">{{ userInfo.favorite_tasks.length }}</div>
           </div>
         </div>
       </div>
@@ -49,19 +49,19 @@
         <div class="title">浏览历史</div>
         <div class="historyBody">
           <div
-            class="historyItem"
-            v-for="(item, index) in historyList"
-            :key="index"
-            @click="$router.push({ path: '/newsNoticeDetail' })"
+              class="historyItem"
+              v-for="(item, index) in historyList"
+              :key="index"
+              @click="jumpDetail(item, item._tag)"
           >
             <div class="ItemLeft">
-              <img :src="item.img" alt="" />
+              <img v-lazy="item.image" alt=""/>
             </div>
             <div class="ItemRight">
               <div class="title">{{ item.title }}</div>
               <div class="type">
                 {{ item.type }}
-                <div class="time">{{ item.time }}</div>
+                <div class="time">{{ item.dataLocal }}</div>
               </div>
             </div>
           </div>
@@ -71,59 +71,59 @@
     <div class="collectBox">
       <div class="tab">
         <div
-          class="quest"
-          :class="active == 0 ? 'active' : ''"
-          @click="active = 0"
+            class="quest"
+            :class="active == 0 ? 'active' : ''"
+            @click="active = 0"
         >
-          科学任务收藏
+          科学新闻收藏
         </div>
         <div
-          class="kit"
-          :class="active == 1 ? 'active' : ''"
-          @click="active = 1"
+            class="kit"
+            :class="active == 1 ? 'active' : ''"
+            @click="active = 1"
         >
-          科学套件收藏
+          科学任务收藏
         </div>
       </div>
       <div class="collectContent">
         <div v-if="active == 0" style="display: flex; flex-wrap: wrap">
           <div
-            class="questItem"
-            v-for="(item, index) in collectList"
-            :key="index"
-            @click="jumpDetail(0,item)"
+              class="questItem"
+              v-for="(item, index) in collectNewsList"
+              :key="index"
+              @click="jumpDetail(item, null)"
           >
             <div class="img">
-              <img :src="item.img" alt="" />
+              <img v-lazy="item.image" alt=""/>
             </div>
             <div class="boxBody">
               <div class="title">{{ item.title }}</div>
-              <div class="msg">{{ item.msg }}</div>
+              <div class="msg">{{ item.description }}</div>
               <div class="tag">
-                <div class="type">{{ item.type }}</div>
-                <div class="algorithm">{{ item.algorithm }}</div>
+                <div class="type">{{ item.category }}</div>
+                <div class="algorithm">{{ item.source }}</div>
               </div>
             </div>
           </div>
         </div>
         <div v-if="active == 1" style="display: flex; flex-wrap: wrap">
           <div
-            class="kitItem mr24"
-            v-for="(item, index) in kitList"
-            :key="index"
-            @click="jumpDetail(1,item)"
+              class="questItem"
+              v-for="(item, index) in collectScienceList"
+              :key="index"
+              @click="jumpDetail(item, null)"
           >
-            <img :src="item.img" alt="" />
-            <div class="text">
-              <div class="titleChild">{{ item.title }}</div>
-              <div class="msg">{{ item.msg }}</div>
+            <div class="img">
+              <img v-lazy="item.image" alt=""/>
             </div>
-            <img
-              class="smallImg"
-              :src="item.smallImg"
-              :style="item.type == 'baidu' ? 'width:65px;height:40px;' : ''"
-              alt=""
-            />
+            <div class="boxBody">
+              <div class="title">{{ item.title }}</div>
+              <div class="msg">{{ item.short_description }}</div>
+              <div class="tag">
+                <div class="type" v-if="item.domain">{{ item.domain.name }}</div>
+                <div class="algorithm">{{ item.contributor }}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -133,115 +133,85 @@
 
 <script>
 import images from "@/utils/js/exportImage";
+import {getNewsList, getScienceList, getUserHistory, getUserInfo} from "@/api/api";
+import {formatDate} from "@/utils/date";
+
 export default {
   data() {
     return {
       images: images,
-      historyList: [
-        {
-          img: "https://pic.imgdb.cn/item/65ef08039f345e8d03e0fa72.png",
-          title: "上海人工智能实验室科学家白磊进行关于气象大模型的报告和讨论",
-          type: "社区活动",
-          time: "4/8 0:57",
-        },
-        {
-          img: "https://pic.imgdb.cn/item/65ef04059f345e8d03bb7fda.png",
-          title: "AI炼金术革新化学：MIT学者使用生成式AI，六秒生成新化学反应",
-          type: "学术动态",
-          time: "4/8 0:57",
-        },
-        {
-          img: "https://pic.imgdb.cn/item/65ef042d9f345e8d03bcd868.png",
-          title: "人工智能促进科学、能源和安全的报告",
-          type: "产业动向",
-          time: "4/8 0:57",
-        },
-        {
-          img: "https://pic.imgdb.cn/item/65ef044e9f345e8d03bdf414.png",
-          title: "使用深度神经网络整合药物与疾病关联数据进行药物再利用",
-          type: "学术动态",
-          time: "4/8 0:57",
-        },
-        {
-          img: "https://pic.imgdb.cn/item/65ef046f9f345e8d03bf228f.png",
-          title:
-            "中国科学院团队利用 AI 大模型训练技术解决同步辐射海量数据处理难题",
-          type: "学术动态",
-          time: "4/8 0:57",
-        },
-      ],
+      historyList: [],
       active: 0,
-      collectList: [
-        {
-          title: "DeepHPMs求解Burgers-BUAA方程",
-          msg: "DeepHPMs应用于Burgers方程，展现流体动力学中复杂波动的数值解。",
-          img: "https://pic.imgdb.cn/item/6612a08d68eb9357136ae905.png",
-          type: "数学",
-          algorithm: "百度AI Studio",
-        },
-        {
-          title: "DeepOnet求解常微分方程",
-          msg: "利用DeepOnet解决常微分方程问题，为科学计算提供新的深度学习方法。",
-          img: "https://pic.imgdb.cn/item/6612a16868eb9357136b82c0.png",
-          type: "数学",
-          algorithm: "百度AI Studio",
-        },
-        {
-          title: "深度学习求解Euler_Beam问题",
-          msg: "利用深度学习技术对Euler Beam理论进行模拟，提高工程力学问题的求解效率。",
-          img: "https://pic.imgdb.cn/item/6612a2a768eb9357136ce477.png",
-          type: "数学",
-          algorithm: "百度AI Studio",
-        },
-        {
-          title: "AMGNet",
-          msg: "AMGNet探索了深度学习在科学计算领域的应用，尤其是在加速多重网格方法解决偏微分方程方面的潜力。",
-          img: "https://pic.imgdb.cn/item/6612a84e68eb935713737fcf.png",
-          type: "流体力学",
-          algorithm: "百度AI Studio",
-        },
-        {
-          title: "Aneurysm",
-          msg: "通过深度学习方法处理血管瘤问题，尤其是在脑血管疾病诊断和治疗计划制定中的应用。",
-          img: "https://pic.imgdb.cn/item/6612a8eb68eb935713743a4f.png",
-          type: "流体力学",
-          algorithm: "百度AI Studio",
-        },
-        {
-          title: "2D-Biharmonic",
-          type: "结构力学",
-          algorithm: "百度AI Studio",
-          img: "https://pic.imgdb.cn/item/6612b29268eb9357137e0e3a.png",
-          msg: "应用物理信息神经网络求解二维双调和方程，探索在复杂边界条件下的数值解法。",
-        },
-        {
-          title: "hPINNs(PINN with hard constraints)",
-          type: "材料科学",
-          algorithm: "百度AI Studio",
-          img: "https://pic.imgdb.cn/item/65e089959f345e8d039380f6.png",
-          msg: "将硬约束条件整合进物理信息神经网络中，提高求解偏微分方程的准确度和鲁棒性。",
-        },
-        {
-          title: "FourCastNet",
-          type: "气象学",
-          algorithm: "百度AI Studio",
-          img: "https://pic.imgdb.cn/item/6612b4c468eb9357138150b6.png",
-          msg: "基于深度学习的天气预报模型，通过自适应傅里叶神经算子高效预测气象变量，如风速和降水。",
-        },
-      ],
+      userInfo: {},
       kitList: [],
+      collectNewsList: [],
+      collectScienceList: []
     };
   },
-  computed: {},
+  computed: {
+    collectList() {
+      return this.active === 0 ? this.collectNewsList : this.collectScienceList
+    }
+  },
   components: {},
+  async activated() {
+    await this._getUserInfo()
+    this._getUserHistoryList()
+    this._getUserCollectList()
+  },
   methods: {
-    jumpDetail(type,item) {
-      if (type) {
-        window.open(item.link)
-      } else {
-        this.$router.push({ path: "/scientificMissionDetail" });
+    async _getUserInfo() {
+      const userInfo = await getUserInfo()
+      userInfo.countDate = this.daysSinceTimestamp(userInfo.registration_date)
+      userInfo.joinDateStr = formatDate(new Date(userInfo.registration_date), 'yyyy-MM-dd')
+      this.userInfo = userInfo
+    },
+    async _getUserCollectList() {
+      if(this.userInfo.favorite_news.length) {
+        this.collectNewsList = await getNewsList({ids: this.userInfo.favorite_news.join(',')})
+      }
+      if(this.userInfo.favorite_tasks.length) {
+        this.collectScienceList = await getScienceList({ids: this.userInfo.favorite_tasks.join(',')})
       }
     },
+    async _getUserHistoryList() {
+      const mixList = await getUserHistory()
+      mixList.news.forEach(item => {
+        item.dataLocal = formatDate(new Date(item.visited_on), 'MM/dd hh:mm')
+        item._tag = 0
+      })
+      mixList.science_tasks.forEach(item => {
+        item.dataLocal = formatDate(new Date(item.visited_on), 'MM/dd hh:mm')
+        item._tag = 1
+      })
+      const historyList = [...mixList.news, ...mixList.science_tasks]
+      historyList.sort((a, b) => {
+        return new Date(b.visited_on).getTime() - new Date(a.visited_on).getTime()
+      })
+      this.historyList = historyList
+    },
+    jumpDetail(item, category) {
+      // 0新闻
+      if(category == null) {
+        category = this.active
+      }
+      if(category === 0) {
+        this.$router.push({path: `/newsNoticeDetail/${item.id}`});
+      } else {
+        this.$router.push({path: `/scientificMissionDetail/${item.id}`});
+      }
+    },
+    daysSinceTimestamp(timestamp) {
+      const startDate = new Date(timestamp);
+      const endDate = new Date();
+      // 将日期转换为毫秒
+      const startMillis = startDate.getTime();
+      const endMillis = endDate.getTime();
+      // 计算时间差（毫秒）
+      const timeDiff = endMillis - startMillis;
+      // 将时间差转换为天数
+      return Math.floor(timeDiff / (1000 * 60 * 60 * 24)) + 1;
+    }
   },
 };
 </script>
@@ -253,14 +223,17 @@ export default {
   max-width: 2000px;
   min-width: 900px;
   margin: 0 auto;
+
   .content {
     width: 1440px;
     padding: 40px 80px;
     margin: 0 auto;
     display: flex;
+
     .information {
       width: 860px;
       margin-right: 20px;
+
       .infoBox {
         height: 280px;
         background: #ffffff;
@@ -268,40 +241,49 @@ export default {
         border-radius: 16px 16px 16px 16px;
         padding: 40px;
         display: flex;
+
         .avatar {
           img {
             width: 120px;
             height: 120px;
           }
         }
+
         .info {
           margin: 20px 0 0 40px;
+
           .name {
             font-weight: bold;
             font-size: 24px;
             color: #262626;
           }
+
           .time {
             font-size: 14px;
             color: #262626;
             margin-top: 8px;
           }
+
           img {
             width: 16px;
             height: 16px;
             margin-top: 8px;
             cursor: pointer;
           }
+
           .basicInformation {
             display: flex;
             margin-top: 10px;
+
             .left {
               margin-right: 50px;
             }
+
             .item {
               font-size: 14px;
               color: #262626;
               margin-top: 15px;
+
               .title {
                 width: 100px;
                 display: inline-block;
@@ -310,6 +292,7 @@ export default {
           }
         }
       }
+
       .collect {
         margin-top: 20px;
         height: 120px;
@@ -318,26 +301,31 @@ export default {
         border-radius: 16px 16px 16px 16px;
         padding: 24px 40px;
         display: flex;
+
         .title {
           font-weight: 500;
           font-size: 16px;
           color: #262626;
           text-align: center;
         }
+
         .num {
           font-weight: 500;
           font-size: 40px;
           color: #6e91fa;
           text-align: center;
         }
+
         .quest {
           width: 370px;
         }
+
         .kit {
           width: 370px;
         }
       }
     }
+
     .history {
       width: 400px;
       height: 420px;
@@ -345,26 +333,33 @@ export default {
       box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
       border-radius: 16px 16px 16px 16px;
       padding: 24px;
+      overflow-y: auto;
+
       .historyBody {
+
         .historyItem {
           display: flex;
           margin-top: 6px;
           padding: 6px;
           cursor: pointer;
           background: #fafafa;
+
           .ItemLeft {
             position: relative;
+
             img {
               width: 48px;
               height: 48px;
               border-radius: 8px 8px 8px 8px;
             }
           }
+
           .ItemRight {
             margin-left: 15px;
             display: flex;
             flex: 1;
             flex-direction: column;
+
             .title {
               font-weight: 500;
               font-size: 14px;
@@ -376,22 +371,26 @@ export default {
               text-overflow: ellipsis;
               white-space: normal;
             }
+
             .type {
               font-size: 14px;
               color: #587dff;
               display: flex;
               justify-content: space-between;
               margin-top: 5px;
+
               .time {
                 color: #262626;
               }
             }
           }
         }
+
         .historyItem:hover {
           background: #ffffff;
           box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
           border-radius: 16px 16px 16px 16px;
+
           .title {
             color: #2954ff;
           }
@@ -399,10 +398,12 @@ export default {
       }
     }
   }
+
   .collectBox {
     width: 1440px;
     margin: 0 auto;
     padding: 0px 80px;
+
     .tab {
       width: 400px;
       height: 40px;
@@ -412,36 +413,43 @@ export default {
       display: flex;
       text-align: center;
       line-height: 35px;
+
       div {
         margin: 2px;
         width: 198px;
         height: 36px;
         cursor: pointer;
       }
+
       div:hover {
         color: #2954ff;
         background: #ffffff;
         border-radius: 10px 10px 10px 10px;
       }
+
       .active {
         color: #2954ff;
         background: #ffffff;
         border-radius: 10px 10px 10px 10px;
       }
     }
+
     .collectContent {
       margin-top: 40px;
       border-radius: 16px;
+
       .questItem {
         width: 290px;
         height: 320px;
         margin: 0 30px 30px 0;
         cursor: pointer;
+
         .img {
           width: 290px;
           height: 160px;
           background: linear-gradient(180deg, #9cb9ff 0%, #deeaff 100%);
           border-radius: 16px 16px 0px 0px;
+
           img {
             width: 250px;
             height: 139px;
@@ -449,6 +457,7 @@ export default {
             margin: 20px 20px 0 20px;
           }
         }
+
         .boxBody {
           width: 290px;
           height: 160px;
@@ -456,6 +465,7 @@ export default {
           background: #fff;
           border-radius: 0px 0px 16px 16px;
           box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+
           .title {
             font-weight: bold;
             font-size: 16px;
@@ -467,6 +477,7 @@ export default {
             text-overflow: ellipsis;
             white-space: normal;
           }
+
           .msg {
             font-size: 12px;
             color: #262626;
@@ -478,10 +489,12 @@ export default {
             white-space: normal;
             margin-top: 8px;
           }
+
           .tag {
             display: flex;
             font-size: 12px;
             margin-top: 24px;
+
             .type {
               background: #587dff;
               border-radius: 14px 14px 14px 14px;
@@ -489,6 +502,7 @@ export default {
               padding: 2px 8px;
               margin-right: 5px;
             }
+
             .algorithm {
               background: #ffffff;
               border: 1px solid #587dff;
@@ -499,14 +513,15 @@ export default {
           }
         }
       }
+
       .kitItem {
         width: 400px;
         height: 420px;
         background: linear-gradient(
-          180deg,
-          #ccd7ff 0%,
-          #f5f7ff 52%,
-          #ffffff 100%
+                180deg,
+                #ccd7ff 0%,
+                #f5f7ff 52%,
+                #ffffff 100%
         );
         box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
         border-radius: 20px;
@@ -514,13 +529,16 @@ export default {
         position: relative;
         margin: 0 25px 30px 0;
         cursor: pointer;
+
         .text {
           margin-top: 24px;
+
           .titleChild {
             font-weight: bold;
             font-size: 24px;
             color: #262626;
           }
+
           .msg {
             font-size: 14px;
             color: #262626;
@@ -533,6 +551,7 @@ export default {
             margin-top: 10px;
           }
         }
+
         .smallImg {
           width: 80px;
           height: 28px;
@@ -540,6 +559,7 @@ export default {
           right: 20px;
           bottom: 20px;
         }
+
         img {
           width: 360px;
           height: 200px;

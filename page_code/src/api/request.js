@@ -9,7 +9,7 @@ const $axios = axios.create({
   // 设置超时时间
   timeout: 30000,
   // 基础url，会在请求url中自动添加前置链接
-  baseURL: '',
+  baseURL: 'http://8.141.91.97:6001/',
   transformRequest: [(data) => {
     // if (data instanceof FormData) {
     //   return data
@@ -66,6 +66,7 @@ $axios.interceptors.response.use(
         case 401:
           Message.error('身份验证失败，请重新登录');
           setTimeout(() => {
+            // window.location.replace('/login')
             // eslint-disable-next-line max-len
             // window.location.replace(`http://sso.zhangyue-inc.com/oauth/authorize?redirect_uri=${process.env.VUE_APP_LOGIN_URL}&response_type=code&client_id=${process.env.VUE_APP_LOGIN_CLIENT_ID}&state=23`);
             // window.location.replace(process.env.VUE_APP_LOGIN_URL + '?return_url=' + window.location.href);
@@ -97,7 +98,7 @@ export default {
       data: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
-        token: localStorage.getItem('token')
+        Authorization: sessionStorage.getItem('token')
       }
     });
   },
@@ -108,7 +109,7 @@ export default {
       params,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        token: localStorage.getItem('token')
+        Authorization: sessionStorage.getItem('token')
       }
     });
   },
@@ -123,14 +124,18 @@ export default {
     return $axios({
       method: 'patch',
       url,
-      params
+      params,
     });
   },
   put(url, params) {
     return $axios({
       method: 'put',
       url,
-      params
+      data: JSON.stringify(params),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: sessionStorage.getItem('token')
+      }
     });
   },
   download(url, data) {

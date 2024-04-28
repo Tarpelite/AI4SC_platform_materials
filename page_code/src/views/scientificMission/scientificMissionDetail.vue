@@ -4,7 +4,7 @@
       <div class="header">
         <div class="title"><span class="renwu" @click="$router.back()">科学任务</span> / {{ detailInfo.title }}</div>
         <div class="btns">
-          <img class="btnsImg" :src="images.collect" alt="收藏" @click="bindCollect"/>
+          <img class="btnsImg" :src="isCollected ? images.collected :images.collect" alt="收藏" @click="bindCollect"/>
           <img class="btnsImg" :src="images.link" alt="" @click="jump(detailInfo.notebook_link)"/>
           <img class="btnsImg" :src="images.homeLink" alt="" @click="jump(detailInfo.introduction_link)"/>
           <img class="btnsImg" :src="images.codeRepository" alt="" @click="jump(detailInfo.repository_link)"/>
@@ -33,16 +33,18 @@
               立即执行
             </div>
           </div>
-          <div class="relevantPapers">
+          <div class="relevantPapers" v-if="detailInfo.papers">
             <div class="title">相关论文</div>
-            <div class="relevantPapersText" @click="jump(detailInfo.notebook_link)">
-              Hidden physics models: Machine learning of nonlinear partial
-              alterental equations…
-            </div>
-            <div class="relevantPapersText" @click="jump(detailInfo.introduction_link)">
-              Meshless physics-informed deep learning method for
-              three-dimensional solid…
-            </div>
+            <template v-if="detailInfo.papers.length > 0">
+              <div class="relevantPapersText" @click="jump(detailInfo.papers[0].doi)">
+                {{ detailInfo.papers[0].title }}
+              </div>
+            </template>
+            <template v-if="detailInfo.papers.length > 1">
+              <div class="relevantPapersText" @click="jump(detailInfo.papers[1].doi)">
+                {{ detailInfo.papers[1].title }}
+              </div>
+            </template>
           </div>
           <div class="scientificMission">
             <div class="title">类似科学任务</div>
@@ -64,37 +66,14 @@
 
 <script>
 import images from "@/utils/js/exportImage";
-import {getRelatedScienceList, getScienceDetail} from "@/api/api";
+import {collectScience, getRelatedScienceList, getScienceDetail, getUserInfo, recordHistory} from "@/api/api";
 
 export default {
   data() {
     return {
+      isCollected: false,
       images: images,
-      moreList: [
-        {
-          title:
-              "AI4Science的基石：几何图神经网络，最全综述来了！人大高瓴联合腾讯AI lab、清华、斯坦福等发布",
-          type: "学术动态",
-          img: "https://pic.imgdb.cn/item/65ef029a9f345e8d03ae62c6.png",
-        },
-        {
-          title: "量子计算新进展，腾讯量子实验室设计新算法进行量子近似优化",
-          type: "学术动态",
-          img: "https://pic.imgdb.cn/item/65ef022f9f345e8d03aacc15.png",
-        },
-        {
-          title:
-              "5天完成6个月实验量，加速催化研究，「自动驾驶」催化实验室Fast-Cat登Nature子刊",
-          type: "学术动态",
-          img: "https://pic.imgdb.cn/item/65ef03149f345e8d03b2f078.png",
-        },
-        {
-          title:
-              "用基于结构的突变偏好进行蛋白质设计，加州大学、MIT、哈佛医学院团队开发了一种无监督方法",
-          type: "学术动态",
-          img: "https://pic.imgdb.cn/item/65ef02e89f345e8d03b136ae.png",
-        },
-      ],
+      moreList: [],
       likenessList: [],
       detailInfo: {}
     };
@@ -108,22 +87,47 @@ export default {
       this.id = id ? id : this.$route.params.id
       this._getDetail()
       this._getRelatedScienceList()
+      this._recordHistory()
+      this._getCollectInfo()
       if(id) {
         this.$nextTick(() => {
           window.scrollTo(0, 0); // 滚动到页面的左上角
         })
       }
     },
+    async _recordHistory() {
+      const params = {
+        user: sessionStorage.getItem('user_id'),
+        content_type: 'sciencetask',
+        object_id: this.id
+      }
+      await recordHistory(params)
+    },
     async _getRelatedScienceList() {
       this.likenessList = {}
       this.likenessList = await getRelatedScienceList()
+    },
+    async _getCollectInfo() {
+      const result = await getUserInfo()
+      if(result) {
+        this.isCollected = result.favorite_tasks && result.favorite_tasks.indexOf(Number(this.id)) !== -1
+      }
     },
     async _getDetail() {
       this.detailInfo = {}
       this.detailInfo = await getScienceDetail(this.id)
     },
-    bindCollect() {
-       getRelatedScienceList()
+    async bindCollect() {
+      const result = await collectScience(this.id)
+      if(result) {
+        if(!this.isCollected) {
+          this.isCollected = true
+          this.$notify.success('收藏成功')
+        } else {
+          this.isCollected = false
+          this.$notify.success('取消收藏成功')
+        }
+      }
     },
     jump(link) {
       if(link.startsWith("http")) {

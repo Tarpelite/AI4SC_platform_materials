@@ -1,41 +1,38 @@
 <template>
   <div id="app">
-    <div class="menuCard" ref="menu" v-if="userInfo">
+    <div class="menuCard" ref="menu" v-if="token">
       <div class="el-menu-i">
         <div class="left">
           <div class="logo">
             <a @click="$router.push('/dashboard')"
-              ><img :src="logoPng" width="202"
+            ><img :src="logoPng" width="202"
             /></a>
           </div>
-          <div class="search">
-            <img src="@/utils/image/search.png" alt="" />
-            <input type="text" placeholder="输入关键词搜索…" />
-          </div>
+          <search></search>
         </div>
         <div class="right">
           <div class="menuItem">
             <div
-              v-for="(item, index) in routerList"
-              :key="index"
-              class="hoverItem"
-              :class="item.path == activeIndex ? 'active' : ''"
-              @click="jump(item.path, item.type)"
+                v-for="(item, index) in routerList"
+                :key="index"
+                class="hoverItem"
+                :class="item.path == activeIndex ? 'active' : ''"
+                @click="jump(item.path, item.type)"
             >
               {{ item.name }}
             </div>
           </div>
           <img
-            class="userAvatar"
-            @click="jump('/userInfo', '')"
-            :src="user"
-            alt=""
+              class="userAvatar"
+              @click="jump('/userInfo', '')"
+              :src="user"
+              alt=""
           />
         </div>
       </div>
     </div>
 
-    <div :class="userInfo ? 'body_content' : ''" ref="body_content">
+    <div :class="token ? 'body_content' : ''" ref="body_content">
       <transition name="fade">
         <keep-alive>
           <router-view></router-view>
@@ -43,7 +40,7 @@
       </transition>
     </div>
     <!-- <div style="background-color: #f5f5f5;"> -->
-    <footerVue v-if="userInfo"></footerVue>
+    <footerVue v-if="token"></footerVue>
     <!-- </div> -->
   </div>
 </template>
@@ -51,6 +48,8 @@
 import routers from "@/router";
 import footerVue from "@/views/footer";
 import images from "@/utils/js/exportImage";
+import search from "@/components/seach/search";
+
 export default {
   data() {
     return {
@@ -114,29 +113,29 @@ export default {
                   label: "数据安全风险评估系统",
                   productsId: 0,
                 },
-                { type: "Rifens", label: "数据安全治理系统", productsId: 1 },
+                {type: "Rifens", label: "数据安全治理系统", productsId: 1},
               ],
             },
             {
               title: "监测审计",
               children: [
-                { type: "Rifens", label: "数据库安全审计系统", productsId: 2 },
+                {type: "Rifens", label: "数据库安全审计系统", productsId: 2},
               ],
             },
             {
               title: "共享防护",
               children: [
-                { type: "Rifens", label: "数据库透明加密系统", productsId: 3 },
-                { type: "Rifens", label: "数据传输加密系统", productsId: 4 },
-                { type: "Rifens", label: "数据静态脱敏系统", productsId: 5 },
+                {type: "Rifens", label: "数据库透明加密系统", productsId: 3},
+                {type: "Rifens", label: "数据传输加密系统", productsId: 4},
+                {type: "Rifens", label: "数据静态脱敏系统", productsId: 5},
               ],
             },
             {
               title: "运营管理",
               children: [
-                { type: "Rifens", label: "数据安全运维系统", productsId: 6 },
-                { type: "Rifens", label: "数据中台", productsId: 7 },
-                { type: "Rifens", label: "数据安全管控平台", productsId: 8 },
+                {type: "Rifens", label: "数据安全运维系统", productsId: 6},
+                {type: "Rifens", label: "数据中台", productsId: 7},
+                {type: "Rifens", label: "数据安全管控平台", productsId: 8},
               ],
             },
           ],
@@ -151,7 +150,7 @@ export default {
             {
               title: "边界防护",
               children: [
-                { type: "Rinspector", label: "5G安全接入网关", productsId: 9 },
+                {type: "Rinspector", label: "5G安全接入网关", productsId: 9},
               ],
             },
             {
@@ -245,29 +244,29 @@ export default {
                 label: "数据安全风险评估系统",
                 productsId: 0,
               },
-              { type: "Rifens", label: "数据安全治理系统", productsId: 1 },
+              {type: "Rifens", label: "数据安全治理系统", productsId: 1},
             ],
           },
           {
             title: "监测审计",
             children: [
-              { type: "Rifens", label: "数据库安全审计系统", productsId: 2 },
+              {type: "Rifens", label: "数据库安全审计系统", productsId: 2},
             ],
           },
           {
             title: "共享防护",
             children: [
-              { type: "Rifens", label: "数据库透明加密系统", productsId: 3 },
-              { type: "Rifens", label: "数据传输加密系统", productsId: 4 },
-              { type: "Rifens", label: "数据静态脱敏系统", productsId: 5 },
+              {type: "Rifens", label: "数据库透明加密系统", productsId: 3},
+              {type: "Rifens", label: "数据传输加密系统", productsId: 4},
+              {type: "Rifens", label: "数据静态脱敏系统", productsId: 5},
             ],
           },
           {
             title: "运营管理",
             children: [
-              { type: "Rifens", label: "数据安全运维系统", productsId: 6 },
-              { type: "Rifens", label: "数据中台", productsId: 7 },
-              { type: "Rifens", label: "数据安全管控平台", productsId: 8 },
+              {type: "Rifens", label: "数据安全运维系统", productsId: 6},
+              {type: "Rifens", label: "数据中台", productsId: 7},
+              {type: "Rifens", label: "数据安全管控平台", productsId: 8},
             ],
           },
         ],
@@ -302,21 +301,22 @@ export default {
           path: "/solution/campus",
         },
       ],
-      userInfo: null,
+      token: null,
     };
   },
   components: {
     footerVue,
+    search
   },
   watch: {
     $route: function (to, from) {
       this.activeIndex = this.$route.path
-      this.userInfo = sessionStorage.getItem("info");
-      if (!this.userInfo) {
-        this.$router.push({ path: "/login" });
+      const token = sessionStorage.getItem("token");
+      if(!token && to.path !== '/login') {
+        this.$router.push({path: "/login"});
       } else {
-        if (this.$route.path == "/login") {
-          this.$router.push({ path: "/dashboard" });
+        if(!this.token) {
+          this.token = sessionStorage.getItem("token");
         }
       }
     },
@@ -328,23 +328,15 @@ export default {
   },
   methods: {
     jump(Path, type) {
-      if (type == "without") {
+      if(type == "without") {
         window.open(Path);
       } else {
         this.activeIndex = Path;
-        this.$router.push({ path: Path });
+        this.$router.push({path: Path});
       }
     },
   },
   mounted() {
-    this.userInfo = sessionStorage.getItem("info");
-    if (!this.userInfo) {
-      this.$router.push({ path: "/login" });
-    } else {
-      if (this.$route.path == "/login") {
-        this.$router.push({ path: "/dashboard" });
-      }
-    }
     window.addEventListener("scroll", this.handleScroll);
   },
 
@@ -407,57 +399,47 @@ p {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+
   .left {
     display: flex;
   }
+
   .right {
     display: flex;
   }
-  .search {
-    background: #fff;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-    img {
-      width: 24px;
-      height: 24px;
-    }
-    input {
-      border: 0;
-      outline: 0;
-      border-radius: 20px;
-    }
-    input::placeholder {
-      font-size: 14px;
-    }
-  }
+
   .logo {
     margin-right: 60px;
+
     img {
       width: 114px;
       height: 36px;
     }
   }
+
   .userAvatar {
     width: 36px;
     height: 36px;
   }
+
   .menuItem {
     display: flex;
     justify-content: space-around;
     align-items: center;
     text-wrap: nowrap;
+
     div {
       margin-right: 32px;
       font-size: 14px;
     }
+
     .hoverItem:hover {
       color: #2954ff;
       border-bottom: 2px solid #2954ff;
       padding-bottom: 5px;
       height: 20px;
     }
+
     .active {
       color: #2954ff;
       border-bottom: 2px solid #2954ff;

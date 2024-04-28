@@ -10,8 +10,8 @@
               <img :src="images.share" alt=""/>
               <span>分享</span>
             </div>
-            <div class="collect">
-              <img :src="images.collect" alt=""/>
+            <div class="collect" @click="collectNews">
+              <img :src="isCollected ? images.collected :images.collect" alt=""/>
               <span>收藏</span>
             </div>
             <div class="back" @click="$router.back()">
@@ -61,7 +61,7 @@
 
 <script>
 import images from "@/utils/js/exportImage";
-import {getNewsDetail, getRelatedNews, getRelatedNewsContent} from "@/api/api";
+import {collectNews, getNewsDetail, getRelatedNews, getRelatedNewsContent, getUserInfo, recordHistory} from "@/api/api";
 import VueMarkdown from 'vue-markdown'
 
 export default {
@@ -70,6 +70,7 @@ export default {
       images: images,
       moreList: [],
       detailInfo: {},
+      isCollected: false,
       contextObj: {
         previous_news: {},
         next_news: {}
@@ -96,11 +97,39 @@ export default {
       this._getDetail()
       this._getRelatedNews()
       this._getRelatedNewsContent()
+      this._recordHistory()
+      this._getCollectInfo()
       if(id) {
         this.$nextTick(() => {
           window.scrollTo(0, 0); // 滚动到页面的左上角
         })
       }
+    },
+    async _getCollectInfo() {
+      const result = await getUserInfo()
+      if(result) {
+        this.isCollected = result.favorite_news && result.favorite_news.indexOf(Number(this.id)) !== -1
+      }
+    },
+    async collectNews() {
+      const result = await collectNews(this.id)
+      if(result) {
+        if(!this.isCollected) {
+          this.isCollected = true
+          this.$notify.success('收藏成功')
+        } else {
+          this.isCollected = false
+          this.$notify.success('取消收藏成功')
+        }
+      }
+    },
+    async _recordHistory() {
+      const params = {
+        user: sessionStorage.getItem('user_id'),
+        content_type: 'news',
+        object_id: this.id
+      }
+      await recordHistory(params)
     },
     async _getDetail() {
       this.detailInfo = {}
