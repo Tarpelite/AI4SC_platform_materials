@@ -89,7 +89,12 @@ export default {
       const url = window.location.href.toString();
       let finIndex = url.split('').lastIndexOf('/');
       let finalUrl = url.substr(0, finIndex + 1) + this.id;
-      navigator.clipboard.writeText(finalUrl);
+      const inputElement = document.createElement("input");
+      inputElement.value = finalUrl;
+      document.body.appendChild(inputElement);
+      inputElement.select();
+      document.execCommand("copy");
+      document.body.removeChild(inputElement);
       this.$notify.success('已复制到粘贴板');
     },
     loadNews(id) {

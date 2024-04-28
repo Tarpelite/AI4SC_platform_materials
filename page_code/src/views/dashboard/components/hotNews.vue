@@ -9,10 +9,10 @@
         @click="jumpDetail(item)"
       >
         <div class="itemImg">
-            <img :src="item.img" alt="" />
+            <img :src="item.image" alt="" />
         </div>
         <div class="msg">
-          <div class="text">{{ item.msg }}</div>
+          <div class="text">{{ item.description }}</div>
         </div>
       </div>
     </div>
@@ -27,51 +27,27 @@
 
 <script>
 import images from "@/utils/js/exportImage";
+import {getNewsList} from "@/api/api";
+import {formatDate} from "@/utils/date";
 export default {
   data() {
     return {
-      list: [
-        {
-          id: 1,
-          msg: "预测所有生物分子，David Baker 团队蛋白质设计新工具 RoseTTAFold All-Atom 登 Science",
-          img: "https://pic.imgdb.cn/item/65ef01049f345e8d039fc9bf.png",
-        },
-        {
-          id: 2,
-          msg: "AI4Science的基石：几何图神经网络，最全综述来了！人大高瓴联合腾讯AI lab、清华、斯坦福等发布",
-          img: "https://pic.imgdb.cn/item/65ef029a9f345e8d03ae62c6.png",
-        },
-        {
-          id: 3,
-          msg: "5天完成6个月实验量，加速催化研究，「自动驾驶」催化实验室Fast-Cat登Nature子刊",
-          img: "https://pic.imgdb.cn/item/65ef03149f345e8d03b2f078.png",
-        },
-        {
-          id: 4,
-          msg: "课题组组织CNCC分论坛 —— 科学计算平台技术前沿",
-          img: "https://pic.imgdb.cn/item/65ef074c9f345e8d03daa411.png",
-        },
-        {
-          id: 5,
-          msg: "课题组组织CNCC分论坛——“神经符号计算：理论、技术与应用”",
-          img: "https://pic.imgdb.cn/item/65ef07649f345e8d03db8f32.png",
-        },
-        {
-          id: 6,
-          msg: "北京航空航天大学举办首届“人工智能科学计算学术研讨会”",
-          img: "https://pic.imgdb.cn/item/65ef08599f345e8d03e41a72.png",
-        },
-        {
-          id: 7,
-          msg: "首届“大湾区杯”粤港澳 AI for Science科技竞赛颁奖典礼隆重举行",
-          img: "https://pic.imgdb.cn/item/65ef08df9f345e8d03e86d28.png",
-        },
-      ],
+      list: [],
       percentage: 0,
       imageList: images,
     };
   },
+  created() {
+    this._getNewsList()
+  },
   methods: {
+    async _getNewsList() {
+      const newsList = await getNewsList()
+      newsList.forEach(item => {
+        item.publishDate = item.publish_date ? formatDate(new Date(item.publish_date), 'yyyy-MM-dd') : item.publish_date
+      })
+      this.list = newsList.filter(item=> item.is_recommended);;
+    },
     increase() {
       this.percentage += 75;
       if (this.percentage > 150) {
@@ -91,7 +67,7 @@ export default {
       }
     },
     jumpDetail(item) {
-      this.$router.push({ path: "/newsNoticeDetail" });
+      this.$router.push({ path: `/newsNoticeDetail/${item.id}` });
     },
   },
 };

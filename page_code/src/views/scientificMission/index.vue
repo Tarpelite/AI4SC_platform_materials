@@ -82,25 +82,25 @@
                   <div class="algorithm">{{ item1.contributor }}</div>
                 </div>
                 <div class="btns">
-                  <div class="btnsImg" v-if="item1.jupyter_notebook_link">
+                  <div class="btnsImg" v-if="item1.notebook_link">
                     <img
                         :src="images.link"
                         alt=""
-                        @click.stop="winOpen(item1.jupyter_notebook_link)"
+                        @click.stop="winOpen(item1.notebook_link)"
                     />
                   </div>
-                  <div class="btnsImg" v-if="item1.code_repo_link">
+                  <div class="btnsImg" v-if="item1.introduction_link">
                     <img
                         :src="images.homeLink"
                         alt=""
-                        @click.stop="winOpen(item1.code_repo_link)"
+                        @click.stop="winOpen(item1.introduction_link)"
                     />
                   </div>
-                  <div class="btnsImg" v-if="item1.homepage_link">
+                  <div class="btnsImg" v-if="item1.repository_link">
                     <img
                         :src="images.codeRepository"
                         alt=""
-                        @click.stop="winOpen(item1.homepage_link)"
+                        @click.stop="winOpen(item1.repository_link)"
                     />
                   </div>
                 </div>
@@ -126,37 +126,37 @@ export default {
       images: images,
       carouselData: [
         {
-          id: 1,
+          id: 90,
           title: "深度学习求解Euler_Beam问题",
           msg: "利用深度学习技术对Euler Beam理论进行模拟，提高工程力学问题的求解效率。",
           img: "https://pic.imgdb.cn/item/6612a2a768eb9357136ce477.png",
         },
         {
-          id: 2,
+          id: 123,
           title: "FourCastNet",
           msg: "基于深度学习的天气预报模型，通过自适应傅里叶神经算子高效预测气象变量，如风速和降水。",
           img: "https://pic.imgdb.cn/item/6612b4c468eb9357138150b6.png",
         },
         {
-          id: 3,
+          id: 129,
           title: "东方.御风",
           msg: "在航空航天领域，通过AI模型优化飞机气动设计，提升飞机性能和环保性。",
           img: "https://pic.imgdb.cn/item/65eeee559f345e8d031cbb5a.png",
         },
         {
-          id: 4,
+          id: 168,
           title: "CTEFNet: 基于 CNN 与迁移学习的厄尔尼诺预测模型",
           msg: "CTEFNet结合卷积神经网络和迁移学习，通过时间序列分析提升厄尔尼诺现象的预测时长，为气候变化研究提供高精度的预测工具。。",
           img: "https://pic.imgdb.cn/item/65eeee559f345e8d031cbc9f.png",
         },
         {
-          id: 5,
+          id: 169,
           title: "DEM-SRNet: 全球3弧秒（90m）海陆高分辨率数字高程模型",
           msg: "DEM-SRNet应用深度残差网络对地面DEM数据进行预训练，显著提升全球数字高程模型的分辨率，为地理科学研究和环境监测提供更为精确的地形数据。",
           img: "https://pic.imgdb.cn/item/6612d7e168eb935713bd2d60.png",
         },
         {
-          id: 6,
+          id: 172,
           title: "Phiflow playground - Kolmogorov流模拟",
           msg: "应用PhiFlow流体库对Kolmogorov流进行仿真，用户可以通过上传的方式指定初始压力场",
           img: "https://pic.imgdb.cn/item/6612dbd768eb935713c2cc1c.png",

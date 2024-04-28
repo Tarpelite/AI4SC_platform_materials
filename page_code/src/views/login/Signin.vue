@@ -71,9 +71,12 @@ export default {
       }
       // 这里应该是发送请求到后端获取验证码的逻辑
       const sendInfo = await sendCode({email: this.regInfo.email})
-      // 模拟发送验证码的操作
-      this.isSending = true;
-      this.startCountdown();
+      if(sendInfo) {
+        this.$notify.success('验证码发送成功')
+        // 模拟发送验证码的操作
+        this.isSending = true;
+        this.startCountdown();
+      }
     },
     async regSubmit() {
       if(this.formReg()) {
@@ -108,7 +111,7 @@ export default {
         this.$notify.error('请输入密码')
         return false
       }
-      if(!(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(this.regInfo.password))) {
+      if(!(/^(?=.*[a-zA-Z])(?=.*\d)[\s\S]{8,}$/.test(this.regInfo.password))) {
         this.$notify.error('密码至少8个字符，至少含字母和数字，不能包含空格')
         return false
       }

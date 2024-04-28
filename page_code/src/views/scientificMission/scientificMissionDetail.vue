@@ -5,9 +5,9 @@
         <div class="title"><span class="renwu" @click="$router.back()">科学任务</span> / {{ detailInfo.title }}</div>
         <div class="btns">
           <img class="btnsImg" :src="isCollected ? images.collected :images.collect" alt="收藏" @click="bindCollect"/>
-          <img class="btnsImg" :src="images.link" alt="" @click="jump(detailInfo.notebook_link)"/>
-          <img class="btnsImg" :src="images.homeLink" alt="" @click="jump(detailInfo.introduction_link)"/>
-          <img class="btnsImg" :src="images.codeRepository" alt="" @click="jump(detailInfo.repository_link)"/>
+          <img class="btnsImg" v-if="detailInfo.notebook_link" :src="images.link" alt="" @click="jump(detailInfo.notebook_link)"/>
+          <img class="btnsImg" v-if="detailInfo.introduction_link" :src="images.homeLink" alt="" @click="jump(detailInfo.introduction_link)"/>
+          <img class="btnsImg" v-if="detailInfo.repository_link"  :src="images.codeRepository" alt="" @click="jump(detailInfo.repository_link)"/>
           <div class="back" @click="$router.back()">
             <img :src="images.back" class="backImg" alt=""/>
             <span>返回</span>
@@ -26,23 +26,33 @@
           </div>
         </div>
         <div class="bodyRight">
-          <div class="tryOnline">
+          <div class="tryOnline" v-if="detailInfo.notebook_link">
             <div class="title">在线尝试</div>
             <div class="immediateExecution" @click="jump(detailInfo.notebook_link)">
               <img :src="images.action" alt=""/>
               立即执行
             </div>
           </div>
+          <div class="tryOnline" v-else>
+            <div class="title">在线尝试</div>
+            <div class="immediateExecution disabled">
+              敬请期待
+            </div>
+          </div>
           <div class="relevantPapers" v-if="detailInfo.papers">
             <div class="title">相关论文</div>
             <template v-if="detailInfo.papers.length > 0">
-              <div class="relevantPapersText" @click="jump(detailInfo.papers[0].doi)">
-                {{ detailInfo.papers[0].title }}
+              <div class="relevant-wrapper" @click="jump(detailInfo.papers[0].doi)">
+                <div class="relevantPapersText">
+                  {{ detailInfo.papers[0].title }}
+                </div>
               </div>
             </template>
             <template v-if="detailInfo.papers.length > 1">
-              <div class="relevantPapersText" @click="jump(detailInfo.papers[1].doi)">
-                {{ detailInfo.papers[1].title }}
+              <div class="relevant-wrapper" @click="jump(detailInfo.papers[1].doi)">
+                <div class="relevantPapersText">
+                  {{ detailInfo.papers[1].title }}
+                </div>
               </div>
             </template>
           </div>
@@ -283,7 +293,10 @@ export default {
             color: #fff;
             margin-top: 6px;
             cursor: pointer;
-
+            &.disabled {
+              color: #587dff;
+              background: #f2f7ff;
+            }
             img {
               width: 16px;
               height: 16px;
@@ -300,23 +313,23 @@ export default {
           box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
           border-radius: 16px 16px 16px 16px;
           padding: 20px;
-
-          .relevantPapersText {
-            cursor: pointer;
+          .relevant-wrapper {
+            padding: 12px 15px;
+            border-radius: 12px 12px 12px 12px;
+            background: #f2f7ff;
             width: 320px;
             height: 60px;
-            background: #f2f7ff;
-            border-radius: 12px 12px 12px 12px;
-            padding: 12px 15px;
+            cursor: pointer;
+            margin-top: 12px;
+          }
+          .relevantPapersText {
             font-size: 14px;
             line-height: 20px;
-            margin-top: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: normal;
           }
         }
 

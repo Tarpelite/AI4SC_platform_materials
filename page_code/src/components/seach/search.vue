@@ -1,11 +1,11 @@
 <template>
   <div class="search">
     <img src="@/utils/image/search.png" alt=""/>
-    <input type="text" v-model="searchTxt" placeholder="输入关键词搜索…" @blur="handleBlur" @keydown.enter="handleSearch"/>
-    <div class="search-content" v-if="isSearching">
+    <input type="text" v-model="searchTxt" placeholder="输入关键词搜索…" @keydown.enter="handleSearch"/>
+    <div ref="searchContentRef" class="search-content" v-if="isSearching">
       <div class="search-content-item" v-if="searchList.length" v-for="(item,idx) in searchList" :key="idx">
         <h3 class="main-title">{{ item.title }}</h3>
-        <div class="sub-category-item" v-if="item.list && item.list.length > 0" v-for="(innerItem ,idx) in item.list" :key="idx" @click="linkPage(innerItem)">
+        <div class="sub-category-item" v-if="item.list && item.list.length > 0" v-for="(innerItem ,idx) in item.list" :key="idx" @click.stop="linkPage(innerItem)">
           <div class="sub-category-title" v-html="innerItem.titleHtml"></div>
           <div class="sub-category-content" v-html="innerItem.inHtml"></div>
         </div>
@@ -45,10 +45,19 @@ export default {
         })
         this.searchList = [{title: '新闻', list: newsList}, {title: '科学任务', list: scList}]
         this.isSearching = true
+        document.addEventListener('click', this.listenClick)
+      }
+    },
+    listenClick() {
+      const e = event || window.event
+      // 判断点击的地方在不在输入框盒子内， contains判断dom节点的包含关系
+      if (this.$refs.searchContentRef && !this.$refs.searchContentRef.contains(e.target)){
+        this.isSearching = false
+        document.removeEventListener('click', this.listenClick)
       }
     },
     linkPage(item) {
-      console.log('00000-----', item)
+      this.isSearching = false
       if(item._tag === 0) {
         this.$router.push({path: `/newsNoticeDetail/${item.id}`});
       } else {
@@ -58,11 +67,6 @@ export default {
     wrapStringWithTag(str, tag, word) {
       const regex = new RegExp(word, 'gi');
       return str.replace(regex, match => `<${tag} style="color: #EB2F32">${match}</${tag}>`);
-    },
-    handleBlur() {
-      setTimeout(() => {
-        this.isSearching = false
-      }, 200)
     }
   }
 }
