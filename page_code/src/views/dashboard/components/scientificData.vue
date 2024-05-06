@@ -6,7 +6,6 @@
         class="item"
         v-for="(item, index) in list"
         :key="index"
-        :class="index == 3 ? '' : 'mr24'"
         @click="jump(item)"
       >
         <div class="body">
@@ -85,6 +84,7 @@ export default {
   }
   .content {
     display: flex;
+    justify-content: space-between;
     margin-top: 20px;
     padding-bottom: 15px;
     .mr24 {

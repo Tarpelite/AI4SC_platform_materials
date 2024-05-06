@@ -1,6 +1,6 @@
 <template>
   <div class="fastFunction">
-    <div class="title">快速功能</div>
+    <div class="f-title">快速功能</div>
     <div class="content">
       <div
         class="item"
@@ -67,11 +67,11 @@ export default {
   width: 1440px;
   margin: 0 auto;
   padding: 0 80px;
-  .title {
+  .f-title {
     font-weight: bold;
     font-size: 40px;
     color: #262626;
-    padding-top: 50px;
+    padding-top: 60px;
   }
   .content {
     display: flex;
@@ -84,9 +84,14 @@ export default {
       flex: 1;
       background: #fff;
       border-radius: 20px;
+      width: 300px;
+      height: 240px;
       box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
       padding: 37px 32px;
       cursor: pointer;
+      &:hover {
+        box-shadow: 0px 2px 16px 1px rgba(0,0,0,0.24);
+      }
       img {
         width: 80px;
         height: 80px;

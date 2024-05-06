@@ -480,7 +480,7 @@ p {
   width: 1440px;
   height: 340px;
   // display: flex;
-  z-index: 1040;
+  z-index: 100;
   overflow: hidden;
 
   .productLeft {
@@ -579,7 +579,7 @@ p {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 1040;
+    z-index: 100;
 
     p:first-child {
       font-size: 14px;

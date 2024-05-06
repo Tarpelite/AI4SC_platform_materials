@@ -2,19 +2,14 @@
   <div class="typicalTask">
     <div class="title">典型任务</div>
     <div class="content" ref="list">
-      <div class="item mr24" v-for="(item,index) in list" :key="index" @click="jumpDetail(item)">
+      <div class="item" v-for="(item,index) in list" :key="index" @click="jumpDetail(item)">
         <div class="text">
           <div class="titleChild">{{ item.title }}</div>
           <div class="msg"> {{ item.short_description }}</div>
         </div>
         <img :src="item.image" alt="">
       </div>
-    </div>
-    <div class="left" @click="decrease">
-      <img :src="imageList.left" alt="">
-    </div>
-    <div class="right" @click="increase">
-      <img :src="imageList.right" alt="">
+      <div v-if="list.length % 4 > 0" class="item-empty" v-for="(item,index) in 4 - list.length % 4"></div>
     </div>
   </div>
 </template>
@@ -37,7 +32,7 @@ export default {
   methods: {
     async _getScienceList() {
       const scList = await getScienceList()
-      this.list = scList.filter(item=> item.is_banner)
+      this.list = scList.filter(item=> item.is_banner).slice(0,7)
     },
     increase() {
       this.percentage += 30;
@@ -65,7 +60,6 @@ export default {
 <style lang="scss" scoped>
 .typicalTask {
   position: relative;
-  overflow: hidden;
   width: 1440px;
   margin: 0 auto;
   padding: 0 80px;
@@ -79,19 +73,22 @@ export default {
 
   .content {
     display: flex;
-    width: auto;
+    flex-wrap: wrap;
     margin-top: 20px;
     transform: translateX(0px);
     transition-property: transform;
     transition-duration: 2s;
-
+    justify-content: space-between;
     .mr24 {
       margin-right: 24px;
     }
-
+    .item-empty {
+      width: 296px;
+      height: 420px;
+    }
     .item {
-      width: 300px;
-      height: 440px;
+      width: 296px;
+      height: 420px;
       background: linear-gradient(#DEEAFF 0%, #9CB9FF 100%);
       box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
       border-radius: 20px;
@@ -100,19 +97,26 @@ export default {
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
-
+      margin-bottom: 32px;
       .text {
+        width: 256px;
         .titleChild {
           font-weight: bold;
           font-size: 24px;
           color: #262626;
+          width: 256px;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .msg {
           font-size: 14px;
           color: #262626;
           display: -webkit-box;
-          -webkit-line-clamp: 4;
+          -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -125,9 +129,7 @@ export default {
         width: 260px;
         height: 200px;
         border-radius: 10px;
-        margin-top: 20px;
       }
-
     }
 
     .item:hover {

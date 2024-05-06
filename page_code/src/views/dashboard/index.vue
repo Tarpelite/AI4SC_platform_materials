@@ -2,10 +2,10 @@
   <div class="dashboard">
     <div class="bannerBg">
       <div style="width: 1440px;margin: 0 auto;padding: 0 80px;">
-        <el-carousel height="560px" ref="nop">
+        <el-carousel height="600px" ref="nop" indicator-position="outside">
           <el-carousel-item v-for="item in carouselData" :key="item.id" :class="'carousel' + item.id">
             <div class="carouselItem" :style="'background-image: url(' + item.path + ')'">
-              <div class='carouselContent'>
+              <div class="carouselContent">
                 <p class="title1">{{ item.title }}</p>
                 <p class="title2">{{ item.title1 }}</p>
                 <span @click="jump(item.jumpPath)">{{ item.btn }}</span>
@@ -15,12 +15,12 @@
         </el-carousel>
       </div>
     </div>
-    <div style="background: #fafafa;">
-      <fastFunction />
-      <hotNews />
-      <typicalTask />
-      <scienceKit />
-      <scientificData />
+    <div style="background: #FAFAFA;">
+      <fastFunction/>
+      <hotNews/>
+      <typicalTask/>
+      <scienceKit/>
+      <scientificData/>
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@ import hotNews from './components/hotNews.vue'
 import typicalTask from './components/typicalTask.vue'
 import scienceKit from './components/scienceKit.vue'
 import scientificData from './components/scientificData.vue'
+
 export default {
   data() {
     return {
@@ -87,52 +88,64 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-::v-deep .el-carousel__indicators--horizontal {
-    position: absolute;
-    bottom: 5px;
-    text-align: right;
-    .el-carousel__indicator--horizontal button {
-        width: 20px;    
-        height: 4px;
-        background: rgba(255, 255, 255, .8);
-        border-radius: 10px;
-    }
+<style lang="scss">
+.el-carousel__indicators--outside {
+  position: absolute;
+  bottom: 5px;
+  text-align: right;
 
-    .el-carousel__indicator--horizontal.is-active button {
-        width: 60px;      
-        height: 4px;
-        background:#fff;
-        border-radius: 10px;
+  .el-carousel__indicator {
+    button {
+      width: 20px;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
     }
+    &.is-active {
+      button {
+        width: 60px;
+        height: 4px;
+        background: #2954FF;
+        border-radius: 10px;
+      }
+    }
+  }
 }
+
 .dashboard {
   height: 100%;
+
   .bannerBg {
     height: 560px;
-    background: linear-gradient( 180deg, #DEEAFF 0%, #DEEAFF 18%, rgba(250,250,250,1) 100%);
+    background: linear-gradient(180deg, #DEEAFF 0%, #DEEAFF 18%, rgba(250, 250, 250, 1) 100%);
     margin: 0 auto;
   }
+
   .carouselItem {
     width: 100%;
     height: 560px;
     margin: 0 auto;
     position: relative;
-    border-radius: 10px;
+    border-radius: 20px;
     background-size: 100% 100%;
     background-repeat: no-repeat;
+
     .carouselContent {
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
       z-index: 105;
       width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.25);
-      border-radius: 10px;
-      text-align: center;
+      height: 180px;
+      border-radius: 20px;
+
       .title1 {
-        margin-top: 187px;
+        width: 1280px;
+        height: 120px;
+        line-height: 120px;
+        background-color: rgba(0,0,0, 0.5);
+        border-radius: 0;
+        padding: 0 40px;
         font-size: 40px;
         font-family: Helvetica Neue-Bold, Helvetica Neue;
         font-weight: bold;
@@ -140,17 +153,23 @@ export default {
         overflow: hidden;
         word-wrap: break-word;
       }
+
       .title2 {
         font-size: 20px;
+        height: 60px;
+        line-height: 60px;
+        background-color: rgba(0,0,0, 0.7);
+        padding: 0 40px;
+        border-radius: 0px 0px 20px 20px;
         font-family: Helvetica Neue-Bold, Helvetica Neue;
         color: #FFFFFF;
-        margin-top: 10px;
       }
+
       span {
         display: inline-block;
         font-size: 20px;
         border: 2px solid #fff;
-        border-radius: 7px;
+        border-radius: 20px;
         color: #fff;
         background-color: transparent;
         padding: 5px 10px;
