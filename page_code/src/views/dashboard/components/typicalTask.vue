@@ -32,7 +32,7 @@ export default {
   methods: {
     async _getScienceList() {
       const scList = await getScienceList()
-      this.list = scList.filter(item=> item.is_banner).slice(0,7)
+      this.list = scList.filter(item=> item.is_banner).slice(0,8)
     },
     increase() {
       this.percentage += 30;
