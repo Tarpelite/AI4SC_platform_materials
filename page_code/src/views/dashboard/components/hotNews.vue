@@ -122,18 +122,29 @@ export default {
       box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
       border-radius: 20px;
       cursor: pointer;
+      
       .itemImg {
         width: 400px;
         height: 180px;
+        background-color: white; /* 设置背景颜色为白色 */
+        display: flex; /* 使用flex布局 */
+        align-items: center; /* 垂直居中 */
+        justify-content: center; /* 水平居中 */
+        border-radius: 20px 20px 0 0; /* 顶部左右圆角 */
 
         img {
           width: 100%;
           height: 100%;
+          // border-radius: 20px 20px 0 0;
+          object-fit: contain; /* 图片等比例缩放 */
+          object-position: center; /* 图片居中显示 */
           border-radius: 20px 20px 0 0;
+          background-color: white; /* 图片未覆盖部分的背景颜色 */
         }
       }
 
       .msg {
+        min-height: 100px; /* 设置最小高度保持描述部分高度一致 */
         padding: 20px 20px;
 
         .text {
@@ -141,7 +152,7 @@ export default {
           font-size: 16px;
           color: #262626;
           display: -webkit-box;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
