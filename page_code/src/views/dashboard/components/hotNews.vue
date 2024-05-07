@@ -134,18 +134,21 @@ export default {
 
         img {
           width: 100%;
-          height: 100%;
+          height: 200px;
           // border-radius: 20px 20px 0 0;
-          object-fit: contain; /* 图片等比例缩放 */
-          object-position: center; /* 图片居中显示 */
+          // height: auto; /* 设置高度为auto以保持图片原始比例 */
+          object-fit: cover; /* 更改为cover确保图片完全覆盖容器，可能会裁剪 */
           border-radius: 20px 20px 0 0;
           background-color: white; /* 图片未覆盖部分的背景颜色 */
         }
       }
 
       .msg {
-        min-height: 100px; /* 设置最小高度保持描述部分高度一致 */
+        // min-height: 100px; /* 设置最小高度保持描述部分高度一致 */
         padding: 20px 20px;
+        background-color: #FAFAFA; /* 确保覆盖区域的背景色与.item背景色一致 */
+        min-height: 100px; /* 调整高度以确保足够的覆盖 */
+        overflow: hidden; /* 添加溢出隐藏 */
 
         .text {
           font-weight: bold;
@@ -157,6 +160,7 @@ export default {
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: normal;
+          height: 4em; // 固定高度
         }
       }
     }

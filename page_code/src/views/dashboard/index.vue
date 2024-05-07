@@ -162,6 +162,7 @@ export default {
     height: 560px;
     background: linear-gradient(180deg, #DEEAFF 0%, #DEEAFF 18%, rgba(250, 250, 250, 1) 100%);
     margin: 0 auto;
+
     z-index: 1;
   }
 
@@ -171,8 +172,9 @@ export default {
     margin: 0 auto;
     position: relative;
     border-radius: 20px;
-    background-size: 100% 100%;
+    background-size: contain;
     background-repeat: no-repeat;
+    background-position: center;
 
     .carouselContent {
       position: absolute;

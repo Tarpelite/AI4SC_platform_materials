@@ -111,6 +111,7 @@ export default {
           -webkit-line-clamp: 2;
           overflow: hidden;
           text-overflow: ellipsis;
+          min-height: 50px; /* 假设每行大约27px高度 */
         }
 
         .msg {
@@ -118,12 +119,13 @@ export default {
           color: #262626;
           opacity: 0.9;
           display: -webkit-box;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: normal;
           margin-top: 10px;
+          min-height: 60px; /* 假设每行大约21px高度 */
         }
       }
 
