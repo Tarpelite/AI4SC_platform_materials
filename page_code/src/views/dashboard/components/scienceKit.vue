@@ -181,7 +181,7 @@ export default {
       width: 400px;
       height: 420px;
       background: linear-gradient(180deg, #CCD7FF 0%, #F5F7FF 52%, #FFFFFF 100%);
-      box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
       border-radius: 20px;
       padding: 20px;
       position: relative;
@@ -238,7 +238,6 @@ export default {
       }
 
       img {
-        background: #fff;
         border-radius: 0px;
       }
     }

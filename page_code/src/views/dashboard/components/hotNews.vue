@@ -42,7 +42,7 @@ export default {
         // autoplay: 3000,
         slidesPerView: 3,
         spaceBetween: 40,
-        autoHeight: true,
+        height: 330,
         prevButton: '.swiper-button-prev',
         nextButton: '.swiper-button-next',
         onClick: (e) => {
@@ -111,7 +111,6 @@ export default {
     .item {
       width: 400px;
       height: 320px;
-      background: #FFFFFF;
       box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
       border-radius: 20px;
       cursor: pointer;

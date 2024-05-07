@@ -1,9 +1,15 @@
 <template>
   <div class="dashboard">
     <div class="bannerBg">
-      <div style="width: 1440px;margin: 0 auto;padding: 0 80px;">
-        <el-carousel height="600px" ref="nop" indicator-position="outside">
-          <el-carousel-item v-for="item in carouselData" :key="item.id" :class="'carousel' + item.id">
+      <div style="width: 1280px;margin: 0 auto; position: relative">
+<!--        <el-carousel height="600px" ref="nop" indicator-position="outside">-->
+<!--          <el-carousel-item v-for="item in carouselData" :key="item.id" :class="'carousel' + item.id">-->
+
+<!--          </el-carousel-item>-->
+<!--        </el-carousel>-->
+        <swiper :options="swiperOption" ref="mySwiper" class="buaa-swiper">
+          <!-- slides -->
+          <swiper-slide v-for="(item, index) in carouselData" class="buua-swiper-slide cursor">
             <div class="carouselItem" :style="'background-image: url(' + item.path + ')'">
               <div class="carouselContent">
                 <p class="title1">{{ item.title }}</p>
@@ -11,8 +17,14 @@
                 <span @click="jump(item.jumpPath)">{{ item.btn }}</span>
               </div>
             </div>
-          </el-carousel-item>
-        </el-carousel>
+          </swiper-slide>
+          <div class="swiper-button-prev" slot="button-prev">
+            <img :src="images.left" alt=""/>
+          </div>
+          <div class="swiper-button-next" slot="button-next">
+            <img :src="images.right" alt=""/>
+          </div>
+        </swiper>
       </div>
     </div>
     <div style="background: #FAFAFA;">
@@ -62,7 +74,18 @@ export default {
           btn: '报名参赛',
           jumpPath: ''
         },
-      ]
+      ],
+      swiperOption: {
+        // swiper options 所有的配置同swiper官方api配置
+        // autoplay: 3000,
+        slidesPerView: 1,
+        autoHeight: true,
+        prevButton: '.swiper-button-prev',
+        nextButton: '.swiper-button-next',
+        onClick: (e) => {
+          this.jumpDetail(this.list[e.clickedIndex])
+        },
+      }
     }
   },
   components: {
@@ -89,6 +112,9 @@ export default {
 </script>
 
 <style lang="scss">
+.cursor {
+  cursor: pointer;
+}
 .el-carousel__indicators--outside {
   position: absolute;
   bottom: 5px;
@@ -179,7 +205,6 @@ export default {
     }
   }
 }
-
 
 .tooltipContent {
   img {

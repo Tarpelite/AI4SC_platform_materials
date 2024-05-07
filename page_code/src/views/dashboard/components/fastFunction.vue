@@ -82,7 +82,6 @@ export default {
     }
     .item {
       flex: 1;
-      background: #fff;
       border-radius: 20px;
       width: 300px;
       height: 240px;
