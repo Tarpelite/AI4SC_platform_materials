@@ -9,7 +9,7 @@ const $axios = axios.create({
   // 设置超时时间
   timeout: 30000,
   // 基础url，会在请求url中自动添加前置链接
-  baseURL: 'http://8.141.91.97:6001/',
+  baseURL: '',
   transformRequest: [(data) => {
     // if (data instanceof FormData) {
     //   return data
@@ -66,7 +66,7 @@ $axios.interceptors.response.use(
         case 401:
           Message.error('身份验证失败，请重新登录');
           setTimeout(() => {
-            // window.location.replace('/login')
+            window.location.replace('/login')
             // eslint-disable-next-line max-len
             // window.location.replace(`http://sso.zhangyue-inc.com/oauth/authorize?redirect_uri=${process.env.VUE_APP_LOGIN_URL}&response_type=code&client_id=${process.env.VUE_APP_LOGIN_CLIENT_ID}&state=23`);
             // window.location.replace(process.env.VUE_APP_LOGIN_URL + '?return_url=' + window.location.href);

@@ -117,7 +117,6 @@ export default {
         // swiper options 所有的配置同swiper官方api配置
         // autoplay: 3000,
         slidesPerView: 3,
-        spaceBetween: 40,
         autoHeight: true,
         prevButton: '.swiper-button-prev',
         nextButton: '.swiper-button-next',
@@ -156,11 +155,20 @@ export default {
 <style lang="scss">
 .typicalTask {
   position: relative;
+  z-index: 2;
   overflow: hidden;
-  width: 1440px;
+  width: 1480px;
   margin: 0 auto;
   padding: 0 80px;
-
+  .swiper-wrapper {
+    margin: 20px;
+  }
+  .swiper-button-next {
+    right: -46px;
+  }
+  .swiper-button-prev {
+    left: -46px;
+  }
   .title {
     font-weight: bold;
     font-size: 40px;
@@ -176,12 +184,11 @@ export default {
     .mr24 {
       margin-right: 24px;
     }
-
     .item {
       width: 400px;
       height: 420px;
+      box-shadow: 0 2px 16px 1px rgba(0,0,0,0.08);
       background: linear-gradient(180deg, #CCD7FF 0%, #F5F7FF 52%, #FFFFFF 100%);
-      box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
       border-radius: 20px;
       padding: 20px;
       position: relative;
@@ -199,6 +206,7 @@ export default {
         .msg {
           font-size: 14px;
           color: #262626;
+          opacity: 0.6;
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
@@ -221,14 +229,13 @@ export default {
         width: 360px;
         height: 200px;
         border-radius: 10px;
-        margin-top: 20px;
       }
 
     }
 
     .item:hover {
       background: linear-gradient(180deg, #587DFF 0%, #9D2EFF 100%);
-
+      box-shadow: 0 2px 16px 1px rgba(0,0,0,0.24);
       .titleChild {
         color: #fff;
       }
@@ -238,7 +245,7 @@ export default {
       }
 
       img {
-        border-radius: 0px;
+        border-radius: 10px;
       }
     }
   }

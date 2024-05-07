@@ -7,7 +7,6 @@
         @click="jump(item.link)"
         v-for="(item, index) in list"
         :key="index"
-        :class="index == 3 ? '' : 'mr24'"
       >
         <img :src="item.img" alt="" />
         <div class="title">{{ item.title }}</div>
@@ -64,6 +63,8 @@ export default {
 
 <style lang="scss" scoped>
 .fastFunction {
+  position: relative;
+  z-index: 2;
   width: 1440px;
   margin: 0 auto;
   padding: 0 80px;
@@ -75,25 +76,29 @@ export default {
   }
   .content {
     display: flex;
+    justify-content: space-between;
     margin-top: 20px;
     padding-bottom: 15px;
     .mr24 {
       margin-right: 24px;
     }
     .item {
-      flex: 1;
       border-radius: 20px;
+      background-color: #FAFAFA;
       width: 300px;
       height: 240px;
-      box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
-      padding: 37px 32px;
+      box-shadow: 0 2px 16px 1px rgba(0, 0, 0, 0.08);
+      padding: 30px 32px;
       cursor: pointer;
       &:hover {
-        box-shadow: 0px 2px 16px 1px rgba(0,0,0,0.24);
+        box-shadow: 0 2px 16px 1px rgba(0,0,0,0.24);
+        .title {
+          color: #2954FF;
+        }
       }
       img {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
       }
       .title {
         font-weight: bold;
@@ -104,6 +109,7 @@ export default {
       .msg {
         font-size: 14px;
         color: #262626;
+        opacity: 0.6;
         margin-top: 5px;
       }
     }

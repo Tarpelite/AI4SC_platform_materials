@@ -32,7 +32,7 @@ export default {
   methods: {
     async _getScienceList() {
       const scList = await getScienceList()
-      this.list = scList.filter(item=> item.is_banner).slice(0,7)
+      this.list = scList.filter(item=> item.is_banner).slice(0,8)
     },
     increase() {
       this.percentage += 30;
@@ -60,6 +60,7 @@ export default {
 <style lang="scss" scoped>
 .typicalTask {
   position: relative;
+  z-index: 2;
   width: 1440px;
   margin: 0 auto;
   padding: 0 80px;
@@ -102,7 +103,7 @@ export default {
         width: 256px;
         .titleChild {
           font-weight: bold;
-          font-size: 24px;
+          font-size: 22px;
           color: #262626;
           width: 256px;
           display: -webkit-box;
@@ -115,6 +116,7 @@ export default {
         .msg {
           font-size: 14px;
           color: #262626;
+          opacity: 0.9;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
@@ -126,7 +128,7 @@ export default {
       }
 
       img {
-        width: 260px;
+        width: 256px;
         height: 200px;
         border-radius: 10px;
       }
@@ -134,11 +136,13 @@ export default {
 
     .item:hover {
       background: linear-gradient(180deg, #587DFF 0%, #9D2EFF 100%);
-
+      box-shadow: 0 2px 16px 1px rgba(0,0,0,0.24);
       .titleChild {
         color: #fff;
       }
-
+      img {
+        border-radius: 10px;
+      }
       .msg {
         color: #fff;
       }

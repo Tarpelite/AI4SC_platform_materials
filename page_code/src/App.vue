@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="menuCard" ref="menu" v-if="token">
+    <div class="menuCard" ref="menu">
       <div class="el-menu-i">
         <div class="left">
           <div class="logo">
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div :class="token ? 'body_content' : ''" ref="body_content">
+    <div class="body_content" ref="body_content">
       <transition name="fade">
         <keep-alive>
           <router-view></router-view>
@@ -40,7 +40,7 @@
       </transition>
     </div>
     <!-- <div style="background-color: #f5f5f5;"> -->
-    <footerVue v-if="token"></footerVue>
+    <footerVue></footerVue>
     <!-- </div> -->
   </div>
 </template>
@@ -308,19 +308,19 @@ export default {
     footerVue,
     search
   },
-  watch: {
-    $route: function (to, from) {
-      this.activeIndex = this.$route.path
-      const token = sessionStorage.getItem("token");
-      if(!token && to.path !== '/login') {
-        this.$router.push({path: "/login"});
-      } else {
-        if(!this.token) {
-          this.token = sessionStorage.getItem("token");
-        }
-      }
-    },
-  },
+  // watch: {
+  //   $route: function (to, from) {
+  //     this.activeIndex = this.$route.path
+  //     const token = sessionStorage.getItem("token");
+  //     if(!token && to.path !== '/login') {
+  //       this.$router.push({path: "/login"});
+  //     } else {
+  //       if(!this.token) {
+  //         this.token = sessionStorage.getItem("token");
+  //       }
+  //     }
+  //   },
+  // },
   computed: {
     activeProduct() {
       return this.$route.query.productsId;
@@ -418,6 +418,7 @@ p {
   }
 
   .userAvatar {
+    margin-left: 28px;
     width: 36px;
     height: 36px;
   }
@@ -432,19 +433,23 @@ p {
       margin-right: 32px;
       font-size: 14px;
     }
-
+    .hoverItem {
+      line-height: 28px;
+      color: rgba(0, 0, 0, 0.65);
+      font-weight: 500;
+    }
     .hoverItem:hover {
       color: #2954ff;
       border-bottom: 2px solid #2954ff;
-      padding-bottom: 5px;
-      height: 20px;
+      line-height: 28px;
+      font-weight: 500;
     }
 
     .active {
       color: #2954ff;
       border-bottom: 2px solid #2954ff;
-      padding-bottom: 5px;
-      height: 20px;
+      line-height: 28px;
+      font-weight: 500;
     }
   }
 

@@ -73,9 +73,11 @@ export default {
 
 <style lang="scss" scoped>
 .fastFunction {
+  position: relative;
+  z-index: 2;
   width: 1440px;
   margin: 0 auto;
-  padding: 0 80px;
+  padding: 0 80px 120px 80px;
   .title {
     font-weight: bold;
     font-size: 40px;
@@ -121,16 +123,18 @@ export default {
             text-align: center;
             font-size: 14px;
             line-height: 28px;
+            color: rgba(38, 38, 38, 0.6);
           }
         }
         .itemTitle {
           font-weight: bold;
-          font-size: 24px;
+          font-size: 22px;
           margin-top: 20px;
         }
         .itemTime {
           font-size: 14px;
           margin-top: 10px;
+          opacity: 0.6;
         }
       }
       .footer {

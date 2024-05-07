@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', redirect: '/login' },
+  { path: '/', redirect: '/dashboard' },
   {
     path: '/login',
     name: '登录',
@@ -58,7 +58,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'hash',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes
 })

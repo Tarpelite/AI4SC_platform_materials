@@ -192,9 +192,12 @@ footer {
           width: 33.33%;
           font-weight: 400;
           font-size: 14px;
-          color: #ffffff;
+          color: rgba(255, 255, 255, 0.8);
           margin-top: 8px;
           cursor: pointer;
+          &:hover {
+            color: #ffffff;
+          }
         }
       }
     }
@@ -213,9 +216,12 @@ footer {
         .bodyItem {
           font-weight: 400;
           font-size: 14px;
-          color: #ffffff;
+          color: rgba(255, 255, 255, 0.8);
           margin-top: 8px;
           cursor: pointer;
+          &:hover {
+            color: #ffffff;
+          }
         }
       }
     }
@@ -233,9 +239,12 @@ footer {
         .bodyItem {
           font-weight: 400;
           font-size: 14px;
-          color: #ffffff;
+          color: rgba(255, 255, 255, 0.8);
           margin-top: 8px;
           cursor: pointer;
+          &:hover {
+            color: #ffffff;
+          }
         }
       }
     }

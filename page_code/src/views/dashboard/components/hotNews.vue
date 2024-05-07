@@ -41,8 +41,6 @@ export default {
         // swiper options 所有的配置同swiper官方api配置
         // autoplay: 3000,
         slidesPerView: 3,
-        spaceBetween: 40,
-        height: 330,
         prevButton: '.swiper-button-prev',
         nextButton: '.swiper-button-next',
         onClick: (e) => {
@@ -89,16 +87,25 @@ export default {
 <style lang="scss">
 .hotNews {
   position: relative;
-  overflow: hidden;
-  width: 1440px;
+  z-index: 2;
+  width: 1480px;
   margin: 0 auto;
   padding: 0 80px;
-
+  .swiper-wrapper {
+    margin: 20px;
+  }
+  .swiper-button-next {
+    right: -46px;
+  }
+  .swiper-button-prev {
+    left: -46px;
+  }
   .title {
     font-weight: bold;
     font-size: 40px;
     color: #262626;
     padding-top: 50px;
+    padding-left: 20px;
   }
   .content {
     margin-top: 20px;
@@ -111,10 +118,10 @@ export default {
     .item {
       width: 400px;
       height: 320px;
+      background-color: #FAFAFA;
       box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
       border-radius: 20px;
       cursor: pointer;
-
       .itemImg {
         width: 400px;
         height: 180px;
@@ -144,6 +151,7 @@ export default {
     }
 
     .item:hover {
+      box-shadow: 0 2px 16px 1px rgba(0,0,0,0.24);
       .text {
         color: #2954ff;
       }
