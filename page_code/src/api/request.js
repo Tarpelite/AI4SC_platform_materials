@@ -9,7 +9,7 @@ const $axios = axios.create({
   // 设置超时时间
   timeout: 30000,
   // 基础url，会在请求url中自动添加前置链接
-  baseURL: '',
+  baseURL: process.env.VUE_APP_BASE_API, // 使用环境变量来设置baseURL
   transformRequest: [(data) => {
     // if (data instanceof FormData) {
     //   return data

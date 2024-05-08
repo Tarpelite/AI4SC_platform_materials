@@ -172,7 +172,7 @@ export default {
     margin: 0 auto;
     position: relative;
     border-radius: 20px;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 
