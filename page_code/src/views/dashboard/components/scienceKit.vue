@@ -35,7 +35,7 @@ export default {
           id: 1,
           title: 'MindEarth地球科学领域套件',
           msg: '地球科学领域套件MindEarth致力于高效使能AI+气象海洋的融合研究。',
-          img: 'https://pic.imgdb.cn/item/65f25b6b9f345e8d03a16ef2.gif',
+          img: 'https://cnai4s.com/media/mindearth.png',
           smallImg: images.huawei,
           type: 'huawei',
           link: 'https://gitee.com/mindspore/mindscience/tree/master/MindEarth'
@@ -44,7 +44,7 @@ export default {
           id: 2,
           title: 'Mindflow计算流体求解套件',
           msg: '支持物理驱动、数据驱动和数据机理融合驱动的AI流体仿真',
-          img: 'https://pic.imgdb.cn/item/65f25bac9f345e8d03a27224.gif',
+          img: 'https://cnai4s.com/media/mindflow.png',
           smallImg: images.huawei,
           type: 'huawei',
           link: 'https://gitee.com/mindspore/mindscience/tree/master/MindFlow'
@@ -53,7 +53,7 @@ export default {
           id: 3,
           title: 'MindElec计算电磁仿真领域套件',
           msg: '持数据建构及转换、仿真计算、结果可视化以及端到端的AI电磁仿真',
-          img: 'https://pic.imgdb.cn/item/65f25bed9f345e8d03a34c02.png',
+          img: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/mindelec.png',
           smallImg: images.huawei,
           type: 'huawei',
           link: 'https://gitee.com/mindspore/mindscience/tree/master/MindElec'
@@ -62,7 +62,7 @@ export default {
           id: 4,
           title: 'MindChemistry计算化学领域套件',
           msg: '支持多体系，多尺度任务的AI+化学仿真',
-          img: 'https://pic.imgdb.cn/item/65f25c359f345e8d03a440e7.jpg',
+          img: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/mindchemistry.jpg',
           smallImg: images.huawei,
           type: 'huawei',
           link: 'https://gitee.com/mindspore/mindscience/tree/master/MindChemistry'
@@ -71,7 +71,7 @@ export default {
           id: 5,
           title: 'MindSPONGE计算生物领域套件',
           msg: '支持高性能、模块化，端到端可微，类AI架构编写的分子模拟功能以及MSA生成，蛋白质折叠训练推理和蛋白质结构打分，NMR数据解析等常用功能。',
-          img: 'https://pic.imgdb.cn/item/65f25c439f345e8d03a47148.gif',
+          img: 'https://cnai4s.com/media/mindsponge.png',
           smallImg: images.huawei,
           type: 'huawei',
           link: 'https://gitee.com/mindspore/mindscience/tree/master/MindSPONGE'
@@ -80,7 +80,7 @@ export default {
           id: 6,
           title: 'SciAI高频模型套件',
           msg: '覆盖物理感知（如PINNs、DeepRitz以及PFNN）和神经算子（如FNO、DeepONet）等主流模型，',
-          img: 'https://pic.imgdb.cn/item/65f25c699f345e8d03a4f0b5.jpg',
+          img: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/sciAI.jpg',
           smallImg: images.feijiang,
           type: 'baidu',
           link: 'https://gitee.com/mindspore/mindscience/tree/master/SciAI'
@@ -89,7 +89,7 @@ export default {
           id: 7,
           title: 'PaddleHelix生物计算套件',
           msg: '支持小分子药物、多肽/蛋白药物、mRNA疫苗等场景，助力创新药的早期发现',
-          img: 'https://pic.imgdb.cn/item/65f25c789f345e8d03a5241b.png',
+          img: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/paddlehelix.png',
           smallImg: images.feijiang,
           type: 'baidu',
           link: 'https://paddlehelix.baidu.com/'
@@ -98,7 +98,7 @@ export default {
           id: 8,
           title: 'PaddleScience科学计算套件',
           msg: 'AI方法加速设计并发现新材料，助力高能物理及天文领域的新问题探索，以及加速智慧工业实时设备数据与模型的“数字孪生”等',
-          img: 'https://pic.imgdb.cn/item/65f25c939f345e8d03a58c1f.jpg',
+          img: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/paddlescience.jpg',
           smallImg: images.feijiang,
           type: 'baidu',
           link: 'https://github.com/PaddlePaddle/PaddleScience'
@@ -107,7 +107,7 @@ export default {
           id: 9,
           title: 'PaddleQuantum量子计算套件',
           msg: '支持量子神经网络的搭建与训练等功能，',
-          img: 'https://pic.imgdb.cn/item/65f25ca29f345e8d03a5c61d.jpg',
+          img: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/paddlequantum.jpg',
           smallImg: images.feijiang,
           type: 'baidu',
           link: 'https://github.com/PaddlePaddle/Quantum/blob/master/README_CN.md'
