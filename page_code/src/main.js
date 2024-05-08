@@ -20,6 +20,7 @@ Vue.use(VueLazyload, {
 // use
 Vue.use(mavonEditor)
 Vue.use(VueAwesomeSwiper)
+Vue.component('vue-markdown', VueMarkdown);
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
