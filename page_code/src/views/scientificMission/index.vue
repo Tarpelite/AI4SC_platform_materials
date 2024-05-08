@@ -51,8 +51,20 @@
             {{ item.name }}
           </div>
         </div>
+        <div class="more" :class="isFilterMore ? 'drop-down' : '' " @click="isFilterMore = !isFilterMore">更多筛选<img :src="images.up" alt=""/></div>
       </div>
-<!--      <div class="more">更多筛选<img :src="images.up" alt=""/></div>-->
+      <div class="more-filter" v-if="isFilterMore">
+        <div class="more-filter-item" :class="item.select ? 'select' : ''" v-for="(item, index) in moreFilter" @click="moreFilterClick(item)">
+          <div class="item-filter-left">
+            <img v-if="!item.select" :src="images.btnCircle" alt=""/>
+            <img v-if="item.select" :src="images.btnCircleSelect" alt=""/>
+          </div>
+          <div class="item-filter-right">
+            <div class="item-filter-title">{{ item.title }}</div>
+            <div class="item-filter-desc">{{ item.desc }}</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="body">
       <div style="max-width: 1440px; min-width: 900px; margin: 0 auto">
@@ -77,9 +89,15 @@
               <div class="boxBody">
                 <div class="title">{{ item1.title }}</div>
                 <div class="msg">{{ item1.short_description }}</div>
-                <div class="tag">
-                  <div class="type">{{ item1.domain.name }}</div>
-                  <div class="algorithm">{{ item1.contributor }}</div>
+                <div class="tag justify-between">
+                  <div class="flex item-center">
+                    <div class="type">{{ item1.domain.name }}</div>
+                    <div class="algorithm">{{ item1.contributor }}</div>
+                  </div>
+                  <div class="sci-collect">
+                    <span>1298</span>
+                    <img :src="images.collectStarSelect" alt="">
+                  </div>
                 </div>
                 <div class="btns">
                   <div class="btnsImg" v-if="item1.notebook_link">
@@ -162,6 +180,12 @@ export default {
           img: "https://pic.imgdb.cn/item/6612dbd768eb935713c2cc1c.png",
         },
       ],
+      moreFilter: [
+        {title: '有代码仓库', desc: '提供模型源代码，可在本地运行', select: false, id: 1, key: 'notebook_link'},
+        {title: '可在线运行', desc: '可以直接在浏览器中进行模型推理', select: false, id: 2, key: 'introduction_link'},
+        {title: '可在线修改', desc: '可以直接在浏览器中编辑代码，训练模型', select: false, id: 3, key: 'repository_link'},
+      ],
+      isFilterMore: false,
       scienceList: [],
       tagList: [],
       tagList1: [],
@@ -173,9 +197,22 @@ export default {
       const arr = this.tagList.filter((item) => item.flag).map(item => item.id);
       const contributeTagList = this.tagList1.filter((item) => item.flag).map(item => item.name)
       const remainScList = JSON.parse(JSON.stringify(this.scienceList.filter(item => arr.includes(item.id))))
-      remainScList.forEach(item => {
-        item.childList = item.childList.filter(inner => contributeTagList.includes(inner.contributor))
-      })
+      const moreFilterList = this.moreFilter.filter(item=> item.select).map(item=> item.key)
+      if(moreFilterList.length) {
+        remainScList.forEach(item => {
+          item.childList = item.childList.filter(inner => {
+            let flag = contributeTagList.includes(inner.contributor)
+            for(let keyItem of moreFilterList) {
+              flag = flag &&  inner[keyItem]
+            }
+            return flag
+          })
+        })
+      } else {
+        remainScList.forEach(item => {
+          item.childList = item.childList.filter(inner => contributeTagList.includes(inner.contributor))
+        })
+      }
       return remainScList
     },
   },
@@ -220,6 +257,11 @@ export default {
       const temp = this.tagList1[index];
       temp.flag = !temp.flag;
       this.$set(this.tagList1, index, temp);
+    },
+    moreFilterClick(item) {
+      let flag = !item.select
+      this.$set(item, 'select', flag)
+
     },
     screenScientificField(index) {
       // const curFlag = item.flag
@@ -357,14 +399,13 @@ export default {
 
   .screen {
     width: 1280px;
-    height: 190px;
     background: #ffffff;
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
     border-radius: 20px 20px 20px 20px;
     margin: 0 auto;
     padding: 24px;
     position: relative;
-
+    transition: height .5s ease;
     .scientificField {
       .scientificFieldTag {
         margin-top: 12px;
@@ -398,7 +439,7 @@ export default {
 
     .contributingParty {
       margin-top: 20px;
-
+      position: relative;
       .contributingPartyTag {
         margin-top: 12px;
         display: flex;
@@ -422,6 +463,7 @@ export default {
       }
     }
 
+
     .more {
       background: #deeaff;
       border-radius: 14px 14px 14px 14px;
@@ -434,16 +476,71 @@ export default {
       width: 90px;
       position: absolute;
       right: 24px;
-      bottom: 24px;
+      bottom: 0;
       cursor: pointer;
-
+      &.drop-down {
+        img {
+          transform: rotate(180deg);
+        }
+      }
       img {
+        transition: all 0.5s ease;
         width: 16px;
         height: 16px;
       }
     }
   }
-
+  .more-filter {
+    display: flex;
+    margin-top: 16px;
+    .more-filter-item {
+      height: 46px;
+      background: #F1F2F5;
+      border-radius: 8px 8px 8px 8px;
+      font-family: Helvetica Neue, Helvetica Neue;
+      font-weight: 400;
+      font-size: 12px;
+      color: #262626;
+      text-align: left;
+      display: flex;
+      padding: 4px 18px 4px 6px;
+      margin-right: 16px;
+      cursor: pointer;
+      &.select {
+        border: 1px solid #587DFF;
+      }
+      .item-filter-left {
+        margin-right: 3px;
+        img {
+          transform: translateY(2px);
+          width: 16px;
+          height: 16px;
+        }
+      }
+      .item-filter-right {
+        .item-filter-title {
+          width: 70px;
+          height: 20px;
+          font-family: Helvetica Neue, Helvetica Neue;
+          font-weight: 400;
+          font-size: 14px;
+          color: #262626;
+          font-style: normal;
+          text-transform: none;
+        }
+        .item-filter-desc {
+          height: 17px;
+          font-family: Helvetica Neue, Helvetica Neue;
+          font-weight: 400;
+          font-size: 12px;
+          color: rgba(38, 38, 38, 0.6);
+          text-align: left;
+          font-style: normal;
+          text-transform: none;
+        }
+      }
+    }
+  }
   .body {
     width: 1280px;
     margin: 0 auto;
@@ -479,7 +576,6 @@ export default {
         }
       }
     }
-
     .content {
       display: flex;
       flex-wrap: wrap;
@@ -536,7 +632,9 @@ export default {
             white-space: normal;
             margin-top: 8px;
           }
-
+          .justify-between {
+            justify-content: space-between;
+          }
           .tag {
             display: flex;
             font-size: 12px;
@@ -556,6 +654,19 @@ export default {
               border-radius: 14px 14px 14px 14px;
               color: #587dff;
               padding: 2px 8px;
+            }
+            .sci-collect {
+              display: flex;
+              align-items: center;
+              span {
+                font-family: Helvetica Neue, Helvetica Neue;
+                font-size: 12px;
+                color: rgba(38, 38, 38, 0.4);
+              }
+              img {
+                width: 20px;
+                height: 20px;
+              }
             }
           }
 

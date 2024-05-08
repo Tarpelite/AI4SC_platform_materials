@@ -8,7 +8,15 @@
     margin: 0 auto;
   }
 }
-
+.flex {
+  display: flex;
+}
+.item-center {
+  align-items: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
 div {
   box-sizing: border-box;
 }
