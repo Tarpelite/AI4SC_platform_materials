@@ -155,9 +155,13 @@ export default {
   },
   components: {},
   async activated() {
-    await this._getUserInfo()
-    this._getUserHistoryList()
-    this._getUserCollectList()
+    if(sessionStorage.getItem('user_id')) {
+      await this._getUserInfo()
+      this._getUserHistoryList()
+      this._getUserCollectList()
+    } else {
+      this.$router.replace('/login')
+    }
   },
   methods: {
     async _getUserInfo() {

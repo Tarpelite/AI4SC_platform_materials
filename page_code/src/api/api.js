@@ -26,13 +26,13 @@ export function login(data) {
 
 export function getUserInfo() {
   const userId = sessionStorage.getItem('user_id')
-  const url = `/users/${userId}`;
+  const url = `/users/${userId}/`;
   return API.get(url);
 }
 
 export function getUserCollectInfo() {
   const userId = sessionStorage.getItem('user_id')
-  const url = `/users/${userId}`;
+  const url = `/users/${userId}/`;
   return API.get(url);
 }
 
@@ -54,12 +54,12 @@ export function changeHotNewsList(data) {
 }
 
 export function getNewsDetail(id) {
-  const url = '/news_detail/' + id;
+  const url = `/news_detail/${id}/`;
   return API.get(url);
 }
 
 export function getRelatedNews(id) {
-  const url = '/related_news/' + id;
+  const url = `/related_news/${id}/`;
   return API.get(url);
 }
 
@@ -125,7 +125,7 @@ export function recordHistory(data) {
 
 export function getUserHistory() {
   const userId = sessionStorage.getItem('user_id')
-  const url = `/user_history/${userId}`;
+  const url = `/user_history/${userId}/`;
   return API.get(url);
 }
 
