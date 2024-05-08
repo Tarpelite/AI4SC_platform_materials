@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="menuCard" ref="menu">
+    <div class="menuCard" ref="menu" v-if="showMenu">
       <div class="el-menu-i">
         <div class="left">
           <div class="logo">
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="body_content" ref="body_content">
+    <div :class="showMenu ? 'body_content' : ''" ref="body_content">
       <transition name="fade">
         <keep-alive>
           <router-view></router-view>
@@ -93,6 +93,7 @@ export default {
         },
       ],
       logoPng: images.logo,
+      showMenu: true,
       user: images.user,
       textColor: "#000",
       productFlag: false,
@@ -308,19 +309,19 @@ export default {
     footerVue,
     search
   },
-  // watch: {
-  //   $route: function (to, from) {
-  //     this.activeIndex = this.$route.path
-  //     const token = sessionStorage.getItem("token");
-  //     if(!token && to.path !== '/login') {
-  //       this.$router.push({path: "/login"});
-  //     } else {
-  //       if(!this.token) {
-  //         this.token = sessionStorage.getItem("token");
-  //       }
-  //     }
-  //   },
-  // },
+  watch: {
+    $route: function (to, from) {
+      if(to.path === '/login') {
+        this.showMenu = false
+      } else {
+        this.showMenu = true
+      }
+      let findItem = this.routerList.find(item=> item.path === to.path)
+      if(findItem != null) {
+        this.activeIndex = findItem.path
+      }
+    }
+  },
   computed: {
     activeProduct() {
       return this.$route.query.productsId;

@@ -7,7 +7,7 @@
             <img :src="images.user" alt=""/>
           </div>
           <div class="info">
-            <div class="name">Hi,Admin</div>
+            <div class="name">Hi,</div>
             <div class="time">今天是你加入科学智算共性平台的第 {{ userInfo.countDate }} 天~</div>
             <!--            <img :src="images.edit" alt=""/>-->
             <div class="basicInformation">
@@ -155,13 +155,9 @@ export default {
   },
   components: {},
   async activated() {
-    if(sessionStorage.getItem('user_id')) {
-      await this._getUserInfo()
-      this._getUserHistoryList()
-      this._getUserCollectList()
-    } else {
-      this.$router.replace('/login')
-    }
+    await this._getUserInfo()
+    this._getUserHistoryList()
+    this._getUserCollectList()
   },
   methods: {
     async _getUserInfo() {
