@@ -64,7 +64,7 @@
           </div>
           <div class="bodyRight">
             <div class="header">
-              <div class="hotNews">热门动态</div>
+              <div>热门动态</div>
               <div class="refresh" @click="changeHotNewsList">
                 <img :src="images.refresh" alt=""/>
                 换一换
@@ -373,10 +373,11 @@ export default {
           justify-content: space-between;
 
           .refresh {
+            width: 90px;
             font-size: 14px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-end;
             padding-right: 10px;
             cursor: pointer;
             img {
