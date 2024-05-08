@@ -7,7 +7,7 @@
     <div class="form">
       <div class="username">
         <img :src="images.username" alt=""/>
-        <input type="text" placeholder="输入你的账号" v-model="regInfo.username"/>
+        <input type="text" placeholder="输入你的用户名" v-model="regInfo.username"/>
       </div>
       <div class="username mg-t24">
         <img :src="images.username" alt=""/>
