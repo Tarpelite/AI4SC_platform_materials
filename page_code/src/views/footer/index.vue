@@ -149,6 +149,8 @@ export default {
 <style lang="scss" scoped>
 footer {
   height: 400px;
+  position: relative;
+  z-index: 9999;
   background: #3959cc;
   .footerbox {
     width: 1280px;

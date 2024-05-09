@@ -52,7 +52,7 @@
           </div>
         </div>
       </div>
-<!--      <div class="more">更多筛选<img :src="images.up" alt=""/></div>-->
+      <!--      <div class="more">更多筛选<img :src="images.up" alt=""/></div>-->
     </div>
     <div class="body">
       <div style="max-width: 1440px; min-width: 900px; margin: 0 auto">
@@ -107,8 +107,8 @@
               </div>
             </div>
             <!--  css 样式补位           -->
-            <div v-if="item.childList.length > 1 && item.childList.length % 4 !== 0"  class="contentItem"
-                  v-for="count of 4 - item.childList.length % 4"></div>
+            <div v-if="item.childList.length > 1 && item.childList.length % 4 !== 0" class="contentItem"
+                 v-for="count of 4 - item.childList.length % 4"></div>
           </div>
         </div>
       </div>
@@ -174,7 +174,7 @@ export default {
       const contributeTagList = this.tagList1.filter((item) => item.flag).map(item => item.name)
       const remainScList = JSON.parse(JSON.stringify(this.scienceList.filter(item => arr.includes(item.id))))
       remainScList.forEach(item => {
-        item.childList = item.childList.filter(inner => contributeTagList.includes(inner.contributor))
+        item.childList = item.childList.filter(inner => contributeTagList.includes(inner.contributor)).slice(0, 8)
       })
       return remainScList
     },
@@ -486,11 +486,13 @@ export default {
       margin-top: 40px;
       border-radius: 16px;
       justify-content: space-between;
+
       .contentItem {
         width: 290px;
         height: 320px;
         margin: 0 0 30px 0;
         cursor: pointer;
+
         .img {
           width: 290px;
           height: 160px;
