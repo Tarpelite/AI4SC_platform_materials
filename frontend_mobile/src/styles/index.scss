@@ -1,0 +1,47 @@
+@import './variable.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: PingFang SC, Arial， Helvetica Neue, Helvetica, Hiragino Sans GB, Microsoft YaHei, sans-serif;
+  color: $main-text;
+  line-height: $line-height;
+  padding-right: 0 !important;
+
+  &.el-popup-parent--hidden {
+    padding-right: 0 !important;
+  }
+}
+
+html {
+  font-size: $text;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}

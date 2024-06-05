@@ -1,0 +1,28 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin h1 {
+  font-size: $h1;
+  font-weight: bold;
+  margin-bottom: $distance2;
+  &.h0 {
+    font-size: $h0;
+  }
+}
+
+@mixin h2 {
+  font-size: $h2;
+  font-weight: bold;
+  margin-bottom: $distance1;
+}
+
+@mixin h3 {
+  font-size: $text;
+  font-weight: bold;
+  margin-bottom: $distance2;
+}
