@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <div class="bannerBg"></div>
-    <div>
+    <div class="relative">
       <swiper :options="swiperOption" ref="mySwiper" class="buaa-swiper index-banner">
         <!-- slides -->
         <swiper-slide v-for="(item, index) in carouselData" class="dashboard-swiper buua-swiper-slide">
@@ -114,7 +114,11 @@ export default {
   .cursor {
     cursor: pointer;
   }
-
+  .buaa-swiper {
+    .swiper-pagination {
+      bottom: -30px !important;
+    }
+  }
   .index-banner {
     height: 380px;
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
