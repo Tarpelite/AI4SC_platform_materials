@@ -33,7 +33,7 @@
       <!--      </div>-->
       <div class="loginBtn" v-if="!wxFlag" @click="Login">登录</div>
       <div class="privacy" v-if="!wxFlag">
-        <input type="radio" v-model="read" :value="true"/><span>服务协议</span>和<span>隐私政策</span>
+        <input type="radio" v-model="read" :value="true"/><span @click="jump('/agreement')">服务协议</span>和<span @click="jump('/privacy')">隐私政策</span>
       </div>
       <!--      <div
               class="WXBtn"
@@ -51,7 +51,7 @@
 <script>
 import images from '@/utils/exportImage';
 import Signin from './Signin.vue';
-import { login } from '@/api/api';
+import {login} from '@/api/api';
 
 export default {
   data() {
@@ -75,16 +75,19 @@ export default {
     verification() {
       this.verificationFlag = !this.verificationFlag;
     },
+    jump(Path) {
+      this.$router.push({path: Path});
+    },
     async Login() {
-      if (!this.username) {
+      if(!this.username) {
         this.$toast('请输入用户名')
         return
       }
-      if (!this.password) {
+      if(!this.password) {
         this.$toast('请输入密码')
         return
       }
-      if (!this.read) {
+      if(!this.read) {
         this.$toast('请勾选同意协议')
         return
       }
@@ -92,10 +95,10 @@ export default {
         username: this.username,
         password: this.password
       })
-      if (loginInfo.token) {
+      if(loginInfo.token) {
         sessionStorage.setItem('token', 'Token ' + loginInfo.token)
         sessionStorage.setItem('user_id', loginInfo.user_id)
-        this.$router.push({ path: '/dashboard' })
+        this.$router.push({path: '/dashboard'})
         this.$toast('登录成功')
       }
     }
