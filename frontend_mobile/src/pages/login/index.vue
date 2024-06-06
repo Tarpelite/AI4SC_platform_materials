@@ -38,15 +38,11 @@ export default {
   right: 0;
   z-index: 2;
   background-size: 100% 100%;
+  overflow-y: auto;
   background: linear-gradient(170deg, #33ADFF 0%, #45A8FD 40%, #9D2EFF 100%);
 
   .bg {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    height: calc(100vh);
+    
     z-index: 1;
     background-image: url("../../assets/image/loginBg.png");
     background-size: 100% 100%;
