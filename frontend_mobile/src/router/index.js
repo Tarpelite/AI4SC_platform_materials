@@ -93,22 +93,6 @@ const routes = [
         meta: {
           roles: true
         }
-      },
-      {
-        path: '/agreement',
-        name: 'agreement',
-        component: () => import('../pages/agreement/agreement'),
-        meta: {
-          roles: false
-        }
-      },
-      {
-        path: '/privacy',
-        name: 'agreement',
-        component: () => import('../pages/agreement/privacy'),
-        meta: {
-          roles: false
-        }
       }
     ]
   },
@@ -127,6 +111,22 @@ const routes = [
       roles: false
     },
     component: () => import('../pages/search')
+  },
+  {
+    path: '/agreement',
+    name: 'agreement',
+    component: () => import('../pages/agreement/agreement'),
+    meta: {
+      roles: false
+    }
+  },
+  {
+    path: '/privacy',
+    name: 'agreement',
+    component: () => import('../pages/agreement/privacy'),
+    meta: {
+      roles: false
+    }
   }
 ]
 
