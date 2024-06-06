@@ -36,8 +36,7 @@
       <!--      </div>-->
       <div class="loginBtn" v-if="!wxFlag" @click="Login">登录</div>
       <div class="privacy" v-if="!wxFlag">
-        <input type="checkbox" v-model="read"/>
-        我已阅读并同意<span>服务协议</span>和<span>隐私政策</span>
+        <input type="checkbox" v-model="read"/><span @click="jump('/agreement')">服务协议</span>和<span @click="jump('/privacy')">隐私政策</span>
       </div>
       <!--      <div
               class="WXBtn"
@@ -75,6 +74,9 @@ export default {
   methods: {
     Toggle() {
       this.flag = "login";
+    },
+    jump(Path) {
+      this.$router.push({path: Path});
     },
     verification() {
       this.verificationFlag = !this.verificationFlag;

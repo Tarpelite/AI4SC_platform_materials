@@ -311,7 +311,7 @@ export default {
   },
   watch: {
     $route: function (to, from) {
-      if(to.path === '/login') {
+      if(to.path === '/login' || to.path === '/agreement' || to.path === '/privacy') {
         this.showMenu = false
       } else {
         this.showMenu = true

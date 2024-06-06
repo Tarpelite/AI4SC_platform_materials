@@ -92,6 +92,22 @@ const routes = [
     meta: {
       roles: true
     }
+  },
+  {
+    path: '/agreement',
+    name: 'agreement',
+    component: () => import('../views/agreement/agreement'),
+    meta: {
+      roles: false
+    }
+  },
+  {
+    path: '/privacy',
+    name: 'agreement',
+    component: () => import('../views/agreement/privacy'),
+    meta: {
+      roles: false
+    }
   }
 ]
 
