@@ -302,7 +302,7 @@ export default {
     // padding: 0 40px;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 20px;
   }
 
   .carouselItem {
@@ -310,6 +310,7 @@ export default {
     height: 400px;
     padding: 40px 60px;
     display: flex;
+    border-radius: 20px;
     background: linear-gradient(135deg, #587dff 0%, #9d2eff 100%);
 
     .right {

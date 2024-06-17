@@ -4,10 +4,11 @@
       <div class="information">
         <div class="infoBox">
           <div class="avatar">
-            <img :src="images.user" alt=""/>
+            <img v-if="userInfo.avator" :src="userInfo.avator" alt="images.user"/>
+            <img v-else :src="images.user" alt="images.user"/>
           </div>
           <div class="info">
-            <div class="name">Hi,</div>
+            <div class="name">Hi, {{ userInfo.username}}</div>
             <div class="time">今天是你加入科学智算共性平台的第 {{ userInfo.countDate }} 天~</div>
             <!--            <img :src="images.edit" alt=""/>-->
             <div class="basicInformation">
@@ -32,6 +33,7 @@
                 </div>
               </div>
             </div>
+            <div class="info-edit" @click="dialogFormVisible= !dialogFormVisible">编辑</div>
           </div>
         </div>
         <div class="collect">
@@ -128,12 +130,39 @@
         </div>
       </div>
     </div>
+    <el-dialog title="修改个人信息" :visible.sync="dialogFormVisible" width="460px">
+      <el-form :model="dialogObj" style="width:400px;">
+        <el-form-item label="用户名" required>
+          <el-input v-model="dialogObj.username" placeholder="请输入原密码" size="small"></el-input>
+        </el-form-item>
+        <el-form-item label="头像">
+          <el-upload
+              action="#"
+              ref="upload"
+              :on-remove="handleRemove"
+              :limit="1"
+              :on-exceed="handleExceed"
+              :beforeUpload="beforeAvatarUpload"
+              :file-list="fileList"
+              :http-request="handleFileUpload"
+              list-type="picture">
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </el-form-item>
+
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false" size="mini">取 消</el-button>
+        <el-button type="primary" @click="handleDialogConfirm" size="mini">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import images from "@/utils/js/exportImage";
-import {getNewsList, getScienceList, getUserHistory, getUserInfo} from "@/api/api";
+import {getNewsList, getScienceList, getUserHistory, getUserInfo, updateUserInfo} from "@/api/api";
 import {formatDate} from "@/utils/date";
 
 export default {
@@ -144,8 +173,14 @@ export default {
       active: 0,
       userInfo: {},
       kitList: [],
+      fileList: [],
       collectNewsList: [],
-      collectScienceList: []
+      collectScienceList: [],
+      dialogFormVisible: false,
+      file: {},
+      dialogObj: {
+        username: '',
+      }
     };
   },
   computed: {
@@ -165,6 +200,7 @@ export default {
       userInfo.countDate = this.daysSinceTimestamp(userInfo.registration_date)
       userInfo.joinDateStr = formatDate(new Date(userInfo.registration_date), 'yyyy-MM-dd')
       this.userInfo = userInfo
+      this.$set(this.dialogObj, 'username', userInfo.username)
     },
     async _getUserCollectList() {
       if(this.userInfo.favorite_news.length) {
@@ -189,6 +225,39 @@ export default {
         return new Date(b.visited_on).getTime() - new Date(a.visited_on).getTime()
       })
       this.historyList = historyList
+    },
+    async handleDialogConfirm() {
+      let userInfoForm = new FormData()
+      userInfoForm.append('avator', this.file.file)
+      userInfoForm.append('username', this.dialogObj.username )
+      const result = await updateUserInfo(userInfoForm)
+      this._getUserInfo()
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    // 处理预览操作
+    handlePreview(file) {
+      console.log('preview', file);
+    },
+    // 处理超出图片个数操作
+    handleExceed(files, fileList) {
+      this.$message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+    },
+    beforeAvatarUpload(file) {
+      const isLt2M = file.size / 1024  < 500
+      if(!isLt2M) {
+        this.$message({
+          message: '上传文件大小不能超过 500kb!',
+          type: 'warning'
+        });
+      }
+      return isLt2M
+    },
+    // 处理文件上传操作
+    handleFileUpload(file) {
+      this.file = file
+      // 调用后端服务器的接口
     },
     jumpDetail(item, category) {
       // 0新闻
@@ -241,9 +310,17 @@ export default {
         border-radius: 16px 16px 16px 16px;
         padding: 40px;
         display: flex;
-
+        position: relative;
+        .info-edit {
+          position: absolute;
+          right: 40px;
+          top: 60px;
+          color: #6e91fa;
+          cursor: pointer;
+        }
         .avatar {
           img {
+            border-radius: 50%;
             width: 120px;
             height: 120px;
           }
@@ -251,7 +328,6 @@ export default {
 
         .info {
           margin: 20px 0 0 40px;
-
           .name {
             font-weight: bold;
             font-size: 24px;

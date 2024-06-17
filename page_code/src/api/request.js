@@ -146,13 +146,14 @@ export default {
       responseType: 'blob'
     });
   },
-  upload(url, data) {
+  upload(url, data, method = 'post') {
     return $axios({
-      method: 'post',
+      method: method,
       url,
       data,
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
+        Authorization: sessionStorage.getItem('token')
       }
     });
   }

@@ -133,3 +133,10 @@ export function smartSearch(data) {
   const url = `/search/`;
   return API.get(url, data);
 }
+
+
+export function updateUserInfo(data) {
+  const userId = sessionStorage.getItem('user_id')
+  const url = `/users/${userId}/`;
+  return API.upload(url, data, 'put');
+}

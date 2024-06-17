@@ -7,7 +7,7 @@
           <img class="btnsImg" :src="isCollected ? images.collected :images.collect" alt="收藏" @click="bindCollect"/>
           <img class="btnsImg" v-if="detailInfo.notebook_link" :src="images.link" alt="" @click="jump(detailInfo.notebook_link)"/>
           <img class="btnsImg" v-if="detailInfo.introduction_link" :src="images.homeLink" alt="" @click="jump(detailInfo.introduction_link)"/>
-          <img class="btnsImg" v-if="detailInfo.repository_link"  :src="images.codeRepository" alt="" @click="jump(detailInfo.repository_link)"/>
+          <img class="btnsImg" v-if="detailInfo.repository_link" :src="images.codeRepository" alt="" @click="jump(detailInfo.repository_link)"/>
           <div class="back" @click="$router.back()">
             <img :src="images.back" class="backImg" alt=""/>
             <span>返回</span>
@@ -23,6 +23,7 @@
           </div>
           <div class="md-body" v-if="detailInfo.detailed_description">
             <vue-markdown>{{ detailInfo.detailed_description }}</vue-markdown>
+            <iframe v-if="detailInfo.demo_link" :src="detailInfo.demo_link" frameborder="0" style="width:100%; height:100vh"></iframe>
           </div>
         </div>
         <div class="bodyRight">
@@ -93,6 +94,15 @@ export default {
   },
   components: {},
   methods: {
+    resizeIframe() {
+      const iframe = this.$refs.iframe;
+      console.log('-----', iframe.contentWindow.document)
+      try {
+        iframe.height = iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+      } catch (e) {
+        // 处理跨域问题或其他错误
+      }
+    },
     loadScience(id) {
       this.id = id ? id : this.$route.params.id
       this._getDetail()
@@ -197,7 +207,6 @@ export default {
         }
       }
     }
-
     .body {
       display: flex;
       padding-top: 48px;
@@ -293,10 +302,12 @@ export default {
             color: #fff;
             margin-top: 6px;
             cursor: pointer;
+
             &.disabled {
               color: #587dff;
               background: #f2f7ff;
             }
+
             img {
               width: 16px;
               height: 16px;
@@ -313,6 +324,7 @@ export default {
           box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
           border-radius: 16px 16px 16px 16px;
           padding: 20px;
+
           .relevant-wrapper {
             padding: 12px 15px;
             border-radius: 12px 12px 12px 12px;
@@ -322,6 +334,7 @@ export default {
             cursor: pointer;
             margin-top: 12px;
           }
+
           .relevantPapersText {
             font-size: 14px;
             line-height: 20px;
