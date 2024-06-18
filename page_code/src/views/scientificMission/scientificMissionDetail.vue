@@ -78,6 +78,8 @@
 <script>
 import images from "@/utils/js/exportImage";
 import {collectScience, getRelatedScienceList, getScienceDetail, getUserInfo, recordHistory} from "@/api/api";
+import {mdParser} from "@/utils/utils";
+
 
 export default {
   data() {
@@ -86,7 +88,8 @@ export default {
       images: images,
       moreList: [],
       likenessList: [],
-      detailInfo: {}
+      detailInfo: {},
+      html2: ''
     };
   },
   activated() {
@@ -136,6 +139,13 @@ export default {
     async _getDetail() {
       this.detailInfo = {}
       this.detailInfo = await getScienceDetail(this.id)
+      if(this.detailInfo.detailed_description) {
+        const detailed_description = this.detailInfo.detailed_description
+        detailed_description.replace(/\r\n/g, '');
+        this.$set(this.detailInfo, 'detailed_description', detailed_description)
+      }
+      // 废弃
+      // this.html2 = mdParser(this.detailInfo.detailed_description)
     },
     async bindCollect() {
       const result = await collectScience(this.id)

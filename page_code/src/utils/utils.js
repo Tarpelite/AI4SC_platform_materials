@@ -1,3 +1,6 @@
+import markdownit from 'markdown-it'
+import mk from 'markdown-it-katex'
+
 export function isObject(data) {
   return Object.prototype.toString.call(data) === '[object Object]'
 }
@@ -129,4 +132,10 @@ export function lineChartOptions(lineObj) {
     }
   }
   return lineOptions
+}
+
+export function mdParser(mdText) {
+  const md = markdownit()
+  md.use(mk);
+  return  md.render(mdText);
 }
