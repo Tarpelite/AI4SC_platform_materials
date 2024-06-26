@@ -54,6 +54,22 @@ export default {
       carouselData: [
         {
           id: 1,
+          path: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/banner4.jpg',
+          title: '北航联合昇思MindSpore发布智算天璇基础模型OmniArch',
+          title1: '实现数理方程的“AI大统一',
+          btn: '报名参赛',
+          jumpPath: 'newsNoticeDetail/60'
+        },
+        {
+          id: 2,
+          path: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/banner5.jpg',
+          title: '北航参加2024年全国信标委人工智能分委会会议周',
+          title1: '2024年4月23日，北航参加全国信标委人工智能分委会会议周，探讨并分享了人工智能标准化的最新动态与发展方向。',
+          btn: '报名参赛',
+          jumpPath: 'newsNoticeDetail/70'
+        },
+        {
+          id: 3,
           path: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/banner1.png',
           title: '北京航空航天大学举办首届“人工智能科学计算学术研讨会”',
           title1: '鄂维南院士、卢宇彤主任、吴文峻教授等发表AI for Science前沿观点',
@@ -61,7 +77,7 @@ export default {
           jumpPath: 'newsNoticeDetail/45'
         },
         {
-          id: 2,
+          id: 4,
           path: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/banner2.png',
           title: 'CNCC | 从“计算”迈向“智算”新范式，科学智算平台技术前沿探讨',
           title1: '2023年10月26日~28日 辽宁·沈阳新世界博览馆',
@@ -69,13 +85,13 @@ export default {
           jumpPath: 'newsNoticeDetail/35'
         },
         {
-          id: 3,
+          id: 5,
           path: 'https://cnai4sc.oss-cn-beijing.aliyuncs.com/banner3.jpg',
           title: '2023 年“大湾区杯”粤港澳 AI for Science 科技竞赛',
           title1: '广东省计算数学学会主办，百度、华为、北航、浙大、中山大学、Datawhale等共同协办',
           btn: '报名参赛',
           jumpPath: 'newsNoticeDetail/50'
-        },
+        }
       ],
       swiperOption: {
         // swiper options 所有的配置同swiper官方api配置

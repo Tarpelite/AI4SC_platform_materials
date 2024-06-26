@@ -29,9 +29,10 @@
               </template>
             </el-table-column>
             <el-table-column
-                label="检测时间">
+                label="检测时间"
+                prop="timeTpt">
               <template slot-scope="scope">
-                {{ operationTime }}
+                {{ timeConvert(scope.row.timeTpt) }}
               </template>
             </el-table-column>
             <el-table-column
@@ -48,17 +49,20 @@
 <script>
 import images from "@/utils/js/exportImage";
 import mapEcharts from "./map.vue"
+
 let operationInterval = null
 export default {
   data() {
     return {
       images: images,
       operationTime: '',
+      randomInterval: [],
       tableData: [
         {
           name: '北航高算中心-XE1',
           serve: '主控节点',
           status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '京津冀'
         },
@@ -66,6 +70,7 @@ export default {
           name: '北航高算中心-XE1',
           serve: '主控节点',
           status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '京津冀'
         },
@@ -73,6 +78,7 @@ export default {
           name: '百度云-CPU',
           serve: '计算服务',
           status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '京津冀'
         }
@@ -81,6 +87,7 @@ export default {
           name: '百度云-CPU',
           serve: '计算服务',
           status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '京津冀'
         }
@@ -89,6 +96,7 @@ export default {
           name: '浙大高算中心-GE1',
           serve: '计算服务',
           status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '长三角'
         }
@@ -96,7 +104,8 @@ export default {
         {
           name: '浙大高算中心-GE1',
           serve: '计算服务',
-          status: 'abnormal',
+          status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '长三角'
         }
@@ -104,7 +113,8 @@ export default {
         {
           name: '浙大高算中心-GE1',
           serve: '计算服务',
-          status: 'stop',
+          status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '长三角'
         }
@@ -113,6 +123,7 @@ export default {
           name: '华为云-MC1',
           serve: '计算服务',
           status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '大湾区'
         }
@@ -121,6 +132,7 @@ export default {
           name: '华为云-MC1',
           serve: '计算服务',
           status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '大湾区'
         }
@@ -129,6 +141,7 @@ export default {
           name: '华为云-MC1',
           serve: '计算服务',
           status: 'normal',
+          timeTpt: new Date().getTime(),
           time: '2024/3/9  19:27:00',
           region: '大湾区'
         }
@@ -141,17 +154,32 @@ export default {
   mounted() {
     this.timeCounting()
   },
+  beforeDestroy() {
+    this.timeOff()
+  },
   methods: {
     timeCounting() {
-      if(operationInterval) {
-        clearInterval(operationInterval)
+      const tableLen = this.tableData.length
+      this.randomInterval.forEach((item) => {
+        if(item) clearInterval(item)
+      })
+      this.randomInterval = []
+      for (let i = 0; i < tableLen; i++) {
+        const ra = Math.max(2, Math.floor(Math.random() * 10)) * 1000
+        // 列表每一列都有各自的增加时间
+        this.randomInterval[i] = setInterval(() => {
+          this.$set(this.tableData[i], 'timeTpt', new Date().getTime())
+        }, ra)
       }
-     operationInterval =  setInterval(() => {
-       this.timeConvert()
-      }, 1000)
     },
-    timeConvert() {
-      const now = new Date();
+    timeOff() {
+      this.randomInterval.forEach((item) => {
+        if(item) clearInterval(item)
+      })
+      this.randomInterval = []
+    },
+    timeConvert(time) {
+      const now = time ? new Date(time) : new Date();
       const year = now.getFullYear();
       const month = now.getMonth() + 1;
       const day = now.getDate();
@@ -170,7 +198,7 @@ export default {
       } else {
         second1 = second
       }
-      this.operationTime =  year + '-' + month + '-' + day + ' ' + hour + ':' + minute1 + ':' + second1
+      return year + '-' + month + '-' + day + ' ' + hour + ':' + minute1 + ':' + second1
     }
   },
 };
