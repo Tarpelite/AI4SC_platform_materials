@@ -10,13 +10,10 @@
           <vue-good-table :columns="columns" :rows="tableData">
             <template slot="table-row" slot-scope="props">
               <span v-if="props.column.field == 'status'">
-                <span :class="props.row.status">
-                  {{ props.row.status == 'normal' ? '正常' : ( props.row.status == 'abnormal' ? '异常' : '停止' ) }}
-                </span>
+                <span :class="props.row.status"> {{ props.row.status == 'normal' ? '正常' : (props.row.status == 'abnormal' ? '异常' : '停止') }} </span>
               </span>
-              <span v-else>
-                {{props.formattedRow[props.column.field]}}
-              </span>
+              <span v-else-if="props.column.field == 'timeTpt'"> {{ timeConvert(props.row.timeTpt) }} </span>
+              <span v-else> {{ props.formattedRow[props.column.field] }} </span>
             </template>
           </vue-good-table>
           <!--          <el-table-->
@@ -64,30 +61,31 @@ export default {
   data() {
     return {
       images: images,
+      randomInterval: [],
       columns: [
         {
           label: '集群名称',
           field: 'name',
           sortable: false,
-          width: '150px',
+          width: '150px'
         },
         {
           label: '服务',
           field: 'serve',
           sortable: false,
-          width: '70px',
+          width: '70px'
         },
         {
           label: '状态',
           field: 'status',
           sortable: false,
-          width: '60px',
+          width: '60px'
         },
         {
           label: '检测时间',
-          field: 'time',
+          field: 'timeTpt',
           sortable: false,
-          width: '120px',
+          width: '170px'
         },
         {
           label: '区域',
@@ -102,6 +100,7 @@ export default {
           serve: '主控节点',
           status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '京津冀'
         },
         {
@@ -109,6 +108,7 @@ export default {
           serve: '主控节点',
           status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '京津冀'
         },
         {
@@ -116,6 +116,7 @@ export default {
           serve: '计算服务',
           status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '京津冀'
         },
         {
@@ -123,6 +124,7 @@ export default {
           serve: '计算服务',
           status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '京津冀'
         },
         {
@@ -130,20 +132,23 @@ export default {
           serve: '计算服务',
           status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '长三角'
         },
         {
           name: '浙大高算中心-GE1',
           serve: '计算服务',
-          status: 'abnormal',
+          status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '长三角'
         },
         {
           name: '浙大高算中心-GE1',
           serve: '计算服务',
-          status: 'stop',
+          status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '长三角'
         },
         {
@@ -151,6 +156,7 @@ export default {
           serve: '计算服务',
           status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '大湾区'
         },
         {
@@ -158,6 +164,7 @@ export default {
           serve: '计算服务',
           status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '大湾区'
         },
         {
@@ -165,6 +172,7 @@ export default {
           serve: '计算服务',
           status: 'normal',
           time: '2024/3/9  19:27:00',
+          timeTpt: new Date().getTime(),
           region: '大湾区'
         }
       ]
@@ -173,9 +181,36 @@ export default {
   components: {
     mapEcharts
   },
+  mounted() {
+    this.timeCounting()
+  },
+  beforeDestroy() {
+    this.timeOff()
+  },
   methods: {
-    timeConvert() {
-      const now = new Date();
+    timeCounting() {
+      const tableLen = this.tableData.length
+      this.randomInterval.forEach((item) => {
+        if(item) clearInterval(item)
+      })
+      this.randomInterval = []
+      for (let i = 0; i < tableLen; i++) {
+        const ra = Math.max(2, Math.floor(Math.random() * 10)) * 1000
+        // 列表每一列都有各自的增加时间
+        console.log('ra', ra)
+        this.randomInterval[i] = setInterval(() => {
+          this.$set(this.tableData[i], 'timeTpt', new Date().getTime())
+        }, ra)
+      }
+    },
+    timeOff() {
+      this.randomInterval.forEach((item) => {
+        if(item) clearInterval(item)
+      })
+      this.randomInterval = []
+    },
+    timeConvert(time) {
+      const now = time ? new Date(time) : new Date();
       const year = now.getFullYear();
       const month = now.getMonth() + 1;
       const day = now.getDate();
@@ -204,6 +239,7 @@ export default {
 .operationCondition {
   height: 100%;
   background-color: #fff;
+
   .operationalBg {
     margin: 0 auto;
     display: flex;
@@ -220,6 +256,7 @@ export default {
       width: 356px;
       margin-top: 40px;
       background: #fff;
+
       .title {
         font-weight: 500;
         font-size: 16px;
@@ -233,16 +270,20 @@ export default {
     td {
       font-size: 12px;
       font-weight: 400;
+
       .normal {
         color: #52C41A;
       }
+
       .abnormal {
         color: #FAAD14;
       }
+
       .stop {
         color: #EB2F32;
       }
     }
+
     thead {
       th {
         background-color: #f1f2f5;
