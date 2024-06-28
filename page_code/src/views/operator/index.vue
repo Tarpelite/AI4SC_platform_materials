@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="intro-right">
-        <img :src="images.banner4" alt="">
+        <img :src="images.datasetBanner" alt="">
       </div>
     </div>
     <div class="calculate-wrapper clearfix">
