@@ -140,3 +140,22 @@ export function updateUserInfo(data) {
   const url = `/users/${userId}/`;
   return API.upload(url, data, 'put');
 }
+
+
+export function getDatasetList() {
+  const userId = sessionStorage.getItem('user_id')
+  const url = `/datasets/`;
+  return API.get(url);
+}
+
+export function getFrameDetail(id) {
+  const userId = sessionStorage.getItem('user_id')
+  const url = `/operation/${id}`;
+  return API.get(url);
+}
+
+export function getFrameCategory(id) {
+  const userId = sessionStorage.getItem('user_id')
+  const url = `/categories/`;
+  return API.get(url);
+}

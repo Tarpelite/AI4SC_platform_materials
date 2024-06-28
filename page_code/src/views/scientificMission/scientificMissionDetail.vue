@@ -57,6 +57,36 @@
               </div>
             </template>
           </div>
+          <div class="relevant-cal">
+            <div class="title">共性算子依赖</div>
+            <div class="relevant-cal-tags">
+              <div class="tag-item">
+                <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
+                <img class="tag-img" :src="images.iconTree" alt="">
+                <span>高级微分学</span>
+              </div>
+              <div class="tag-item">
+                <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
+                <img class="tag-img" :src="images.iconTree" alt="">
+                <span>逐元素加法</span>
+              </div>
+            </div>
+          </div>
+          <div class="relevant-cal">
+            <div class="title">计算库依赖</div>
+            <div class="relevant-cal-tags">
+              <div class="tag-item">
+                <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
+                <img class="tag-img" :src="images.iconTree" alt="">
+                <span>高级微分学</span>
+              </div>
+              <div class="tag-item">
+                <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
+                <img class="tag-img" :src="images.iconTree" alt="">
+                <span>逐元素加法</span>
+              </div>
+            </div>
+          </div>
           <div class="scientificMission">
             <div class="title">类似科学任务</div>
             <div
@@ -355,7 +385,60 @@ export default {
             -webkit-box-orient: vertical;
           }
         }
-
+        .relevant-cal {
+          width: 360px;
+          margin-top: 24px;
+          background: #FFFFFF;
+          box-shadow: 0px 2px 16px 1px rgba(0,0,0,0.08);
+          border-radius: 16px 16px 16px 16px;
+          padding: 16px 20px;
+          .title {
+            height: 22px;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 12px;
+          }
+          .relevant-cal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            .tag-item {
+              padding: 8px 18px;
+              background: #F1F2F5;
+              border-radius: 8px 8px 8px 8px;
+              font-family: Helvetica Neue, Helvetica Neue;
+              font-weight: 500;
+              font-size: 14px;
+              color: #2954FF;
+              text-align: left;
+              margin-right: 12px;
+              margin-top: 8px;
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              &:hover {
+                background: #587DFF;
+                color: #fff;
+                .tag-img-theme {
+                  display: none;
+                }
+                .tag-img {
+                  display: block;
+                }
+              }
+              .tag-img-theme {
+                display: block;
+              }
+              .tag-img {
+                display: none;
+              }
+              img {
+                width: 16px;
+                height: 16px;
+                margin-right: 3px;
+              }
+            }
+          }
+        }
         .scientificMission {
           margin-top: 24px;
           width: 360px;

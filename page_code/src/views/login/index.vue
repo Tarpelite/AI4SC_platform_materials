@@ -45,10 +45,8 @@ export default {
             background-size:100% 100%;
             position: relative;
             img {
-                width: 240px;
-                height: 310px;
-                margin-left: 200px;
-                margin-top: 210px;
+                width: 648px;
+                height: 690px;
             }
             .bgtext {
                 position: absolute;

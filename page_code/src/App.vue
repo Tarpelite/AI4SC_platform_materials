@@ -65,6 +65,10 @@ export default {
           path: "/newsNotice",
         },
         {
+          name: "算子框架",
+          path: "/operator",
+        },
+        {
           name: "科学任务",
           path: "/scientificMission",
         },
@@ -74,8 +78,7 @@ export default {
         },
         {
           name: "数据资源",
-          path: "http://aisccc.cn/database",
-          type: "without",
+          path: "/dataset",
         },
         {
           name: "智算评测",
@@ -413,7 +416,7 @@ p {
     margin-right: 60px;
 
     img {
-      width: 114px;
+      width: 136px;
       height: 36px;
     }
   }

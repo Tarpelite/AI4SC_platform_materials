@@ -94,6 +94,30 @@ const routes = [
     }
   },
   {
+    path: '/dataset',
+    name: '数据集',
+    component: () => import('../views/dataset'),
+    meta: {
+      roles: false
+    }
+  },
+  {
+    path: '/operator',
+    name: '算子框架',
+    component: () => import('../views/operator'),
+    meta: {
+      roles: false
+    }
+  },
+  {
+    path: '/operator/:id',
+    name: '算子框架',
+    component: () => import('../views/operator/detail'),
+    meta: {
+      roles: true
+    }
+  },
+  {
     path: '/agreement',
     name: 'agreement',
     component: () => import('../views/agreement/agreement'),

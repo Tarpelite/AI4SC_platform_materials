@@ -164,7 +164,7 @@ footer {
         border-bottom: 1px solid rgba(255, 255, 255, 0.6);
         padding-bottom: 5px;
         img {
-          width: 72px;
+          width: 99px;
           height: 20px;
         }
       }
