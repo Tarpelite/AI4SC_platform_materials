@@ -57,9 +57,9 @@
               </div>
             </template>
           </div>
-          <div class="relevant-cal">
+          <div class="relevant-cal"  v-if="commonLibs && commonLibs.length">
             <div class="title">共性算子依赖</div>
-            <div class="relevant-cal-tags"  v-if="commonLibs && commonLibs.length">
+            <div class="relevant-cal-tags">
               <div class="tag-item" v-for="item in commonLibs" @click="linkCalframePage(item.id)">
                 <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
                 <img class="tag-img" :src="images.iconTree" alt="">
@@ -67,9 +67,9 @@
               </div>
             </div>
           </div>
-          <div class="relevant-cal">
+          <div class="relevant-cal" v-if="calLibs && calLibs.length">
             <div class="title">计算库依赖</div>
-            <div class="relevant-cal-tags" v-if="calLibs && calLibs.length">
+            <div class="relevant-cal-tags">
               <div class="tag-item" v-for="item in calLibs" @click="linkCalframePage(item.id)">
                 <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
                 <img class="tag-img" :src="images.iconTree" alt="">
