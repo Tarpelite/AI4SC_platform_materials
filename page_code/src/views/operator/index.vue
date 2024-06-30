@@ -64,11 +64,7 @@ export default {
         {title: 'PINN求解方法计算库',id: 48, desc: '集成PINN求解方法相关的计算库，包括多种常见微分方程求解，包括Allen-Cahn、Euler-Beam、Navier-Stokes等。'},
         {title: 'FNO求解方法计算库', id: 49,desc: '集成FNO求解方法相关的计算库，包括FourcastNet等模型'},
         {title: 'DeepONet计算库',id: 50, desc: '集成算子学习相关方法的计算库，包括DeepONet等模型'},
-<<<<<<< HEAD
         {title: '势函数模拟/LAMMPS计算库',id: 51, desc: '集成势函数模拟相关方法的计算库，包括DeepMD-kit套件'}
-=======
-        {title: '势函数模拟/LAMMPS计算',id: 51, desc: '集成势函数模拟相关方法的计算库，包括DeepMD-kit套件'}
->>>>>>> a9cfb0ccec3fb88905430e16063976f66d1a0ad3
       ],
       comList: [
         {title: '高阶微分类', id: 2, desc: '海森矩阵、张量操作等'},
