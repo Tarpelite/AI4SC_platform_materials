@@ -59,23 +59,18 @@
           </div>
           <div class="relevant-cal">
             <div class="title">共性算子依赖</div>
-            <div class="relevant-cal-tags">
-              <div class="tag-item">
+            <div class="relevant-cal-tags"  v-if="commonLibs && commonLibs.length">
+              <div class="tag-item" v-for="item in commonLibs" @click="linkCalframePage(item.id)">
                 <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
                 <img class="tag-img" :src="images.iconTree" alt="">
-                <span>高级微分学</span>
-              </div>
-              <div class="tag-item">
-                <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
-                <img class="tag-img" :src="images.iconTree" alt="">
-                <span>逐元素加法</span>
+                <span>{{ item.title }}</span>
               </div>
             </div>
           </div>
           <div class="relevant-cal">
             <div class="title">计算库依赖</div>
-            <div class="relevant-cal-tags" v-if="detailInfo.operations && detailInfo.operations.length">
-              <div class="tag-item" v-for="item in detailInfo.operations">
+            <div class="relevant-cal-tags" v-if="calLibs && calLibs.length">
+              <div class="tag-item" v-for="item in calLibs" @click="linkCalframePage(item.id)">
                 <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
                 <img class="tag-img" :src="images.iconTree" alt="">
                 <span>{{ item.title }}</span>
@@ -102,7 +97,14 @@
 
 <script>
 import images from "@/utils/js/exportImage";
-import {collectScience, getRelatedScienceList, getScienceDetail, getUserInfo, recordHistory} from "@/api/api";
+import {
+  collectScience,
+  getRelatedScienceList,
+  getScienceDetail,
+  getScienceDetailTags,
+  getUserInfo,
+  recordHistory
+} from "@/api/api";
 import {mdParser} from "@/utils/utils";
 
 
@@ -113,6 +115,8 @@ export default {
       images: images,
       moreList: [],
       likenessList: [],
+      calLibs: [],
+      commonLibs: [],
       detailInfo: {},
       html2: ''
     };
@@ -131,12 +135,16 @@ export default {
         // 处理跨域问题或其他错误
       }
     },
+    linkCalframePage(id) {
+      this.$router.push(`/operator/${id}`)
+    },
     loadScience(id) {
       this.id = id ? id : this.$route.params.id
       this._getDetail()
       this._getRelatedScienceList()
       this._recordHistory()
       this._getCollectInfo()
+      this._getScienceTagInfo()
       if(id) {
         this.$nextTick(() => {
           window.scrollTo(0, 0); // 滚动到页面的左上角
@@ -154,6 +162,15 @@ export default {
     async _getRelatedScienceList() {
       this.likenessList = {}
       this.likenessList = await getRelatedScienceList()
+    },
+    async _getScienceTagInfo() {
+      const result = await getScienceDetailTags(this.id)
+      if(result && result.computational_libs) {
+        this.calLibs = result.computational_libs
+      }
+      if(result && result.operations) {
+        this.commonLibs = result.operations
+      }
     },
     async _getCollectInfo() {
       const result = await getUserInfo()

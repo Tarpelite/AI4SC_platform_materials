@@ -73,6 +73,10 @@ export function getScienceList(data) {
   const url = '/science_tasks/'
   return API.get(url, data);
 }
+export function getScienceDetailTags(id) {
+  const url = `/computational_lib_and_operations/?sciencetask_id=${id}`
+  return API.get(url);
+}
 
 export function collectNews(newsId) {
   const userId = sessionStorage.getItem('user_id')
