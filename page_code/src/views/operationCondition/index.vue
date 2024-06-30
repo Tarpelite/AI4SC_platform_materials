@@ -225,7 +225,7 @@ export default {
       width: 1280px;
       height: 720px;
       background: #202D6B;
-
+      position: relative;
       border-radius: 20px 20px 20px 20px;
       margin-top: 20px;
     }

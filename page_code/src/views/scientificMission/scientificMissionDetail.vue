@@ -74,16 +74,11 @@
           </div>
           <div class="relevant-cal">
             <div class="title">计算库依赖</div>
-            <div class="relevant-cal-tags">
-              <div class="tag-item">
+            <div class="relevant-cal-tags" v-if="detailInfo.operations && detailInfo.operations.length">
+              <div class="tag-item" v-for="item in detailInfo.operations">
                 <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
                 <img class="tag-img" :src="images.iconTree" alt="">
-                <span>高级微分学</span>
-              </div>
-              <div class="tag-item">
-                <img class="tag-img-theme" :src="images.iconTreeTheme" alt="">
-                <img class="tag-img" :src="images.iconTree" alt="">
-                <span>逐元素加法</span>
+                <span>{{ item.title }}</span>
               </div>
             </div>
           </div>
