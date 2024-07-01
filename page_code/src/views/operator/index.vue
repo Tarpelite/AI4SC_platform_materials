@@ -1,6 +1,7 @@
 <template>
   <!--算子-->
   <div class="buaa-operator">
+    <div class="bannerBg"></div>
     <div class="operator-intro clearfix">
       <div class="intro-left">
         <div class="intro-title">科学智算共性框架</div>
@@ -89,6 +90,16 @@ export default {
   width: 1280px;
   margin: 0 auto;
 
+  .bannerBg {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    height: 600px;
+    background: linear-gradient(180deg, #DEEAFF 0%, #DEEAFF 18%, rgba(222, 234, 255, 0) 100%);
+    margin: 0 auto;
+    z-index: 1;
+  }
   .operator-intro {
     background: linear-gradient(291deg, #C0B1FF 0%, #B7CEFF 100%);
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
@@ -96,6 +107,8 @@ export default {
     display: flex;
     align-items: center;
     padding: 40px 60px;
+    position: relative;
+    z-index: 2;
 
     .intro-left {
       .intro-title {
@@ -174,6 +187,8 @@ export default {
   }
 
   .calculate-wrapper {
+    position: relative;
+    z-index: 2;
     .title {
       height: 40px;
       font-family: Helvetica Neue, Helvetica Neue;
@@ -285,6 +300,8 @@ export default {
   }
 
   .common-wrapper {
+    position: relative;
+    z-index: 2;
     .title {
       height: 40px;
       font-family: Helvetica Neue, Helvetica Neue;

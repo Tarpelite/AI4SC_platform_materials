@@ -175,6 +175,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+::v-deep .el-carousel {
+  border-radius: 20px;
+}
 ::v-deep .el-carousel__indicators--horizontal {
   position: absolute;
   bottom: 5px;
@@ -185,7 +188,6 @@ export default {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
   }
-
   .el-carousel__indicator--horizontal.is-active button {
     width: 60px;
     height: 4px;
@@ -212,7 +214,7 @@ export default {
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.4);
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 20px;
   }
   .carouselItem {
     width: 1280px;
