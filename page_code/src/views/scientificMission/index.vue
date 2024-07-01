@@ -139,7 +139,7 @@ export default {
         },
         {
           id: 129,
-          title: "东方.御风",
+          title: "东方御风",
           msg: "在航空航天领域，通过AI模型优化飞机气动设计，提升飞机性能和环保性。",
           img: "https://cnai4s.com/media/science_tasks_images/media/%E4%B8%9C%E6%96%B9.%E5%BE%A1%E9%A3%8E_cSsh1ez.jpg",
         },
