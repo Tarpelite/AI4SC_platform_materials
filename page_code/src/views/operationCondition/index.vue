@@ -5,7 +5,7 @@
         <mapEcharts/>
       </div>
       <div class="operationalTable">
-        <div class="title">情况表格</div>
+        <div class="title">算力中心列表</div>
         <div style="margin-top: 10px;">
           <el-table
               v-if="tableData && tableData.length"
