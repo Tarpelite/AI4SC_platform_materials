@@ -36,7 +36,6 @@ $axios.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log('errrrrr', error)
     return Promise.reject(error);
   }
 );
@@ -58,19 +57,17 @@ $axios.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      console.log('-----', error.response);
       switch (error.response.status) {
         case 400:
           Message.error(error.response.data && error.response.data.message ? error.response.data.message  : '请求错误');
           break;
         case 401:
           Message.error('身份验证失败，请重新登录');
-          setTimeout(() => {
-            window.location.replace('/login')
-            // eslint-disable-next-line max-len
-            // window.location.replace(`http://sso.zhangyue-inc.com/oauth/authorize?redirect_uri=${process.env.VUE_APP_LOGIN_URL}&response_type=code&client_id=${process.env.VUE_APP_LOGIN_CLIENT_ID}&state=23`);
-            // window.location.replace(process.env.VUE_APP_LOGIN_URL + '?return_url=' + window.location.href);
-          }, 1500);
+          if(window.location.pathname !== '/login') {
+            setTimeout(() => {
+              window.location.replace('/login')
+            }, 1500);
+          }
           break;
         case 404:
           Message.error('网络请求不存在');

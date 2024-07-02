@@ -98,13 +98,14 @@ export default {
         username: this.username,
         password: this.password
       })
-      if(loginInfo.token)
+      if(loginInfo.token) {
         sessionStorage.setItem("token", 'Token ' + loginInfo.token)
         sessionStorage.setItem("user_id", loginInfo.user_id)
         this.$router.push({path: '/dashboard'})
         this.$notify.success('登录成功')
       }
     }
+  }
 }
 </script>
 
