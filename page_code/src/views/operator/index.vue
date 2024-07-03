@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="intro-right">
-        <img src="https://cnai4sc.oss-cn-beijing.aliyuncs.com/framework_tiny.png" alt="">
+        <img src="https://cnai4sc.oss-cn-beijing.aliyuncs.com/framework_overview.png" alt="">
       </div>
     </div>
     <div class="calculate-wrapper clearfix">
