@@ -2,7 +2,10 @@
   <div class="box">
     <div class="left">
       <div class="bg">
-        <img @click="toHome" :src="images.loginLogo" alt="">
+        <div class="banner-bg" @click="toHome">
+          <img class="logo-title" :src="images.footerLogo" alt=""/>
+          <img class="logo-test" :src="images.AI4SC" alt=""/>
+        </div>
         <div class="bgtext">版权所有：科学智算共性平台 京ICP备18020905号-2</div>
       </div>
     </div>
@@ -52,17 +55,28 @@ export default {
       background-image: url("@/utils/image/loginBg.png");
       background-size: 100% 100%;
       position: relative;
-
-      img {
+      .banner-bg {
         position: absolute;
         left: 50%;
         top: 240px;
-        width: 240px;
-        height: 300px;
-        margin-left: -120px;
+        margin-left: -105px;
+        width: 210px;
+        height: 260px;
         cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
-
+      .logo-title {
+        width: 158px;
+        height: 158px;
+        margin-bottom: 32px;
+      }
+      .logo-test {
+        width: 210px;
+        height: 50px;
+      }
       .bgtext {
         position: absolute;
         left: 0;

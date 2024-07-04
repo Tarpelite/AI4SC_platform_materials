@@ -49,6 +49,9 @@ import routers from "@/router";
 import footerVue from "@/views/footer";
 import images from "@/utils/js/exportImage";
 import search from "@/components/seach/search";
+import bus from '@/utils/bus'
+import {getUserInfo} from "@/api/api";
+import {formatDate} from "@/utils/date";
 
 export default {
   data() {
@@ -319,7 +322,7 @@ export default {
       } else {
         this.showMenu = true
       }
-      let findItem = this.routerList.find(item=> item.path === to.path)
+      let findItem = this.routerList.find(item => item.path === to.path)
       if(findItem != null) {
         this.activeIndex = findItem.path
       }
@@ -339,11 +342,20 @@ export default {
         this.$router.push({path: Path});
       }
     },
+    async _getUserInfo() {
+      const userInfo = await getUserInfo()
+      this.user = userInfo.avator
+    }
   },
   mounted() {
+    bus.$on('userInfo',(msg)=> {
+      this._getUserInfo()
+    })
+    if(sessionStorage.getItem('user_id')) {
+      this._getUserInfo()
+    }
     window.addEventListener("scroll", this.handleScroll);
   },
-
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
   },
@@ -425,6 +437,7 @@ p {
     margin-left: 28px;
     width: 36px;
     height: 36px;
+    border-radius: 18px;
   }
 
   .menuItem {
@@ -437,11 +450,13 @@ p {
       margin-right: 32px;
       font-size: 14px;
     }
+
     .hoverItem {
       line-height: 28px;
       color: rgba(0, 0, 0, 0.65);
       font-weight: 500;
     }
+
     .hoverItem:hover {
       color: #2954ff;
       border-bottom: 2px solid #2954ff;

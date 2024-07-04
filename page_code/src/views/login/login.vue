@@ -55,6 +55,7 @@
 import images from "@/utils/js/exportImage";
 import Signin from "./Signin.vue";
 import {login} from "@/api/api";
+import bus from "@/utils/bus";
 
 export default {
   data() {
@@ -101,6 +102,7 @@ export default {
       if(loginInfo.token) {
         sessionStorage.setItem("token", 'Token ' + loginInfo.token)
         sessionStorage.setItem("user_id", loginInfo.user_id)
+        bus.$emit('userInfo')
         this.$router.push({path: '/dashboard'})
         this.$notify.success('登录成功')
       }

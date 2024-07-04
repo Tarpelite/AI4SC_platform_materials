@@ -40,6 +40,7 @@
 <script>
 import images from "@/utils/js/exportImage";
 import {register, sendCode} from "@/api/api";
+import bus from "@/utils/bus";
 
 export default {
   data() {
@@ -89,6 +90,7 @@ export default {
         if(result.token) {
           sessionStorage.setItem("token", 'Token ' + result.token)
           sessionStorage.setItem("user_id", result.user_id)
+          bus.$emit('userInfo')
           this.$router.push({path: '/dashboard'})
           this.$notify.success('注册成功')
         }
