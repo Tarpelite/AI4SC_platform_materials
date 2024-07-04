@@ -4,8 +4,8 @@
       <div class="information">
         <div class="infoBox">
           <div class="avatar">
-            <img v-if="userInfo.avator" :src="userInfo.avator" alt="images.user"/>
-            <img v-else :src="images.user" alt="images.user"/>
+            <img v-if="userInfo.avator" :src="userInfo.avator" alt="images.avator"/>
+            <img v-else :src="images.avator" alt="images.avator"/>
           </div>
           <div class="info">
             <div class="name">Hi, {{ userInfo.username}}</div>

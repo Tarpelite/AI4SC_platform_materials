@@ -26,7 +26,6 @@
               class="userAvatar"
               @click="jump('/userInfo', '')"
               :src="user"
-              alt=""
           />
         </div>
       </div>
