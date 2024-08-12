@@ -18,9 +18,23 @@
 
 <script>
 var myChart = {};
-import * as echarts from "echarts";
+import * as echarts from "echarts/core";
+import { init, registerMap } from "echarts/core";
+import { MapChart, LinesChart, EffectScatterChart } from "echarts/charts";
+import { GeoComponent, TooltipComponent, VisualMapComponent } from "echarts/components";
+import { CanvasRenderer } from "echarts/renderers";
 import chinaMap from "./china.json";
 import images from "@/utils/js/exportImage";
+
+echarts.use([
+  MapChart,
+  LinesChart,
+  EffectScatterChart,
+  GeoComponent,
+  TooltipComponent,
+  VisualMapComponent,
+  CanvasRenderer,
+]);
 
 export default {
   data() {
@@ -133,9 +147,10 @@ export default {
   },
   methods: {
     initial() {
-      myChart = echarts.init(document.getElementById("mapEcharts"));
-      echarts.registerMap("china", {geoJSON: chinaMap});
-      var option = {
+      const myChart = init(document.getElementById("mapEcharts"));
+      registerMap("china", { geoJSON: chinaMap });
+
+      const option = {
         geo: {
           map: "china",
           top: "31%",

@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .box {
   width: 390px;
-  height: calc(100vh);
+  // height: calc(100vh);
   position: fixed;
   left: 0;
   top: 0;
