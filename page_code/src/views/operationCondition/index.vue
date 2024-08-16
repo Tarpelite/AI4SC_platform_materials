@@ -48,7 +48,6 @@
 
 <script>
 import images from "@/utils/js/exportImage";
-import mapEcharts from "./map.vue"
 
 let operationInterval = null
 export default {
@@ -149,7 +148,7 @@ export default {
     };
   },
   components: {
-    mapEcharts
+    mapEcharts: () => import('./map.vue')
   },
   mounted() {
     this.timeCounting()

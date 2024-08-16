@@ -7,7 +7,7 @@
           <div class="titleChild">{{ item.title }}</div>
           <div class="msg"> {{ item.short_description }}</div>
         </div>
-        <img :src="item.image" alt="">
+        <img v-lazy="item.image" alt="">
       </div>
       <div v-if="list.length % 4 > 0" class="item-empty" v-for="(item,index) in 4 - list.length % 4"></div>
     </div>

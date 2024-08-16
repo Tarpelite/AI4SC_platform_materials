@@ -8,7 +8,7 @@
         v-for="(item, index) in list"
         :key="index"
       >
-        <img :src="item.img" alt="" />
+        <img v-lazy="item.img" alt="" />
         <div class="title">{{ item.title }}</div>
         <div class="msg">{{ item.msg }}</div>
       </div>
