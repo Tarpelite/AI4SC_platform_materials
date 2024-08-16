@@ -5,7 +5,7 @@
       <swiper :options="swiperOption" ref="mySwiper" class="buaa-swiper index-banner">
         <!-- slides -->
         <swiper-slide v-for="(item, index) in carouselData" class="buua-swiper-slide cursor">
-          <div class="carouselItem" :style="'background-image: url(' + item.path + ')'">
+          <div class="carouselItem" v-lazy:background-image="item.path">
             <div class="carouselContent">
               <p class="title1">{{ item.title }}</p>
               <p class="title-divided"></p>

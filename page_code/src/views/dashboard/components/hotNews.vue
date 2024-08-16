@@ -7,7 +7,7 @@
         <swiper-slide v-for="(item, index) in list" class="buua-swiper-slide">
           <div class="item">
             <div class="itemImg">
-              <img :src="item.image" alt=""/>
+              <img v-lazy="item.image" alt=""/>
             </div>
             <div class="msg">
               <div class="text">{{ item.description }}</div>
@@ -15,10 +15,10 @@
           </div>
         </swiper-slide>
         <div class="swiper-button-prev" slot="button-prev">
-          <img :src="imageList.left" alt=""/>
+          <img v-lazy="imageList.left" alt=""/>
         </div>
         <div class="swiper-button-next" slot="button-next">
-          <img :src="imageList.right" alt=""/>
+          <img v-lazy="imageList.right" alt=""/>
         </div>
       </swiper>
     </div>

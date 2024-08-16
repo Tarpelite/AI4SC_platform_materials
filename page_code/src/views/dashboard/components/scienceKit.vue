@@ -5,7 +5,7 @@
       <swiper :options="swiperOption" ref="mySwiper" class="buaa-swiper">
         <swiper-slide v-for="(item, index) in list" class="buua-swiper-slide">
           <div class="item ua-swiper-slide" :key="index">
-            <img :src="item.img" alt="">
+            <img v-lazy="item.img" alt="">
             <div class="text">
               <div class="titleChild">{{ item.title }}</div>
               <div class="msg"> {{ item.msg }}</div>

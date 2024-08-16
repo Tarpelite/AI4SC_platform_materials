@@ -126,6 +126,12 @@ export default {
       images: images,
       carouselData: [
         {
+          id: 180,
+          title: "北航OmniArch智算天璇方程求解大模型",
+          msg: "在全球范围内, 北航智算天璇(OmniArch)模型首次实现了在1D、2D、3D的PDE数据联合训练,实现几十类正反求解问题的统一求解,在zero-shot的数据集上相比现有SOTA方法精度提升1个数量级,在流体、电磁、气象等多物理场和多方程耦合场景发现了“物理场-方程”联合学习的scaling-law涌现。",
+          img:"https://cnai4sc.oss-cn-beijing.aliyuncs.com/omniarch/OmniArch_framework.png"
+        },
+        {
           id: 90,
           title: "深度学习求解Euler_Beam问题",
           msg: "利用深度学习技术对Euler Beam理论进行模拟，提高工程力学问题的求解效率。",

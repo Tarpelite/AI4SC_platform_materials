@@ -10,7 +10,7 @@
       >
         <div class="body">
           <div class="header">
-            <img :src="images.data" alt="" />
+            <img v-lazy="images.data" alt="" />
             <div class="type">{{ item.type }}</div>
           </div>
           <div class="itemTitle">{{ item.title }}</div>
@@ -22,7 +22,7 @@
               {{ item2 }}
             </div>
           </div>
-          <img :src="images.download" alt="" />
+          <img v-lazy="images.download" alt="" />
         </div>
       </div>
     </div>
