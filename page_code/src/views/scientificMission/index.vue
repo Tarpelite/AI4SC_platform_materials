@@ -21,7 +21,19 @@
         </el-carousel>
       </div>
     </div>
-    <div style="height: 80px"></div>
+    <div class="common-wrapper">
+      <div class="title">科学智算模型库</div>
+      <div class="common-content">
+        <div class="common-item" v-for="(item, index) in comList" :key="index" @click="linkDetail(item.id)">
+          <div class="common-item-title">
+            <span>{{ item.title }}</span>
+            <img :src="images.cal_arrow" alt="">
+          </div>
+          <div class="content">{{ item.desc }}</div>
+        </div>
+      </div>
+    </div>
+    <h2>科学任务</h2>
     <div class="screen">
       <div class="scientificField">
         <div class="title">科学领域</div>
@@ -172,6 +184,15 @@ export default {
       tagList: [],
       tagList1: [],
       contributingPartyIndex: 0,
+      datasetList: [
+        {title: '模型库', num: 3},
+        {title: '模型数量', num: 23},
+      ],
+      comList: [
+        {title: '方程求解模型库', id: 2, desc: '正问题求解、反问题求解、不确定性推理等'},
+        {title: '领域计算模型库', id: 1, desc: '电磁领域、材料领域、生物领域等'},
+        {title: '系统仿真模型库', id: 4, desc: '跨尺度基因网络、社会网络等'},
+      ]
     };
   },
   computed: {
@@ -286,6 +307,85 @@ export default {
   }
 }
 
+.common-wrapper {
+  width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+
+  .title {
+    height: 40px;
+    font-family: Helvetica Neue, Helvetica Neue;
+    font-weight: bold;
+    font-size: 28px;
+    color: #262626;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+    margin: 60px 0 40px 0;
+  }
+
+  .common-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .common-item {
+      width: 414px;
+      height: 140px;
+      background: #FFFFFF;
+      box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+      border-radius: 20px;
+      border: 1px solid #E1E2E6;
+      padding: 43px 32px;
+      position: relative;
+      margin-bottom: 24px;
+      cursor: pointer;
+
+      &:hover {
+        background: #587DFF;
+
+        .common-item-title {
+          color: #fff;
+        }
+
+        .content {
+          color: #fff;
+        }
+      }
+
+      .common-item-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 30px;
+        font-family: Helvetica Neue, Helvetica Neue;
+        font-weight: 500;
+        font-size: 22px;
+        color: #262626;
+        text-align: left;
+        margin: 0;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .content {
+        width: 256px;
+        font-family: Helvetica Neue, Helvetica Neue;
+        font-weight: 400;
+        font-size: 14px;
+        color: rgba(38, 38, 38, 0.6);
+        text-align: left;
+        margin-top: 4px;
+      }
+    }
+  }
+}
+
 .scientificMission {
   height: 100%;
   margin-top: 20px;
@@ -358,6 +458,52 @@ export default {
         position: absolute;
         bottom: 0;
         cursor: pointer;
+      }
+    }
+  }
+
+  h2 {
+    width: 1280px;
+    margin: 34px auto 12px auto;
+    font-family: Helvetica Neue, Helvetica Neue;
+    font-weight: bold;
+    font-size: 28px;
+    color: #262626;
+    height: 88px;
+    line-height: 88px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+  }
+  .summarize-wrapper {
+    width: 1280px;
+    height: 120px;
+    margin: 0 auto 32px auto;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
+    border-radius: 20px 20px 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .summarize-item {
+      text-align: center;
+      flex: 1;
+      height: 64px;
+      border-right: 1px solid #E1E2E6;
+
+      .sum-title {
+        font-weight: 500;
+        font-size: 16px;
+        color: rgba(38, 38, 38, 0.8);
+      }
+
+      .sum-num {
+        margin-top: 6px;
+        height: 38px;
+        font-weight: 500;
+        font-size: 32px;
+        color: rgba(38, 38, 38, 0.8);
       }
     }
   }

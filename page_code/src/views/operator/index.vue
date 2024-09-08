@@ -57,21 +57,21 @@ export default {
       collapse: false,
       calList: [
         {title: '数据处理计算库', id: 42, desc: '集成数据（预）处理相关的计算库，包括几何缩放、平移、样本组合、拆分等操作。'},
-        {title: '概率统计计算库',id: 43, desc: '集成概率统计相关的计算库，包括伪随机、准随机、获取随机分布等操作。'},
+        {title: '概率统计计算库', id: 43, desc: '集成概率统计相关的计算库，包括伪随机、准随机、获取随机分布等操作。'},
         {title: '稀疏计算库', id: 44, desc: '集成稀疏计算相关的计算库，包括稀疏矩阵基础运算、稀疏表示格式转换、稀疏梯度计算等操作。'},
-        {title: '二阶优化计算库',id: 45, desc: '集成二阶优化相关的计算库，包括L-BFGS等二阶优化器。'},
-        {title: '几何形状定义计算库', id: 46,desc: '集成几何形状定义相关的计算库，包括代数几何、Mesh几何、点云几何。'},
-        {title: '方程符号化定义计算库',id: 47, desc: '集成方程符号化定义相关的计算库，包括创建符号、创建函数、符号表达式转写等操作。'},
-        {title: 'PINN求解方法计算库',id: 48, desc: '集成PINN求解方法相关的计算库，包括多种常见微分方程求解，包括Allen-Cahn、Euler-Beam、Navier-Stokes等。'},
-        {title: 'FNO求解方法计算库', id: 49,desc: '集成FNO求解方法相关的计算库，包括FourcastNet等模型。'},
-        {title: 'DeepONet计算库',id: 50, desc: '集成算子学习相关方法的计算库，包括DeepONet等模型。'},
-        {title: '势函数模拟/LAMMPS计算库',id: 51, desc: '集成势函数模拟相关方法的计算库，包括DeepMD-kit套件。'}
+        {title: '二阶优化计算库', id: 45, desc: '集成二阶优化相关的计算库，包括L-BFGS等二阶优化器。'},
+        {title: '几何形状定义计算库', id: 46, desc: '集成几何形状定义相关的计算库，包括代数几何、Mesh几何、点云几何。'},
+        {title: '方程符号化定义计算库', id: 47, desc: '集成方程符号化定义相关的计算库，包括创建符号、创建函数、符号表达式转写等操作。'},
+        {title: 'PINN求解方法计算库', id: 48, desc: '集成PINN求解方法相关的计算库，包括多种常见微分方程求解，包括Allen-Cahn、Euler-Beam、Navier-Stokes等。'},
+        {title: 'FNO求解方法计算库', id: 49, desc: '集成FNO求解方法相关的计算库，包括FourcastNet等模型。'},
+        {title: 'DeepONet计算库', id: 50, desc: '集成算子学习相关方法的计算库，包括DeepONet等模型。'},
+        {title: '势函数模拟/LAMMPS计算库', id: 51, desc: '集成势函数模拟相关方法的计算库，包括DeepMD-kit套件。'}
       ],
       comList: [
         {title: '高阶微分类', id: 2, desc: '海森矩阵、张量操作等'},
         {title: '复数操作类', id: 1, desc: '计算相位角、复数取模等'},
         {title: '傅里叶变换类', id: 4, desc: '二维离散傅里叶变换、逆变换等'},
-        {title: '线性代数类',id: 8,  desc: '特征值与特征向量计算等'},
+        {title: '线性代数类', id: 8, desc: '特征值与特征向量计算等'},
         {title: '分数阶微分类', id: 13, desc: '分数阶快速、精准微分等'},
         {title: '积分操作类', id: 5, desc: '蒙特卡洛积分、高斯求积等'},
       ]
@@ -100,6 +100,7 @@ export default {
     margin: 0 auto;
     z-index: 1;
   }
+
   .operator-intro {
     background: linear-gradient(291deg, #C0B1FF 0%, #B7CEFF 100%);
     box-shadow: 0px 2px 16px 1px rgba(0, 0, 0, 0.08);
@@ -143,9 +144,10 @@ export default {
         text-align: left;
         font-style: normal;
         text-transform: none;
+
         .content-span {
           display: inline-block;
-          height:  42px;
+          height: 42px;
           transition: height 1s linear;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
@@ -153,6 +155,7 @@ export default {
           text-overflow: ellipsis;
           white-space: normal;
         }
+
         .intro-op {
           float: right;
           height: 20px;
@@ -161,11 +164,13 @@ export default {
           align-items: center;
           cursor: pointer;
           color: rgba(41, 84, 255, 0.8);
+
           &.collapse {
             img {
               transform: rotate(90deg);
             }
           }
+
           img {
             width: 16px;
             height: 16px;
@@ -189,6 +194,7 @@ export default {
   .calculate-wrapper {
     position: relative;
     z-index: 2;
+
     .title {
       height: 40px;
       font-family: Helvetica Neue, Helvetica Neue;
@@ -302,6 +308,7 @@ export default {
   .common-wrapper {
     position: relative;
     z-index: 2;
+
     .title {
       height: 40px;
       font-family: Helvetica Neue, Helvetica Neue;

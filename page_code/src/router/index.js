@@ -78,6 +78,14 @@ const routes = [
     },
   },
   {
+    path: '/smartKit/:id',
+    name: '智能套件',
+    component: () => import('../views/smartKit/detail'),
+    meta: {
+      roles: false
+    },
+  },
+  {
     path: '/operationCondition',
     name: '运行情况',
     component: () => import('../views/operationCondition'),
